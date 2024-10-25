@@ -9,7 +9,7 @@
           <ul>
             <li *ngFor="let partido of liga.value">
               <img [src]="partido.teams.home.logo" alt="{{ partido.teams.home.name }}" />
-              <span>{{ partido.teams.home.name }} vs {{ partido.teams.away.name }}</span>
+              <span>{{ partido.teams.home.name }} {{ partido.goals.home }} - {{ partido.goals.away }} {{ partido.teams.away.name }}</span>
               <img [src]="partido.teams.away.logo" alt="{{ partido.teams.away.name }}" />
               <span>{{ partido.fixture.date | date:'shortTime' }}</span>
             </li>
