@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" href="" sizes="32x32" type="image/png">
-    <title>Inicio</title>
-</head>
+
 <body>
-    
     <nav>
         <div class="logo">
             <img src="LRS.png" alt="">
@@ -24,23 +15,6 @@
             <li><a routerLink="/login-page">Cerrar Sesion</a></li>
         </ul>
     </nav>
-
-    <div class="partidosDia">
-  <h1>PARTIDOS DEL DIA</h1>
-
-
-  <ul>
-    <li *ngFor="let partido of partidos">
-        <img [src]="partido.teams.home.logo" alt="{{ partido.teams.home.name }}" />
-        <span>{{ partido.teams.home.name }} vs {{ partido.teams.away.name }}</span>
-        <img [src]="partido.teams.away.logo" alt="{{ partido.teams.away.name }}" />
-        <span>{{ partido.fixture.date | date:'shortTime' }}</span>
-    </li>
-</ul>
-
-
-  
-</div>
-
+    <app-partidos></app-partidos>
 </body>
-</html>
+

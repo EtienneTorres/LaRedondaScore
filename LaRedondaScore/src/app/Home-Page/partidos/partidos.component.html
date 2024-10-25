@@ -1,0 +1,19 @@
+
+
+  
+    <div class="partidosDia">
+        <h1>PARTIDOS DEL DÍA</h1>
+      
+        <div *ngFor="let liga of (partidosPorLiga | keyvalue)">
+          <h2>{{ liga.key }}</h2> <!-- Nombre de la liga -->
+          <ul>
+            <li *ngFor="let partido of liga.value">
+              <img [src]="partido.teams.home.logo" alt="{{ partido.teams.home.name }}" />
+              <span>{{ partido.teams.home.name }} vs {{ partido.teams.away.name }}</span>
+              <img [src]="partido.teams.away.logo" alt="{{ partido.teams.away.name }}" />
+              <span>{{ partido.fixture.date | date:'shortTime' }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
