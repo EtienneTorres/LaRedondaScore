@@ -63,7 +63,6 @@ ligasDeseadas: { name: string; country: string }[] = [
         const partidos = data.response; // Ajusta según la estructura de la respuesta
         
 
-
         // Agrupamos los partidos por liga
         this.partidosPorLiga = partidos.reduce((acc: any, partido: any) => {
           const ligaNombre = partido.league.name; // Ajusta según la propiedad de la liga
@@ -91,5 +90,28 @@ ligasDeseadas: { name: string; country: string }[] = [
 console.error('Error al cargar partidos:', error);
 }
 );
+
 }
+getEstadoPartido(fechaPartido: string, golesHome: number, golesAway: number): string {
+  const fechaPartidoDate = new Date(fechaPartido);
+  const fechaActual = new Date();
+
+  if (fechaPartidoDate > fechaActual) {
+      // El partido no ha comenzado
+      return fechaPartidoDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Muestra la hora
+  } else if (golesHome >= 0 || golesAway >= 0) {
+      // El partido ha comenzado
+      const tiempoTranscurrido = Math.floor((fechaActual.getTime() - fechaPartidoDate.getTime()) / 60000); // Tiempo en minutos
+
+      // Si el tiempo transcurrido es mayor que la duración típica del partido, mostramos "Finalizado"
+      if (tiempoTranscurrido >= 90) { // Supone que un partido dura 90 minutos
+          return "Finalizado";
+      } else {
+          return `${tiempoTranscurrido}'`
+      }
+  }
+  // Si no hay goles, podría ser que no se hayan jugado
+  return "Postergado"; // Si no ha comenzado ni se ha jugado, se considera postergado
 }
+
+ }
