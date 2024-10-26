@@ -100,11 +100,13 @@ getEstadoPartido(fechaPartido: string, golesHome: number, golesAway: number): st
       // El partido no ha comenzado
       return fechaPartidoDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Muestra la hora
   } else if (golesHome >= 0 || golesAway >= 0) {
-      // El partido ha comenzado
-      const tiempoTranscurrido = Math.floor((fechaActual.getTime() - fechaPartidoDate.getTime()) / 60000); // Tiempo en minutos
-
+      // El partido ha comenz
+      let tiempoTranscurrido = Math.floor((fechaActual.getTime() - fechaPartidoDate.getTime()) / 60000); // Tiempo en minutos
+      if (tiempoTranscurrido > 45){
+        tiempoTranscurrido = tiempoTranscurrido - 15;
+      }
       // Si el tiempo transcurrido es mayor que la duración típica del partido, mostramos "Finalizado"
-      if (tiempoTranscurrido >= 90) { // Supone que un partido dura 90 minutos
+      if (tiempoTranscurrido >= 115) { // Supone que un partido dura 90 minutos
           return "Finalizado";
       } else {
           return `${tiempoTranscurrido}'`
