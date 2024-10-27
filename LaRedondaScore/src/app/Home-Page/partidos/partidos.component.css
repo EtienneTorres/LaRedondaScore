@@ -43,7 +43,7 @@ ul {
 li {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 15px 10px;
     border-radius: 12px;
     margin-bottom: 12px;
@@ -73,14 +73,23 @@ li img {
     display: flex;
     align-items: center;
     flex: 1;
+    justify-content: center;
 }
 
-/* Textos de nombres de equipo */
+.equipo-local {
+    justify-content: flex-start; /* Logo del equipo local a la izquierda */
+}
+
+.equipo-visitante {
+    justify-content: flex-end; /* Logo del equipo visitante a la derecha */
+}
+
+
 .equipo-local span, .equipo-visitante span {
     font-size: 1em;
     color: #f0f0f0;
     font-weight: 500;
-    flex-shrink: 0; /* Evita que el estado se reduzca */
+    text-align: center; /* Centra el texto del nombre del equipo */
 }
 
 /* Marcador y estado de partido */

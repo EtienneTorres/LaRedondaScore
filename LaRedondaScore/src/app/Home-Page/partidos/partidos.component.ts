@@ -101,30 +101,33 @@ ligasDeseadas: { name: string; country: string }[] = [
 
 
 
-
-
-getEstadoPartido(fechaPartido: string, golesHome: number, golesAway: number): string {
-  const fechaPartidoDate = new Date(fechaPartido);
-  const fechaActual = new Date();
-
-  if (fechaPartidoDate > fechaActual) {
-      // El partido no ha comenzado
-      return fechaPartidoDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Muestra la hora
-  } else if (golesHome >= 0 || golesAway >= 0) {
-      // El partido ha comenz
-      let tiempoTranscurrido = Math.floor((fechaActual.getTime() - fechaPartidoDate.getTime()) / 60000); // Tiempo en minutos
-      if (tiempoTranscurrido > 45){
-        tiempoTranscurrido = tiempoTranscurrido - 15;
+    getEstadoPartido(fechaPartido: string, golesHome: number, golesAway: number, status: { long: string, short: string, elapsed: number, extra?: number }): string {
+      const fechaPartidoDate = new Date(fechaPartido);
+      const fechaActual = new Date();
+    
+      // Si el partido no ha comenzado
+      if (fechaPartidoDate > fechaActual) {
+          return fechaPartidoDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       }
-      // Si el tiempo transcurrido es mayor que la duración típica del partido, mostramos "Finalizado"
-      if (tiempoTranscurrido >= 115) { // Supone que un partido dura 90 minutos
+    
+      // Mostrar el estado del partido según las propiedades del objeto status
+      switch (status.short) {
+        case 'HT': // Medio tiempo
+          return `Entretiempo`;
+        case '1H': // Primera mitad
+          return ` ${status.elapsed}'`;
+        case '2H': // Segunda mitad
+          return ` ${status.elapsed}'`;
+        case 'ET': // Tiempo extra
+          return ` - ${status.elapsed}' + ${status.extra ? `(+${status.extra})` : ''}`;
+        case 'PEN': // Penales
+          return "Penales";
+        case 'FT': // Finalizado
           return "Finalizado";
-      } else {
-          return `${tiempoTranscurrido}'`
+        default:
+          return "Estado desconocido";
       }
-  }
-  // Si no hay goles, podría ser que no se hayan jugado
-  return "Postergado"; // Si no ha comenzado ni se ha jugado, se considera postergado
-}
+    }
+    
 
  }

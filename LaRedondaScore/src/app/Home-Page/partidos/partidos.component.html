@@ -5,26 +5,31 @@
     <h2>{{ liga.key }}</h2>
     <ul>
       <li *ngFor="let partido of liga.value">
+       
         <!-- Contenedor para equipo local -->
-        <div class="equipo">
-          <img [src]="partido.teams.home.logo" alt="{{ partido.teams.home.name }}" />
-          <span>{{ partido.teams.home.name }}</span>
-        </div>
+<div class="equipo equipo-local">
+  <img [src]="partido.teams.home.logo" alt="{{ partido.teams.home.name }}" />
+  <span>{{ partido.teams.home.name }}</span>
+</div>
 
         <!-- Contenedor para resultado o marcador -->
         <div class="marcador">
           <span>{{ partido.goals.home }} - {{ partido.goals.away }}</span>
         </div>
 
-        <!-- Contenedor para equipo visitante -->
-        <div class="equipo">
-          <span>{{ partido.teams.away.name }}</span>
-          <img [src]="partido.teams.away.logo" alt="{{ partido.teams.away.name }}" />
-        </div>
+      
+<!-- Contenedor para equipo visitante -->
+<div class="equipo equipo-visitante">
+  <span>{{ partido.teams.away.name }}</span>
+  <img [src]="partido.teams.away.logo" alt="{{ partido.teams.away.name }}" />
+</div>
 
         <!-- Estado del partido -->
-        <span class="estado">{{ getEstadoPartido(partido.fixture.date, partido.goals.home, partido.goals.away) }}</span>
+        <span class="estado">
+          {{ getEstadoPartido(partido.fixture.date, partido.goals.home, partido.goals.away, partido.fixture.status) }}
+        </span>
       </li>
     </ul>
   </div>
 </div>
+
