@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PartidoService {
 
-  private apiKey = '6840d2a6950c4f773adfa9afcc623cbf'; // Asegúrate de no exponer esta clave en el cliente
+  private apiKey = '4ea57f554d5fb4128078db8a12a1a5a2'; 
   private apiUrl = 'https://v3.football.api-sports.io/fixtures';
 
   constructor(private http: HttpClient) {}
