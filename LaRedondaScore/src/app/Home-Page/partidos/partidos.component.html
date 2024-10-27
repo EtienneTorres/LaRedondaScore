@@ -1,5 +1,3 @@
-
-  
 <div class="partidosDia">
   <h1>PARTIDOS DEL DÍA</h1>
 
@@ -7,13 +5,26 @@
     <h2>{{ liga.key }}</h2>
     <ul>
       <li *ngFor="let partido of liga.value">
-        <img [src]="partido.teams.home.logo" alt="{{ partido.teams.home.name }}" />
-        <span>{{ partido.teams.home.name }} {{ partido.goals.home }} - {{ partido.goals.away }} {{ partido.teams.away.name }}</span>
-        <img [src]="partido.teams.away.logo" alt="{{ partido.teams.away.name }}" />
+        <!-- Contenedor para equipo local -->
+        <div class="equipo">
+          <img [src]="partido.teams.home.logo" alt="{{ partido.teams.home.name }}" />
+          <span>{{ partido.teams.home.name }}</span>
+        </div>
 
-        <!-- Usar la función para mostrar el estado del partido -->
-        <span>{{ getEstadoPartido(partido.fixture.date, partido.goals.home, partido.goals.away) }}</span>
+        <!-- Contenedor para resultado o marcador -->
+        <div class="marcador">
+          <span>{{ partido.goals.home }} - {{ partido.goals.away }}</span>
+        </div>
+
+        <!-- Contenedor para equipo visitante -->
+        <div class="equipo">
+          <span>{{ partido.teams.away.name }}</span>
+          <img [src]="partido.teams.away.logo" alt="{{ partido.teams.away.name }}" />
+        </div>
+
+        <!-- Estado del partido -->
+        <span class="estado">{{ getEstadoPartido(partido.fixture.date, partido.goals.home, partido.goals.away) }}</span>
       </li>
     </ul>
   </div>
-</div> 
+</div>

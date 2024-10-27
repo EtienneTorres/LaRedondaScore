@@ -1,60 +1,109 @@
-
-.partidosDia
-{
+.partidosDia {
     width: 60%;
     height: auto;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(80px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
-    border-radius: 10px;
+    color: #e0e0e0;
+    border-radius: 20px;
     padding: 30px 25px;
     margin-left: 400px;
     margin-top: 100px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.partidosDia h1
-{
-    color: white;
-    font-size: 36px;
+.partidosDia h1 {
+    color: #ffffff;
+    font-size: 2.5em;
+    font-weight: bold;
     text-align: center;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
 }
 
-
-
-.partidosDia h1 {
-    text-align: center;
-    font-size: 24px;
-    color: #ffffff; /* Color del texto */
+.partidosDia h2 {
+    font-size: 1.6em;
+    color: #FFD700;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    border-left: 5px solid #FFD700;
+    padding-left: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 ul {
-    list-style-type: none; /* Quitar puntos de la lista */
-    padding: 0; /* Sin padding */
+    list-style-type: none;
+    padding: 0;
 }
 
 li {
-    display: flex; /* Usar flexbox para alinear items */
-    justify-content: space-between; /* Espaciado entre elementos */
-    align-items: center; /* Centrar verticalmente */
-    padding: 10px; /* Espaciado interno */
-    border-bottom: 1px solid #ddd; /* Línea divisoria */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: background 0.3s, transform 0.2s;
+    gap: 10px; /* Añade espacio entre los elementos */
+
 }
 
-li:last-child {
-    border-bottom: none; /* Sin línea divisoria en el último item */
+li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
 }
 
-img {
-    width: 40px; /* Ajusta el tamaño de los logos */
-    height: auto; /* Mantener la proporción */
-    margin-right: 10px; /* Espacio entre la imagen y el texto */
+/* Ajuste de tamaño de los logos */
+li img {
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-li span {
-    color: white;
-    flex-grow: 1; /* Permitir que el texto crezca */
-    text-align: center; /* Centrar texto */
+/* Contenedores de equipo local y visitante */
+.equipo {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+/* Textos de nombres de equipo */
+.equipo-local span, .equipo-visitante span {
+    font-size: 1em;
+    color: #f0f0f0;
+    font-weight: 500;
+    flex-shrink: 0; /* Evita que el estado se reduzca */
+}
+
+/* Marcador y estado de partido */
+.marcador {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #f0f0f0;
+    text-align: center;
+    min-width: 60px;
+    flex-shrink: 0; /* Evita que el estado se reduzca */
+}
+
+.estado {
+    font-size: 0.9em;
+    color: #FFA500;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    min-width: 80px;
+    text-align: right;
+    flex-shrink: 0; /* Evita que el estado se reduzca */
+}
+
+/* Fuentes generales */
+.partidosDia h1, .partidosDia h2, li span {
+    font-family: 'Arial', sans-serif;
 }
