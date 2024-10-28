@@ -28,6 +28,9 @@
         <span class="estado">
           {{ getEstadoPartido(partido.fixture.date, partido.goals.home, partido.goals.away, partido.fixture.status) }}
         </span>
+
+        <button [routerLink]="['/fichapartido', partido.fixture.id]">+</button>
+
       </li>
     </ul>
   </div>

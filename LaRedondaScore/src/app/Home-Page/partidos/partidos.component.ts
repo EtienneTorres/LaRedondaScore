@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {OnInit } from '@angular/core';
 import { PartidoService } from '../../Api/partidos.service';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-partidos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [RouterModule,CommonModule],
   templateUrl: './partidos.component.html',
   styleUrl: './partidos.component.css'
 })
@@ -40,7 +41,8 @@ ligasDeseadas: { name: string; country: string }[] = [
   { name: "Primera D", country: "Argentina" },
   { name: "Primera C", country: "Argentina" },
   { name: "Primera Nacional", country: "Argentina" },
-  { name: "Primera B Metropolitana", country: "Argentina" }
+  { name: "Primera B Metropolitana", country: "Argentina" },
+  { name: "Süper Lig", country: "Turkey"}
 ];
 
 
@@ -128,6 +130,4 @@ ligasDeseadas: { name: string; country: string }[] = [
           return "Estado desconocido";
       }
     }
-    
-
  }

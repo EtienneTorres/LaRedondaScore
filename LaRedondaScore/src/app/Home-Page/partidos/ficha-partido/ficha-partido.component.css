@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .equipo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .equipo img {
+    width: 50px; /* Ajusta según el tamaño que desees */
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .equipo h3 {
+    margin: 0 10px;
+    font-size: 1.5em;
+    color: #444;
+  }
+  
+  .marcador {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .marcador h2 {
+    font-size: 2em;
+    color: #007BFF; /* Color para el marcador */
+  }
+  
+  .marcador p {
+    font-size: 1em;
+    color: #666;
+  }
+  
+  .equipo-local {
+    background-color: #e0f7fa; /* Color de fondo para el equipo local */
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .equipo-visitante {
+    background-color: #ffebee; /* Color de fondo para el equipo visitante */
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  @media (max-width: 600px) {
+    .equipo {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .equipo img {
+      margin-bottom: 10px;
+    }
+  
+    .marcador h2 {
+      font-size: 1.5em;
+    }
+  }
+  

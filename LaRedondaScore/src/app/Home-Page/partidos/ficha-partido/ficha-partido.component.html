@@ -1,0 +1,22 @@
+<div *ngIf="!cargando && detallesPartido">
+  <h1>Detalles del Partido</h1>
+  <div *ngIf="detallesPartido.teams">
+    <div class="equipo equipo-local">
+      <img [src]="detallesPartido.teams.home.logo" alt="{{ detallesPartido.teams.home.name }}" />
+      <h3>{{ detallesPartido.teams.home.name }}</h3>
+      <p>Goles: {{ detallesPartido.goals.home }}</p>
+    </div>
+
+    <div class="marcador">
+      <h2>{{ detallesPartido.goals.home }} - {{ detallesPartido.goals.away }}</h2>
+      <!-- <p>Status: {{ detallesPartido.status.long }}</p> -->
+      <!-- <p>Tiempo jugado: {{ detallesPartido.status.elapsed }}' (+{{ detallesPartido.status.extra || 0 }})</p> -->
+    </div>
+
+    <div class="equipo equipo-visitante">
+      <h3>{{ detallesPartido.teams.away.name }}</h3>
+      <img [src]="detallesPartido.teams.away.logo" alt="{{ detallesPartido.teams.away.name }}" />
+      <p>Goles: {{ detallesPartido.goals.away }}</p>
+    </div>
+  </div>
+</div>
