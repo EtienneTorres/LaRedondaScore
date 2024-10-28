@@ -1,22 +1,57 @@
+
+<body>
 <div *ngIf="!cargando && detallesPartido">
+  <div class="FichaPartido">
   <h1>Detalles del Partido</h1>
+  
   <div *ngIf="detallesPartido.teams">
     <div class="equipo equipo-local">
       <img [src]="detallesPartido.teams.home.logo" alt="{{ detallesPartido.teams.home.name }}" />
       <h3>{{ detallesPartido.teams.home.name }}</h3>
-      <p>Goles: {{ detallesPartido.goals.home }}</p>
     </div>
 
     <div class="marcador">
       <h2>{{ detallesPartido.goals.home }} - {{ detallesPartido.goals.away }}</h2>
-      <!-- <p>Status: {{ detallesPartido.status.long }}</p> -->
-      <!-- <p>Tiempo jugado: {{ detallesPartido.status.elapsed }}' (+{{ detallesPartido.status.extra || 0 }})</p> -->
+      <p>{{ getEstadoFicha(detallesPartido.fixture.status) }}</p>
     </div>
 
     <div class="equipo equipo-visitante">
       <h3>{{ detallesPartido.teams.away.name }}</h3>
       <img [src]="detallesPartido.teams.away.logo" alt="{{ detallesPartido.teams.away.name }}" />
-      <p>Goles: {{ detallesPartido.goals.away }}</p>
     </div>
   </div>
+
+  <div class="formaciones" *ngIf="detallesPartido.lineups?.length > 0">
+    <h3>Formaciones Titulares</h3>
+  
+    <div class="formacion equipo-local" *ngIf="detallesPartido.lineups[0]">
+      <h4>{{ detallesPartido.lineups[0]?.team.name || 'Equipo Local' }} ({{ detallesPartido.lineups[0]?.formation || 'N/A' }}):</h4>
+      <h4>DT: {{ detallesPartido.lineups[0]?.coach?.name || 'N/A' }}</h4>
+      <ul>
+        <li *ngFor="let jugador of detallesPartido.lineups[0]?.startXI">
+          {{ jugador.player?.name || 'Desconocido' }} - Dorsal: {{ jugador.player?.number || 'N/A' }} - Posición: {{ getPosicion(jugador.player?.pos) || 'N/A' }}
+        </li>
+      </ul>
+    </div>
+  
+    <div class="formacion equipo-visitante" *ngIf="detallesPartido.lineups[1]">
+      <h4>{{ detallesPartido.lineups[1]?.team.name || 'Equipo Visitante' }} ({{ detallesPartido.lineups[1]?.formation || 'N/A' }}):</h4>
+      <h4>DT: {{ detallesPartido.lineups[1]?.coach?.name || 'N/A' }}</h4>
+      <ul>
+        <li *ngFor="let jugador of detallesPartido.lineups[1]?.startXI">
+          {{ jugador.player?.name || 'Desconocido' }} - Dorsal: {{ jugador.player?.number || 'N/A' }} - Posición: {{ getPosicion(jugador.player?.pos) || 'N/A' }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="informacion-adicional">
+    <h3>Información Adicional</h3>
+    <p>Fecha: {{ detallesPartido.fixture.date | date:'fullDate' }}</p>
+    <p>Horario: {{ detallesPartido.fixture.date | date:'shortTime' }}</p>
+    <p>Estadio: {{ detallesPartido.fixture.venue.name }}</p>
+    <p>Ciudad: {{ detallesPartido.fixture.venue.city }}</p>
+  </div>
 </div>
+</div>
+</body>

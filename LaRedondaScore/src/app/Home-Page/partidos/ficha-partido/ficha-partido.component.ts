@@ -41,5 +41,37 @@ export class FichaPartidoComponent implements OnInit {
       }
     );
   }
-  
+
+  getEstadoFicha(status: { long: string, short: string, elapsed: number, extra?: number }): string {
+  switch (status.short) {
+    case 'HT': // Medio tiempo
+      return `Entretiempo`;
+    case '1H': // Primera mitad
+      return ` ${status.elapsed}'`;
+    case '2H': // Segunda mitad
+      return ` ${status.elapsed}'`;
+    case 'ET': // Tiempo extra
+      return ` - ${status.elapsed}' + ${status.extra ? `(+${status.extra})` : ''}`;
+    case 'PEN': // Penales
+      return "Penales";
+    case 'FT': // Finalizado
+      return "Finalizado";
+    default:
+      return "No ha comenzado.";
+  }
+ }
+  getPosicion(posicion: string): string {
+    switch (posicion) {
+      case 'G':
+        return 'Portero';
+      case 'D':
+        return 'Defensor';
+      case 'M':
+        return 'Centrocampista';
+      case 'F':
+        return 'Delantero';
+      default:
+        return 'Desconocido';
+    }
+  }
 }

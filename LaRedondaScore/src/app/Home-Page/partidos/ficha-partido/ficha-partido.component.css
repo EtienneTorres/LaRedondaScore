@@ -1,73 +1,145 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-  }
-  
-  h1 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .equipo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px 0;
-  }
-  
-  .equipo img {
-    width: 50px; /* Ajusta según el tamaño que desees */
-    height: auto;
-    margin-right: 10px;
-  }
-  
-  .equipo h3 {
-    margin: 0 10px;
-    font-size: 1.5em;
-    color: #444;
-  }
-  
-  .marcador {
-    text-align: center;
-    margin: 20px 0;
-  }
-  
-  .marcador h2 {
-    font-size: 2em;
-    color: #007BFF; /* Color para el marcador */
-  }
-  
-  .marcador p {
-    font-size: 1em;
-    color: #666;
-  }
-  
-  .equipo-local {
-    background-color: #e0f7fa; /* Color de fondo para el equipo local */
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .equipo-visitante {
-    background-color: #ffebee; /* Color de fondo para el equipo visitante */
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  @media (max-width: 600px) {
-    .equipo {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .equipo img {
-      margin-bottom: 10px;
-    }
-  
-    .marcador h2 {
-      font-size: 1.5em;
-    }
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url(../../../Imagenes/Fondo.jpg)no-repeat center fixed;
+  background-size: cover;
+  flex-direction: column; 
+  overflow-y: auto;
+}
+.FichaPartido {
+  width: 150%;
+  height: auto;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .2);
+  backdrop-filter: blur(80px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  color: #e0e0e0;
+  border-radius: 20px;
+  padding: 30px 25px;
+  margin: auto 0;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fichaPartido h1 {
+  color: #FFD700; /* Color dorado para el título */
+  font-size: 2.2em;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.fichaPartido h2 {
+  font-size: 1.5em;
+  color: #ffffff;
+  margin: 20px 0 10px;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.formaciones {
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 2px solid #FFD700; /* Línea dorada en la parte superior */
+}
+
+.formaciones h3 {
+  font-size: 1.5em;
+  color: #ffffff;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.formacion {
+  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.formacion h4 {
+  color: #FFD700;
+  font-size: 1.2em;
+  margin: 5px 0;
+}
+
+.formacion ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.formacion li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espacio entre el nombre y el dorsal */
+  padding: 8px;
+  margin-bottom: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.formacion li:hover {
+  background: rgba(255, 255, 255, 0.2); /* Efecto hover */
+}
+
+/* Ajuste de estilo para los números y posiciones */
+.formacion li span {
+  color: #f0f0f0;
+  font-weight: 500;
+}
+
+.equipo {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center; /* Centra el equipo local y visitante */
+}
+
+.marcador {
+  display: flex; /* Usar flexbox para alinear */
+  flex-direction: column; /* Alinear en columnas */
+  align-items: center; /* Centra el contenido del marcador */
+  margin: 0 20px; /* Espacio entre equipos y marcador */
+}
+
+.equipo-local, .equipo-visitante {
+  flex-direction: column; /* Alinea logo y nombre verticalmente */
+  align-items: center; /* Centra el logo y el nombre */
+}
+
+.equipo-local {
+  justify-content: flex-start; /* Logo del equipo local a la izquierda */
+}
+
+.equipo-visitante {
+  justify-content: flex-end; /* Logo del equipo visitante a la derecha */
+}
+
+.equipo img {
+  width: 70px; /* Tamaño del escudo ajustado */
+  height: auto; /* Mantiene la proporción */
+  margin-right: 10px; /* Espacio entre el logo y el nombre del equipo */
+  border-radius: 50%; /* Hace que la imagen sea redonda */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde para el escudo */
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5); /* Sombra para el escudo */
+}
+
+
+.marcador {
+  font-size: 1.5em; /* Ajusta el tamaño de la fuente según lo desees */
+  font-weight: bold;
+  color: #f0f0f0;
+  text-align: center; /* Centra el texto */
+  min-width: 60px;
+  flex-shrink: 0; /* Evita que el estado se reduzca */
+  margin: 20px 0; /* Añade margen vertical */
+  display: flex; /* Usar flexbox para centrar */
+  flex-direction: column; /* Para alinear el texto en columnas */
+  align-items: center; /* Alinea horizontalmente en el centro */
+}
