@@ -1,4 +1,22 @@
 
+<nav>
+  <div class="logo">
+      <img src="LRS.png" alt="">
+  </div>
+
+  <div class="search-container">
+      <input type="text" placeholder="Buscar..." aria-label="Buscar">
+      <i class='bx bx-search-alt-2'></i>
+  </div>
+
+
+  <ul class="nav-links">
+      <li><a routerLink="/PaginaPrincipal">Volver</a></li>
+  </ul>
+</nav>
+
+
+
 <body>
 <div *ngIf="!cargando && detallesPartido">
   <div class="FichaPartido">
@@ -22,24 +40,23 @@
   </div>
 
   <div class="formaciones" *ngIf="detallesPartido.lineups?.length > 0">
-    <h3>Formaciones Titulares</h3>
   
-    <div class="formacion equipo-local" *ngIf="detallesPartido.lineups[0]">
+    <div class="formacion equipo_local" *ngIf="detallesPartido.lineups[0]">
       <h4>{{ detallesPartido.lineups[0]?.team.name || 'Equipo Local' }} ({{ detallesPartido.lineups[0]?.formation || 'N/A' }}):</h4>
       <h4>DT: {{ detallesPartido.lineups[0]?.coach?.name || 'N/A' }}</h4>
       <ul>
         <li *ngFor="let jugador of detallesPartido.lineups[0]?.startXI">
-          {{ jugador.player?.name || 'Desconocido' }} - Dorsal: {{ jugador.player?.number || 'N/A' }} - Posición: {{ getPosicion(jugador.player?.pos) || 'N/A' }}
+          {{ getPosicion(jugador.player?.pos) || 'N/A' }} - {{ jugador.player?.number || 'N/A' }} - {{ jugador.player?.name || 'Desconocido' }}
         </li>
       </ul>
     </div>
   
-    <div class="formacion equipo-visitante" *ngIf="detallesPartido.lineups[1]">
+    <div class="formacion equipo_visitante" *ngIf="detallesPartido.lineups[1]">
       <h4>{{ detallesPartido.lineups[1]?.team.name || 'Equipo Visitante' }} ({{ detallesPartido.lineups[1]?.formation || 'N/A' }}):</h4>
       <h4>DT: {{ detallesPartido.lineups[1]?.coach?.name || 'N/A' }}</h4>
       <ul>
         <li *ngFor="let jugador of detallesPartido.lineups[1]?.startXI">
-          {{ jugador.player?.name || 'Desconocido' }} - Dorsal: {{ jugador.player?.number || 'N/A' }} - Posición: {{ getPosicion(jugador.player?.pos) || 'N/A' }}
+           {{ getPosicion(jugador.player?.pos) || 'N/A' }} - {{ jugador.player?.number || 'N/A' }} - {{ jugador.player?.name || 'Desconocido' }}
         </li>
       </ul>
     </div>
@@ -54,4 +71,6 @@
   </div>
 </div>
 </div>
+
+
 </body>

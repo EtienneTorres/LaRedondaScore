@@ -9,6 +9,7 @@ body {
   overflow-y: auto;
 }
 .FichaPartido {
+  margin-top: 120px;
   width: 150%;
   height: auto;
   background: transparent;
@@ -18,11 +19,10 @@ body {
   color: #e0e0e0;
   border-radius: 20px;
   padding: 30px 25px;
-  margin: auto 0;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.fichaPartido h1 {
+.FichaPartido h1 {
   color: #FFD700; /* Color dorado para el título */
   font-size: 2.2em;
   font-weight: bold;
@@ -32,7 +32,7 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-.fichaPartido h2 {
+.FichaPartido h2 {
   font-size: 1.5em;
   color: #ffffff;
   margin: 20px 0 10px;
@@ -42,20 +42,17 @@ body {
 }
 
 .formaciones {
-  margin-top: 20px;
+  display: flex; /* Usar flexbox para alinear las formaciones */
+  justify-content: space-between; /* Espacio entre las formaciones */
+  margin-top: 80px;
   padding: 10px;
-  border-top: 2px solid #FFD700; /* Línea dorada en la parte superior */
-}
+  border-top: 2px solid #FFD700;}
 
-.formaciones h3 {
-  font-size: 1.5em;
-  color: #ffffff;
-  text-align: left;
-  margin-bottom: 10px;
-}
+
 
 .formacion {
-  margin-bottom: 15px;
+  width: 48%; 
+  margin-bottom: 20px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   padding: 10px;
@@ -68,7 +65,7 @@ body {
   margin: 5px 0;
 }
 
-.formacion ul {
+.equipo_local ul {
   list-style-type: none;
   padding: 0;
 }
@@ -105,12 +102,11 @@ body {
   display: flex; /* Usar flexbox para alinear */
   flex-direction: column; /* Alinear en columnas */
   align-items: center; /* Centra el contenido del marcador */
-  margin: 0 20px; /* Espacio entre equipos y marcador */
+  margin: -40px 0px; /* Espacio entre equipos y marcador */
 }
 
 .equipo-local, .equipo-visitante {
-  flex-direction: column; /* Alinea logo y nombre verticalmente */
-  align-items: center; /* Centra el logo y el nombre */
+  flex-direction: row;
 }
 
 .equipo-local {
@@ -121,25 +117,125 @@ body {
   justify-content: flex-end; /* Logo del equipo visitante a la derecha */
 }
 
+.equipo_visitante{
+  justify-content: flex-end;
+}
+
+.equipo_local{
+  justify-content: flex-start;
+}
+
 .equipo img {
-  width: 70px; /* Tamaño del escudo ajustado */
-  height: auto; /* Mantiene la proporción */
+  width: 60px; /* Tamaño del escudo ajustado */
+  height: 60px; /* Mantiene la proporción */
   margin-right: 10px; /* Espacio entre el logo y el nombre del equipo */
-  border-radius: 50%; /* Hace que la imagen sea redonda */
+  margin-left: 10px;
+  align-items: center;
+  border-radius: 60%; /* Hace que la imagen sea redonda */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Borde para el escudo */
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5); /* Sombra para el escudo */
 }
 
-
-.marcador {
-  font-size: 1.5em; /* Ajusta el tamaño de la fuente según lo desees */
+ .marcador {
+  font-size: 1.2em;
   font-weight: bold;
+   height: 30px;
   color: #f0f0f0;
-  text-align: center; /* Centra el texto */
-  min-width: 60px;
+  text-align: center;
   flex-shrink: 0; /* Evita que el estado se reduzca */
-  margin: 20px 0; /* Añade margen vertical */
-  display: flex; /* Usar flexbox para centrar */
   flex-direction: column; /* Para alinear el texto en columnas */
-  align-items: center; /* Alinea horizontalmente en el centro */
+}
+
+.informacion-adicional{
+  margin-top: 30px;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+nav {
+  display: flex;
+  background: transparent;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(200px);
+  color: #fff;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  width: 100%;
+  z-index: 1; 
+}
+
+.nav-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  transition: background-color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: #ffffff;
+  border-radius: 5px;
+  color: black;
+}
+
+.search-container {
+  flex-grow: 1; 
+  display: flex;
+  justify-content: center; 
+}
+
+.search-container input {
+  width: 300px;
+  height: 0px;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, .2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 20px 45px 20px 20px;
+  transition: border-color 0.3s ease;
+}
+
+.search-container input:hover {
+  border-color: rgba(255, 255, 255, 1); /* Cambia el borde a blanco */
+}
+.search-container input::placeholder
+{
+  color: #fff;
+}
+
+.search-container i
+{
+  position: absolute;
+  right: 550px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+.logo img {
+  width: 60px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.3); /* Aumenta el tamaño al 110% */
 }

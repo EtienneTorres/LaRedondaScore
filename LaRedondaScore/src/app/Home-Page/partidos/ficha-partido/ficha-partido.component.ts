@@ -63,15 +63,15 @@ export class FichaPartidoComponent implements OnInit {
   getPosicion(posicion: string): string {
     switch (posicion) {
       case 'G':
-        return 'Portero';
+        return 'POR';
       case 'D':
-        return 'Defensor';
+        return 'DEF';
       case 'M':
-        return 'Centrocampista';
+        return 'MED';
       case 'F':
-        return 'Delantero';
+        return 'DEL';
       default:
-        return 'Desconocido';
+        return '-';
     }
   }
 }

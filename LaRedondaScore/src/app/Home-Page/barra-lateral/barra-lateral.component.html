@@ -1,0 +1,10 @@
+<div class="sidebar">
+    <h2>Paises</h2>
+    <ul>
+        <li *ngFor="let country of countries">
+            <img [src]="country.flag" alt="{{ country.name }} flag" class="country-flag"/>
+            {{ country.name }}
+        </li>
+    </ul>
+</div>
+

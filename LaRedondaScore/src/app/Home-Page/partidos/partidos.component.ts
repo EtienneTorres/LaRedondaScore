@@ -42,7 +42,8 @@ ligasDeseadas: { name: string; country: string }[] = [
   { name: "Primera C", country: "Argentina" },
   { name: "Primera Nacional", country: "Argentina" },
   { name: "Primera B Metropolitana", country: "Argentina" },
-  { name: "Süper Lig", country: "Turkey"}
+  { name: "Süper Lig", country: "Turkey"},
+  { name: "Premier League", country: "Singapore" }
 ];
 
 
