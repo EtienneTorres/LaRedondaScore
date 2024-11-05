@@ -7,9 +7,10 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = '3fe8097be2c03810eacfc05dc5753520'; 
+  private apiKey = '8f3569d54b888d1edf7683ad56d9df25'; 
   private apiUrl = 'https://v3.football.api-sports.io/fixtures';
   private apiUrl2 = 'https://v3.football.api-sports.io/countries';
+  private apiurl3='https://v3.football.api-sports.io/leagues'
 
   constructor(private http: HttpClient) {}
 
@@ -55,6 +56,21 @@ export class PartidoService {
     );
   }
 
+  getleagues():Observable<any>
+  {
+
+    const headers = {
+      'x-rapidapi-host': 'v3.football.api-sports.io',
+      'x-rapidapi-key': this.apiKey
+    };
+    return this.http.get<any>(`${this.apiurl3}`, { headers }).pipe(
+      catchError(error => {
+        console.error('Error al obtener las ligas', error);
+        return throwError(error);
+      })
+    );
+
+  }
   
 
 }

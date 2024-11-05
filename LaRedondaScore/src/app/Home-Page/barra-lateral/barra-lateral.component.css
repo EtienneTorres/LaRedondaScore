@@ -1,6 +1,5 @@
-/* barra-lateral.component.css */
 .sidebar {
-  width: 250px; /* Ajusta el ancho según tu diseño */
+  width: 300px; 
   padding: 20px;
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid rgba(255, 255, 255, 0.2);
@@ -8,41 +7,98 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   color: #e0e0e0;
   border-radius: 10px;
-  position: fixed; /* Asegúrate de que esté fijo en la pantalla */
-  top: 100px; /* Ajusta la posición vertical según sea necesario */
-  left: 20px; /* Espaciado desde la izquierda */
-  height: calc(100% - 100px); /* Altura del contenedor para permitir scroll */
-  overflow-y: auto; /* Permitir el desplazamiento vertical */
-  scrollbar-width: none; /* Para Firefox */
-  max-height: 62vh; /* Altura máxima del contenedor */
-}
-
-.country-flag {
-  width: 30px; /* Ajusta el tamaño de la bandera */
-  height: auto;
-  margin-right: 10px; /* Espacio entre la bandera y el nombre del país */
-  border-radius: 20%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: fixed; 
+  top: 100px; 
+  left: 20px; 
+  height: calc(100% - 100px); 
+  overflow-y: auto; 
+  scrollbar-width: none; 
+  max-height: 62vh; 
 }
 
 h2 {
-  margin-top: 20px;
-  color: #FFD700; /* Color dorado para los títulos */
+  color: #FFD700; 
 }
 
 ul {
-  list-style-type: none;
+  list-style-type: none; 
   padding: 0;
 }
 
 li {
   display: flex;
-  align-items: center;
   padding: 10px;
   cursor: pointer;
   transition: background 0.3s;
+  flex-direction: column;
 }
 
 li:hover {
-  background: rgba(255, 255, 255, 0.1); /* Efecto hover */
+  background: rgba(255, 255, 255, 0.1); 
+}
+
+.league-list {
+  margin-top: 5px;
+  padding-left: 0; /* Elimina el espaciado a la izquierda */
+  list-style-type: disc; /* Agrega viñetas a la lista de ligas */
+  color: #e0e0e0; /* Ajuste de color para legibilidad */
+  display: flex; /* Usa flexbox para alinear la bandera y el nombre del país */
+}
+
+li.expanded > .league-list {
+  display: block; /* Muestra la lista cuando el elemento li tiene la clase 'expanded' */
+}
+
+.league-flag {
+  width: 15px; 
+  height: auto;
+  margin-right: 10px; 
+  border-radius: 20%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.country-info {
+  display: flex; /* Usa flexbox para alinear la bandera y el nombre del país */
+  align-items: center; /* Alinea verticalmente el contenido */
+}
+
+.league-list {
+  display: flex; /* Usa flexbox para alinear la bandera y el nombre del país */
+  align-items: center; /* Alinea verticalmente el contenido */
+}
+
+
+.league-item {
+  display: flex; /* Usa flexbox para alinear el logo y el nombre de la liga */
+  align-items: center; /* Alinea verticalmente el contenido */
+  padding: 5px 0; /* Añade un poco de espacio vertical entre las ligas */
+}
+
+.country-flag {
+  width: 30px; 
+  height: auto;
+  margin-right: 10px; 
+  border-radius: 20%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.league-flag {
+  width: 30px; 
+  height: auto;
+  margin-right: 10px; 
+  border-radius: 20%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.country-name {
+  margin-left: 10px; /* Espaciado a la izquierda del nombre del país */
+  font-size: 16px;
+  color: #FFD700; 
+}
+
+.league-name {
+  margin-left: 40px; /* Espaciado a la izquierda del nombre del país */
+  font-size: 12px;
+  color: #e0e0e0; 
+
 }
