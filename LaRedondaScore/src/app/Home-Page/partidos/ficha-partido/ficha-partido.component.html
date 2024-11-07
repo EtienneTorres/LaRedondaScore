@@ -1,21 +1,6 @@
 
-<nav>
-  <div class="logo">
-      <img src="LRS.png" alt="">
-  </div>
 
-  <div class="search-container">
-      <input type="text" placeholder="Buscar..." aria-label="Buscar">
-      <i class='bx bx-search-alt-2'></i>
-  </div>
-
-
-  <ul class="nav-links">
-      <li><a routerLink="/PaginaPrincipal">Volver</a></li>
-  </ul>
-</nav>
-
-
+<app-nav></app-nav>
 
 <body>
 <div *ngIf="!cargando && detallesPartido">

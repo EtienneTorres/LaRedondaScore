@@ -3,11 +3,12 @@ import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { PartidoService } from '../../../Api/partidos.service';
 import { CommonModule } from '@angular/common';
+import { NavComponent } from '../../../navbar/nav/nav.component';
 
 @Component({
   selector: 'app-ficha-partido',
   standalone: true,
-  imports: [RouterModule,CommonModule],
+  imports: [RouterModule,CommonModule,NavComponent],
   templateUrl: './ficha-partido.component.html',
   styleUrl: './ficha-partido.component.css'
 })

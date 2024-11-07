@@ -1,0 +1,24 @@
+<body>
+  <div class="ficha-equipo-container" *ngIf="equipoDetails">
+    <h2>{{ equipoDetails.team.name }}</h2>
+
+  
+    <div class="team-info">
+      <!-- Mostrar el escudo -->
+      <img [src]="equipoDetails.team.logo" alt="{{ equipoDetails.team.name }} Logo" class="team-logo">
+      
+      <div class="team-details">
+        <p><strong>País:</strong> {{ equipoDetails.team.country }}</p>
+        <p><strong>Ciudad:</strong> {{ equipoDetails.venue.city }}</p>
+        <img [src]="equipoDetails.venue.image" class="team-stadium-logo">
+        <p><strong>Estadio:</strong> {{ equipoDetails.venue.name }}</p>
+        <p><strong>Direccion:</strong> {{ equipoDetails.venue.address }}</p>
+        <p><strong>Capacidad:</strong> {{ equipoDetails.venue.capacity }}</p>
+        <!-- Agrega más detalles según lo que necesites mostrar -->
+      </div>
+    </div>
+  </div>
+</body>
+
+
+    

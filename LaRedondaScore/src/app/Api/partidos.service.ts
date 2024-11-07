@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable} from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -7,10 +7,11 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = '8f3569d54b888d1edf7683ad56d9df25'; 
-  private apiUrl = 'https://v3.football.api-sports.io/fixtures';
+  private apiKey = '9ca333677650bccc43ef6eacaad3148c'; 
+  private apiUrl = 'https://v3.football.api-sports.io';
   private apiUrl2 = 'https://v3.football.api-sports.io/countries';
   private apiurl3='https://v3.football.api-sports.io/leagues'
+  private apiurl4='https://v3.football.api-sports.io/teams'
 
   constructor(private http: HttpClient) {}
 
@@ -20,7 +21,7 @@ export class PartidoService {
       'x-rapidapi-key': this.apiKey
     };
     
-    return this.http.get<any>(`${this.apiUrl}?date=${date}`, { headers }).pipe(
+    return this.http.get<any>(`${this.apiUrl}/fixtures?date=${date}`, { headers }).pipe(
       catchError(error => {
         console.error('Error al obtener los partidos del día', error);
         return throwError(error);
@@ -71,6 +72,24 @@ export class PartidoService {
     );
 
   }
-  
+
+
+  getEquiposPorNombre(teamName: string): Observable<any> {
+    const headers = {
+        'x-rapidapi-host': 'v3.football.api-sports.io',
+        'x-rapidapi-key': this.apiKey
+    };
+    //const params = new HttpParams().set('name', teamName); // Parámtero de búsqueda
+
+    return this.http.get<any>(`${this.apiurl4}?name=${teamName}`, { headers }).pipe(
+        catchError(error => {
+            console.error('Error al obtener el equipo', error);
+            return throwError(error);
+        })
+    );
+}
+
+
+
 
 }

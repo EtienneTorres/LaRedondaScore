@@ -33,7 +33,7 @@ ligasDeseadas: { name: string; country: string }[] = [
   { name: "Primeira Liga", country: "Portugal" },
   { name: "World Cup", country: "International" }, // Mundial no tiene un país específico
   { name: "Ligue 2", country: "France" },
-  { name: "UEFA Champions League", country: "International" }, // Champions League es un torneo internacional
+  { name: "UEFA Champions League", country: "World" }, // Champions League es un torneo internacional
   { name: "Primera B Metropolitana", country: "Argentina" },
   { name: "Copa De La Liga Profesional", country: "Argentina" },
   { name: "Copa Argentina", country: "Argentina" },

@@ -1,0 +1,36 @@
+<div class="search-container">
+    <input 
+        type="text" 
+        placeholder="Buscar equipo..." 
+        [(ngModel)]="searchTerm" 
+        (keyup.enter)="onInputChange()" 
+        aria-label="Buscar">
+    
+     <!-- Si se está buscando, muestra un indicador de carga -->
+     <div *ngIf="loading" class="loading-indicator">
+        Cargando...
+    </div>
+
+    <!-- Mostrar los resultados de búsqueda -->
+    <ul *ngIf="filteredEquipos.length > 0" class="dropdown-menu">
+        <li *ngFor="let equipo of filteredEquipos">
+            <div class="team-item">
+
+              <!-- Usamos routerLink para redirigir al componente FichaEquipo -->
+              <a [routerLink]="['/ficha-equipo', equipo.name]" >
+
+
+                <!-- Mostrar el escudo -->
+                <img [src]="equipo.logo" alt="{{ equipo.name }} Logo" class="team-logo">
+                <!-- Mostrar el nombre del equipo -->
+                <span class="team-name">{{ equipo.name }}</span>
+              </a>
+            </div>
+        </li>
+    </ul>
+
+    <!-- Si no se encuentran resultados, mostrar mensaje -->
+    <div *ngIf="filteredEquipos.length === 0 && searchTerm.length > 2 && !loading" class="no-results">
+        No se encontraron equipos.
+    </div>
+</div>
