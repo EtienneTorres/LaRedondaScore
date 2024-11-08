@@ -10,33 +10,17 @@
       </div>
     </div>
   
-    <div class="season-stats" *ngIf="seasonStats">
-      <h2>Estadísticas de la Temporada {{ seasonStats.year }}</h2>
-      <div class="stat">
-        <span>Equipos Participantes: </span>
-        <span>{{ seasonStats.teams.length }}</span>
-      </div>
-      <div class="stat">
-        <span>Partidos Jugados: </span>
-        <span>{{ seasonStats.matchesPlayed }}</span>
-      </div>
-      <div class="stat">
-        <span>Partidos Ganados: </span>
-        <span>{{ seasonStats.matchesWon }}</span>
-      </div>
-      <div class="stat">
-        <span>Partidos Perdidos: </span>
-        <span>{{ seasonStats.matchesLost }}</span>
-      </div>
-      <div class="stat">
-        <span>Goles a Favor: </span>
-        <span>{{ seasonStats.goalsFor }}</span>
-      </div>
-      <div class="stat">
-        <span>Goles en Contra: </span>
-        <span>{{ seasonStats.goalsAgainst }}</span>
+    <div *ngIf="seasonStats">
+      <h2>{{ seasonStats.league.name }} - {{ seasonStats.country.name }}</h2>
+      <img [src]="seasonStats.flag" alt="{{ seasonStats.country }} flag" width="30" />
+      
+      <div *ngIf="seasonStats.currentSeason">
+        <h3>Temporada Actual: {{ seasonStats.currentSeason.year }}</h3>
+        <p>Inicio: {{ seasonStats.currentSeason.start }}</p>
+        <p>Fin: {{ seasonStats.currentSeason.end }}</p>
       </div>
     </div>
+    
   
     <div class="informacion-adicional">
       <h3>Más Información</h3>

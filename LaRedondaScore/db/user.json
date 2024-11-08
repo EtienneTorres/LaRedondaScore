@@ -3,19 +3,28 @@
     {
       "id": "1",
       "username": "usuario1",
-      "password": "contraseña1",
-      "favoritos": []
+      "password": "contraseña1"
     },
     {
       "id": "2",
       "username": "usuario2",
-      "password": "contraseña2",
-      "favoritos": []
+      "password": "contraseña2"
     },
     {
       "id": "6254",
       "username": "Mariano",
       "password": "Mariano"
+    }
+  ],
+  "favoritos": [
+    {
+      "id": "1",
+      "userId": 1,
+      "equipos": {
+        "1": "Huracan",
+        "2": "Lanus",
+        "3": "Real Madrid"
+      }
     }
   ]
 }

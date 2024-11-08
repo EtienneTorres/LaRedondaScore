@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
+import { of } from 'rxjs';
+import { Favoritos } from '../Favorite-teams/favoritos';
+
 
 @Injectable({
   providedIn: 'root'
@@ -29,27 +32,46 @@ export class UserService {
     return this.currentUserId;  // Obtén el `userId` de la sesión activa
   }
 
-   // Obtener los equipos favoritos de un usuario
-   getFavoriteTeams(userId: number): Observable<any> {
-    return this.http.get(`${this.urlbase}/users/${userId}/favoriteTeams`);
-  }
-
-  // Agregar un equipo a la lista de favoritos de un usuario
-  // addFavoriteTeam(userId: number, team: string): Observable<any> {
-  //   return this.http.post(`${this.urlbase}/users/${userId}/favoriteTeams`, team);
-  // }
-
   
-  // Eliminar un equipo de la lista de favoritos de un usuario
-  removeFavoriteTeam(userId: number, teamId: number): Observable<any> {
-    return this.http.delete(`${this.urlbase}/users/${userId}/favoriteTeams/${teamId}`);
-  }
-
-
   addFavoriteTeam(userId: number, teamName: string): Observable<any> {
-   return  this.http.post(`http://localhost:3000/users/${userId}/favoritos`, { teamName });
-
+    return this.http.get<any[]>(`${this.urlbase}/favoritos/?userId=${userId}`).pipe(
+      switchMap(favoritos => {
+        if (favoritos.length > 0) {
+          const favorito = favoritos[0];
+          
+          // Verificar si el equipo ya existe
+          if (!Object.values(favorito.equipos).includes(teamName)) {
+            const newId = Object.keys(favorito.equipos).length + 1; // Generar nuevo ID para el equipo
+            favorito.equipos[newId] = teamName; // Agregar el nuevo equipo
+  
+            // Actualizar los favoritos del usuario
+            return this.http.put(`${this.urlbase}/favoritos/${favorito.id}`, favorito);
+            
+          } else {
+            return of({ message: 'El equipo ya está en tus favoritos' });
+          }
+        } else {
+          return of({ message: 'Usuario no encontrado' });
+        }
+      })
+    );
   }
+  
+  
+  
+  
+  
+  getFavoriteTeams(userId: number): Observable<any> {
+    return this.http.get<any[]>(`${this.urlbase}/favoritos/?userId=${userId}`).pipe(
+      map(favoritos => {
+        if (favoritos.length > 0) {
+          return favoritos[0].equipos; // Devuelve solo el objeto "equipos"
+        }
+        return {}; // Si no existe el usuario, devuelve un objeto vacío
+      })
+    );
+  }
+  
   
   
 

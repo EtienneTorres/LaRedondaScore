@@ -37,21 +37,41 @@ export class DetallesLeagueComponent implements OnInit {
   loadLeagueDetails(id: string) {
     this.partidoService.getLeagueDetails(id).subscribe((data: any) => {
       this.league = data.response[0]; // Asegúrate de acceder al dato correctamente
-      console.log('Datos de la liga:', this.league);
+      console.log('Datos de la liga load:', this.league);
     }, error => {
       console.error('Error al cargar los detalles de la liga:', error);
     });
   }
 
-  // Método para cargar las estadísticas de la temporada (2024)
+
   loadSeasonStats(id: string) {
-    const seasonYear = 2020; // Definir el año de la temporada, en este caso 2024
-    this.partidoService.getSeasonStats(id, seasonYear).subscribe((data: any) => {
-      console.log(this.seasonStats)
-      this.seasonStats = data.response[0]; // Asegúrate de acceder correctamente
-      console.log('Estadísticas de la temporada:', this.seasonStats);
+    this.partidoService.getSeasonStats(id).subscribe((data: any) => {
+      if (data.response) {
+        const leagueData = data;  // Aquí 'data' contiene la liga y temporadas
+        console.log('Datos de la liga:', leagueData);
+        
+        // Accediendo a la información de la liga, país y temporadas
+        this.seasonStats = {
+          leagueName: leagueData.league.name,
+          leagueLogo: leagueData.league.logo,
+          country: leagueData.country.name,
+          countryFlag: leagueData.country.flag,
+          seasons: leagueData.seasons.map((season: any) => ({
+            year: season.year,
+            start: season.start,
+            end: season.end,
+            current: season.current,
+          }))
+        };
+  
+        console.log('Estadísticas de la temporada:', this.seasonStats);
+      } else {
+        console.log('No se encontraron datos para esta liga');
+      }
     }, error => {
       console.error('Error al cargar las estadísticas de la temporada:', error);
     });
   }
+  
+
 }
