@@ -1,0 +1,136 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url(../../../Imagenes/Fondo.jpg)no-repeat center fixed;
+  background-size: cover;
+  flex-direction: column; 
+  overflow-y: auto;
+}
+
+.DetalleLeague {
+    margin-top: 120px;
+    width: 80%;
+    max-width: 1200px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(80px); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #e0e0e0;
+    border-radius: 20px;
+    padding: 30px 25px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .DetalleLeague h1 {
+    color: #FFD700;
+    font-size: 2.2em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+  
+  .DetalleLeague h2, .DetalleLeague h3 {
+    color: #FFD700;
+    font-size: 1.5em;
+    margin: 20px 0 10px;
+    font-weight: 600;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  
+  .league-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  .league-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  }
+  
+  .league-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .league-info h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .league-info p {
+    color: #fff;
+    font-size: 1.1em;
+  }
+  
+  .season-stats {
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  .stat {
+    font-size: 1.2em;
+    margin: 10px 0;
+  }
+  
+  .stat span:first-child {
+    font-weight: bold;
+  }
+  
+  .informacion-adicional {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  nav {
+    display: flex;
+    background: transparent;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(200px);
+    color: #fff;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    z-index: 1; 
+  }
+  
+  .nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .nav-links li {
+    margin-left: 20px;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-links a:hover {
+    background-color: #ffffff;
+    border-radius: 5px;
+    color: black;
+  }
+  

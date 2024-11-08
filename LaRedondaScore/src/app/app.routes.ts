@@ -4,13 +4,17 @@ import { LoginPageComponent } from './Login/login-page/login-page.component';
 import { FichaPartidoComponent } from './Home-Page/partidos/ficha-partido/ficha-partido.component';
 import { FichaEquipoComponent } from './search/ficha-equipo/ficha-equipo.component';
 import { RegisterPageComponent } from './Login/register-page/register-page.component';
+import { DetallesLeagueComponent } from './Home-Page/barra-lateral/detalle-league/detalle-league.component';
 
 export const routes: Routes = [
     { path: 'login-page', component: LoginPageComponent }, // Página de inicio
     { path: 'PaginaPrincipal', component: PaginaPrincipalComponent }, // Ruta al nuevo componente
-    { path: 'fichapartido/:id', component: FichaPartidoComponent },
+    { path: 'ficha-partido/:id', component: FichaPartidoComponent },
     { path: 'ficha-equipo/:teamName', component: FichaEquipoComponent },// Ruta para ficha del equipo
     { path: 'register', component: RegisterPageComponent }, // Ruta para el registro
+    { path: 'detalle-league/:id', component: DetallesLeagueComponent },// Ruta para ficha del equipo
+
+
     { path: '**', redirectTo: 'login-page' }// Redirige cualquier otra ruta a la página de inicio
 ];
 

@@ -17,6 +17,16 @@
         <!-- Agrega más detalles según lo que necesites mostrar -->
       </div>
     </div>
+
+ <!-- Botón para agregar a favoritos -->
+ <button (click)="agregarAFavoritos(equipoDetails.team.name)" class="btn-favorito">Agregar a favoritos</button>
+ <p *ngIf="message">{{ message }}</p> <!-- Mensaje de éxito o error -->
+
+
+
+
+
+
   </div>
 </body>
 

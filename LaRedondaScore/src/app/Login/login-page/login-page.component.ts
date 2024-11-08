@@ -23,26 +23,32 @@ export class LoginPageComponent {
  constructor(private userService: UserService, private router: Router) { }
 
  // Método que se ejecuta al enviar el formulario
- login() {
-   // Llamamos al servicio de login
-   this.userService.login(this.username, this.password).subscribe(
-     (response) => {
-       // Si la respuesta contiene un usuario, redirigimos a la página principal
-       if (response.length > 0) {
-         console.log('Login exitoso', response);
-         this.router.navigate(['/PaginaPrincipal']);  // Redirige a la página principal o dashboard
-       } else {
-         // Si el login no es exitoso
-         this.errorMessage = 'Usuario o contraseña incorrectos';
-       }
-     },
-     (error) => {
-       // En caso de error en la solicitud
-       this.errorMessage = 'Hubo un problema al intentar iniciar sesión';
-       console.error('Error en el login:', error);
-     }
-   );
- }
+login() {
+  // Llamamos al servicio de login
+  this.userService.login(this.username, this.password).subscribe(
+    (response) => {
+      // Verificamos que la respuesta no esté vacía
+      if (response && response.length > 0) {
+        const user = response[0]; // Suponiendo que la respuesta es un arreglo con un único usuario
+
+        // Guardamos el ID del usuario en localStorage
+        localStorage.setItem('userId', user.id);  // Guarda el ID del usuario en localStorage
+
+        console.log('Login exitoso', response);
+        this.router.navigate(['/PaginaPrincipal']);  // Redirige a la página principal o dashboard
+      } else {
+        // Si el login no es exitoso
+        this.errorMessage = 'Usuario o contraseña incorrectos';
+      }
+    },
+    (error) => {
+      // En caso de error en la solicitud
+      this.errorMessage = 'Hubo un problema al intentar iniciar sesión';
+      console.error('Error en el login:', error);
+    }
+  );
+}
+
 
  openRegisterWindow() {
   window.open(

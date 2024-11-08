@@ -1,0 +1,46 @@
+<body>
+<div class="DetalleLeague">
+    <h1>{{ league.league.name }}</h1> <!-- Nombre de la liga -->
+    
+    <div class="league-header">
+      <img [src]="league.league.logo" alt="Logo de la liga" class="league-logo" />
+      <div class="league-info">
+        <h2>{{ league.league.name }}</h2>
+        <p>{{ league.league.area.name }}</p>
+      </div>
+    </div>
+  
+    <div class="season-stats" *ngIf="seasonStats">
+      <h2>Estadísticas de la Temporada {{ seasonStats.year }}</h2>
+      <div class="stat">
+        <span>Equipos Participantes: </span>
+        <span>{{ seasonStats.teams.length }}</span>
+      </div>
+      <div class="stat">
+        <span>Partidos Jugados: </span>
+        <span>{{ seasonStats.matchesPlayed }}</span>
+      </div>
+      <div class="stat">
+        <span>Partidos Ganados: </span>
+        <span>{{ seasonStats.matchesWon }}</span>
+      </div>
+      <div class="stat">
+        <span>Partidos Perdidos: </span>
+        <span>{{ seasonStats.matchesLost }}</span>
+      </div>
+      <div class="stat">
+        <span>Goles a Favor: </span>
+        <span>{{ seasonStats.goalsFor }}</span>
+      </div>
+      <div class="stat">
+        <span>Goles en Contra: </span>
+        <span>{{ seasonStats.goalsAgainst }}</span>
+      </div>
+    </div>
+  
+    <div class="informacion-adicional">
+      <h3>Más Información</h3>
+      <p>Para más detalles, consulta la página oficial de la liga.</p>
+    </div>
+  </div>
+</body>

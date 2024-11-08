@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PartidoService } from '../../Api/partidos.service';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../users-services/user.service';
 
 @Component({
   selector: 'app-ficha-equipo',
@@ -15,10 +16,13 @@ export class FichaEquipoComponent implements OnInit {
 
   teamName: string = ''; // Nombre del equipo a mostrar
   equipoDetails: any = {}; // Detalles del equipo que obtendremos de la API
+  userId: number | null = null; // ID del usuario logueado
+  message:string='';
 
   constructor(
     private route: ActivatedRoute, // Para acceder a los parámetros de la ruta
-    private partidoService: PartidoService // Servicio para obtener los detalles del equipo
+    private partidoService: PartidoService ,// Servicio para obtener los detalles del equipo
+    private user:UserService,
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +37,8 @@ export class FichaEquipoComponent implements OnInit {
         console.log(this.teamName);
       }
     });
+
+    this.userId = this.user.getUserId();
   }
 
   getEquipoDetails(teamName: string): void {
@@ -45,4 +51,25 @@ export class FichaEquipoComponent implements OnInit {
       console.error('Error al obtener detalles del equipo', error);
     });
   }
+
+  agregarAFavoritos(teamName: string): void {
+    // Leer el ID del usuario desde localStorage
+    const userId = Number(localStorage.getItem('userId')) ;
+  
+    if (userId) {
+      // Llamamos al servicio para agregar el equipo a favoritos
+      this.user.addFavoriteTeam(userId, teamName)
+        .subscribe(response => {
+          console.log('Equipo agregado a favoritos', response);
+        }, error => {
+          console.error('Error al agregar equipo a favoritos', error);
+        });
+    } else {
+      console.warn('Usuario no autenticado');
+      // Si el usuario no está autenticado, puedes redirigir a la página de login
+    }
+  }
+  
+  
+  
 }

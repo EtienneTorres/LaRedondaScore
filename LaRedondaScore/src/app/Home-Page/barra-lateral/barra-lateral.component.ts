@@ -1,13 +1,15 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { PartidoService } from '../../Api/partidos.service';
 import { CommonModule } from '@angular/common';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-barra-lateral',
   standalone: true,
-  imports: [RouterOutlet,CommonModule],
+  imports: [CommonModule,FormsModule,RouterModule,RouterLink],
   templateUrl: './barra-lateral.component.html',
   styleUrl: './barra-lateral.component.css'
 })
@@ -67,7 +69,6 @@ loadleagues(country: string) {
     console.error('Error al cargar las ligas:', error);
   });
 }
-
 
   // Array de ligas que deseas mostrar
  // Array de ligas que deseas mostrar, incluyendo el país
