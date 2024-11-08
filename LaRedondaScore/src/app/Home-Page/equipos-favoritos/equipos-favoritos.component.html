@@ -1,0 +1,20 @@
+<div class="sidebar">
+    <h2>Equipos Favoritos</h2>
+  
+    <!-- Mensaje de retroalimentación -->
+    <p *ngIf="mensaje" class="feedback">{{ mensaje }}</p>
+  
+    <!-- Lista de equipos favoritos -->
+    <ul>
+      <li *ngFor="let equipo of equiposFavoritos | keyvalue" 
+          (click)="agregarEquipoAFavoritos(equipo.value)" 
+          [class.expanded]="true">
+  
+        <div class="equipo-info">
+          <img src="/World.png" alt="Flag" class="country-flag" />
+          <span class="equipo-name">{{ equipo.value }}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  

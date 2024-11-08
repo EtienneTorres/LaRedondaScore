@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PartidoService } from '../../Api/partidos.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../users-services/user.service';
+import { Observable } from 'rxjs';
+import { EquiposService } from '../../lista-favoritos/equipos.service';
 
 @Component({
   selector: 'app-ficha-equipo',
@@ -23,7 +25,9 @@ export class FichaEquipoComponent implements OnInit {
     private route: ActivatedRoute, // Para acceder a los parámetros de la ruta
     private partidoService: PartidoService ,// Servicio para obtener los detalles del equipo
     private user:UserService,
+    private equipo:EquiposService
   ) {}
+  
 
   ngOnInit(): void {
     // Obtener el nombre del equipo desde la URL
@@ -38,7 +42,7 @@ export class FichaEquipoComponent implements OnInit {
       }
     });
 
-    this.userId = this.user.getUserId();
+    this.userId = this.equipo.getUserId();
   }
 
   getEquipoDetails(teamName: string): void {
@@ -55,10 +59,11 @@ export class FichaEquipoComponent implements OnInit {
   agregarAFavoritos(teamName: string): void {
     // Leer el ID del usuario desde localStorage
     const userId = Number(localStorage.getItem('userId')) ;
-  
+    console.log(userId);
+    console.log(teamName);
     if (userId) {
       // Llamamos al servicio para agregar el equipo a favoritos
-      this.user.addFavoriteTeam(userId, teamName)
+      this.equipo.addFavoriteTeam(userId, teamName)
         .subscribe(response => {
           console.log('Equipo agregado a favoritos', response);
         }, error => {
@@ -69,6 +74,29 @@ export class FichaEquipoComponent implements OnInit {
       // Si el usuario no está autenticado, puedes redirigir a la página de login
     }
   }
+  
+
+  mostrarFavoritos(): void {
+    const userId = Number(localStorage.getItem('userId'));
+    
+    if (userId) {
+      this.equipo.getFavoriteTeams(userId).subscribe(
+        (favoritos) => {
+          if (favoritos.length > 0) {
+            console.log('Equipos favoritos:', favoritos[0].teams);
+          } else {
+            console.log('No tiene equipos favoritos');
+          }
+        },
+        (error) => {
+          console.error('Error al obtener los favoritos', error);
+        }
+      );
+    } else {
+      console.warn('Usuario no autenticado');
+    }
+  }
+  
   
   
   

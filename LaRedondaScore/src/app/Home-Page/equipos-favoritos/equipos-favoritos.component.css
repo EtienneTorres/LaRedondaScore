@@ -1,0 +1,62 @@
+.sidebar {
+    width: 300px; 
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(80px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: #e0e0e0;
+    border-radius: 10px;
+    position: fixed;
+    top: 700px; /* Ajustar la distancia desde la parte superior */
+    left: 20px;
+    height: auto; /* Deja que la barra lateral se ajuste según el contenido */
+    max-height: 62vh; 
+    overflow-y: auto;
+    scrollbar-width: none; /* Elimina el scroll */
+  }
+  
+  /* Oculta la barra de desplazamiento en Chrome, Safari y Edge */
+  .sidebar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  h2 {
+    color: #FFD700;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    display: flex;
+    padding: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    flex-direction: column;
+  }
+  
+  li:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .equipo-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .country-flag {
+    width: 20px;
+    height: auto;
+    margin-right: 8px;
+    border-radius: 20%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .equipo-name {
+    font-size: 14px;
+    color: #FFD700;
+  }
+  
