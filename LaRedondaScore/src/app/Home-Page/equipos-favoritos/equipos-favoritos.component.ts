@@ -12,30 +12,37 @@ import { CommonModule } from '@angular/common';
 export class EquiposFavoritosComponent implements OnInit {
 
 
-
+  currentUserId: number | null = 1; // Asignar un ID predeterminado para pruebas
   equiposFavoritos: string[] = []; 
   mensaje: string = ''; // Para mostrar mensajes de feedback
 
   constructor(private equiposService: EquiposService) {}
 
   ngOnInit(): void {
-    const userId = this.equiposService.getUserId(); // Obtén el ID de usuario actual
-    if (userId) {
+    const userId = Number(localStorage.getItem('userId'));
+    if (userId !== null) {
       this.cargarEquiposFavoritos(userId);
+    } else {
+      this.mensaje = 'Usuario no encontrado';
+      console.error('El ID de usuario no está disponible.');
     }
   }
+  
 
   cargarEquiposFavoritos(userId: number) {
     this.equiposService.getFavoriteTeams(userId).subscribe(
       (favoritos) => {
-        // Asumiendo que 'favoritos' es un array con el formato que compartiste
-        // Extraemos los nombres de los equipos
-        const equipos = favoritos[0].equipos; // 'equipos' es un objeto
-        this.equiposFavoritos = Object.values(equipos); // Obtener los nombres de los equipos
+        this.equiposFavoritos = favoritos; // Almacena el JSON completo de favoritos
+        console.log(this.equiposFavoritos); // Muestra el JSON completo en la consola
       },
-      (error) => this.mensaje = 'Error al cargar los equipos favoritos'
+      (error) => {
+        this.mensaje = 'Error al cargar los equipos favoritos';
+        console.error(error);
+      }
     );
   }
+  
+
 
   agregarEquipoAFavoritos(teamName: string) {
     const userId = this.equiposService.getUserId();

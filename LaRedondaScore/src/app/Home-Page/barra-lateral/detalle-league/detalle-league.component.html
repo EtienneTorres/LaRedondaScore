@@ -19,13 +19,6 @@
         <h4>Año: {{ season?.year }} ({{ season?.start }} - {{ season?.end }})</h4>
         <p>Temporada actual: {{ season?.current ? 'Sí' : 'No' }}</p>
     
-        <h5>Estadísticas de cobertura:</h5>
-        <ul>
-          <li>Eventos de partidos: {{ season?.coverage?.fixtures?.events ? 'Sí' : 'No' }}</li>
-          <li>Alineaciones: {{ season?.coverage?.fixtures?.lineups ? 'Sí' : 'No' }}</li>
-          <li>Estadísticas de partidos: {{ season?.coverage?.fixtures?.statistics_fixtures ? 'Sí' : 'No' }}</li>
-          <li>Estadísticas de jugadores: {{ season?.coverage?.fixtures?.statistics_players ? 'Sí' : 'No' }}</li>
-        </ul>
       </div>
     
     </div>
