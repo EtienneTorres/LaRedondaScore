@@ -86,18 +86,13 @@ font-size: 13.5px;
 margin: -15px 0 15px;
 }
 
-.remember-forget label input
-{
-    accent-color: #fff;
-    margin-right: 3px;
-}
+
 
 .remember-forget a
 {
     color: #fff;
     text-decoration: none;
 }
-
 
 .remember-forget a:hover
 {
@@ -161,3 +156,21 @@ margin: -15px 0 15px;
     transform: scale(1.3); /* Aumenta el tamaño al 110% */
 }
 
+@media (max-width: 600px) {
+    .wrapper {
+      width: 90%;
+      margin-top: 20px;
+    }
+  
+    .logo {
+      width: 120px;
+      height: 80px;
+    }
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  

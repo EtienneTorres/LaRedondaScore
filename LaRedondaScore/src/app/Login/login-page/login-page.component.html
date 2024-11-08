@@ -1,36 +1,56 @@
-
 <body>
+  <img src="Logoinicio2.png" alt="" class="logo">
+  
+  <div class="wrapper">
+    <form #loginForm="ngForm" (ngSubmit)="login()" novalidate>
+      <h1>Acceder</h1>
 
-    <img src="Logoinicio2.png" alt="" class="logo">
-    
-<div class="wrapper">
-
-
-    <form action="">
-        <h1>Acceder</h1>
-        <div class="input-box">
-            <input type="text" placeholder="Usuario" required>
-            <i class='bx bxs-user'></i>
+      <!-- Usuario -->
+      <div class="input-box">
+        <input 
+          type="text" 
+          placeholder="Usuario" 
+          [(ngModel)]="username" 
+          name="username" 
+          required 
+          #usernameInput="ngModel">
+        <i class='bx bxs-user'></i>
+        <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="error-message">
+          El usuario es obligatorio.
         </div>
+      </div>
 
-        <div class="input-box">
-            <input type="password" placeholder="Contraseña" required>
-            <i class='bx bxs-lock-alt'></i>
+      <!-- Contraseña -->
+      <div class="input-box">
+        <input 
+          type="password" 
+          placeholder="Contraseña" 
+          [(ngModel)]="password" 
+          name="password" 
+          required 
+          #passwordInput="ngModel">
+        <i class='bx bxs-lock-alt'></i>
+        <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="error-message">
+          La contraseña es obligatoria.
         </div>
+      </div>
 
-        <div class="remember-forget">
-        <label><input type="checkbox">Mantener sesión iniciada</label>
+      <!-- Recordar sesión -->
+      <div class="remember-forget">
         <a href="#">¿Olvidaste tu contraseña?</a>    
-        </div>
+      </div>
 
-        <button type="button" class="btn" routerLink="/PaginaPrincipal">INGRESA</button>
+      <!-- Botón de submit -->
+      <button type="submit" [disabled]="loginForm.invalid" class="btn">INGRESA</button>
 
-
-           <div class="register-link">
-            <p>¿Aún no tenés cuenta en LaRedondaScore?<a href="">¡Registrate acá!</a></p>
-           </div>
+     
+      <div class="register-link">
+        <p>¿Aún no tenés cuenta en LaRedondaScore? 
+          <a href="javascript:void(0);" (click)="openRegisterWindow()">¡Regístrate acá!</a>
+        </p>
+      </div>
+      
 
     </form>
-
-</div>
+  </div>
 </body>

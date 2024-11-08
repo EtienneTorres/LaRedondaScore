@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = '9ca333677650bccc43ef6eacaad3148c'; 
+  private apiKey = ''; 
   private apiUrl = 'https://v3.football.api-sports.io';
   private apiUrl2 = 'https://v3.football.api-sports.io/countries';
   private apiurl3='https://v3.football.api-sports.io/leagues'
