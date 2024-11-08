@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = '619f5c9b3bab49264c4d69ef4c3f8c6b'; 
+  private apiKey = 'a23811ba8958ba1b18b979c804d41aca'; 
   private apiUrl = 'https://v3.football.api-sports.io';
 
   constructor(private http: HttpClient) {}
@@ -106,7 +106,7 @@ getSeasonStats(id: string): Observable<any> {
     'x-rapidapi-key': this.apiKey
   };
 
-  return this.http.get<any>(`${this.apiUrl}/leagues/standings?league=${id}`, { headers }).pipe(
+  return this.http.get<any>(`${this.apiUrl}/leagues?id=${id}`, { headers }).pipe(
         catchError(error => {
       console.error('Error al obtener las estadísticas de la temporada', error);
       return throwError(error);

@@ -43,28 +43,12 @@ export class DetallesLeagueComponent implements OnInit {
     });
   }
 
-
+  
   loadSeasonStats(id: string) {
     this.partidoService.getSeasonStats(id).subscribe((data: any) => {
-      if (data.response) {
-        const leagueData = data;  // Aquí 'data' contiene la liga y temporadas
-        console.log('Datos de la liga:', leagueData);
-        
-        // Accediendo a la información de la liga, país y temporadas
-        this.seasonStats = {
-          leagueName: leagueData.league.name,
-          leagueLogo: leagueData.league.logo,
-          country: leagueData.country.name,
-          countryFlag: leagueData.country.flag,
-          seasons: leagueData.seasons.map((season: any) => ({
-            year: season.year,
-            start: season.start,
-            end: season.end,
-            current: season.current,
-          }))
-        };
-  
-        console.log('Estadísticas de la temporada:', this.seasonStats);
+      if (data.response && data.response.length > 0) {
+        this.seasonStats = data.response[0];  // Asignar la respuesta
+        console.log('Datos de la liga:', this.seasonStats);
       } else {
         console.log('No se encontraron datos para esta liga');
       }
@@ -72,6 +56,7 @@ export class DetallesLeagueComponent implements OnInit {
       console.error('Error al cargar las estadísticas de la temporada:', error);
     });
   }
+  
   
 
 }

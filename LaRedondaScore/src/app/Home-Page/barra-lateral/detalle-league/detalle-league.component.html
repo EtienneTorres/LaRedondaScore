@@ -6,25 +6,28 @@
       <img [src]="league.league.logo" alt="Logo de la liga" class="league-logo" />
       <div class="league-info">
         <h2>{{ league.league.name }}</h2>
-        <p>{{ league.league.area.name }}</p>
-      </div>
-    </div>
-  
-    <div *ngIf="seasonStats">
-      <h2>{{ seasonStats.league.name }} - {{ seasonStats.country.name }}</h2>
-      <img [src]="seasonStats.flag" alt="{{ seasonStats.country }} flag" width="30" />
-      
-      <div *ngIf="seasonStats.currentSeason">
-        <h3>Temporada Actual: {{ seasonStats.currentSeason.year }}</h3>
-        <p>Inicio: {{ seasonStats.currentSeason.start }}</p>
-        <p>Fin: {{ seasonStats.currentSeason.end }}</p>
       </div>
     </div>
     
-  
-    <div class="informacion-adicional">
-      <h3>Más Información</h3>
-      <p>Para más detalles, consulta la página oficial de la liga.</p>
+      <h2>{{ seasonStats.league.name }}</h2>
+      <img [src]="seasonStats?.league?.logo" alt="Logo de la liga" width="50">
+      <p>País: {{ seasonStats?.country?.name }}</p>
+      <img [src]="seasonStats?.country?.flag" alt="Bandera del país" width="30">
+    
+      <h3>Temporadas</h3>
+      <div *ngFor="let season of seasonStats?.seasons">
+        <h4>Año: {{ season?.year }} ({{ season?.start }} - {{ season?.end }})</h4>
+        <p>Temporada actual: {{ season?.current ? 'Sí' : 'No' }}</p>
+    
+        <h5>Estadísticas de cobertura:</h5>
+        <ul>
+          <li>Eventos de partidos: {{ season?.coverage?.fixtures?.events ? 'Sí' : 'No' }}</li>
+          <li>Alineaciones: {{ season?.coverage?.fixtures?.lineups ? 'Sí' : 'No' }}</li>
+          <li>Estadísticas de partidos: {{ season?.coverage?.fixtures?.statistics_fixtures ? 'Sí' : 'No' }}</li>
+          <li>Estadísticas de jugadores: {{ season?.coverage?.fixtures?.statistics_players ? 'Sí' : 'No' }}</li>
+        </ul>
+      </div>
+    
     </div>
-  </div>
+  
 </body>
