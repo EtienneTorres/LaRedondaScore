@@ -1,38 +1,38 @@
 <div class="partidosDia">
   <h1>PARTIDOS DEL DÍA</h1>
 
+  <!-- Flechas de navegación -->
+  <div class="navegacion">
+    <button (click)="anteriorDia()">&#60;</button> <!-- Flecha izquierda -->
+    <span>{{ fechaSeleccionada }}</span> <!-- Mostrar la fecha actual -->
+    <button (click)="siguienteDia()">&#62;</button> <!-- Flecha derecha -->
+  </div>
+
+  <!-- Mostrar los partidos agrupados por liga -->
   <div *ngFor="let liga of (partidosPorLiga | keyvalue)">
     <h2>{{ liga.key }}</h2>
     <ul>
       <li *ngFor="let partido of liga.value">
-       
-        <!-- Contenedor para equipo local -->
-<div class="equipo equipo-local">
-  <img [src]="partido.teams.home.logo" alt="{{ partido.teams.home.name }}" />
-  <span>{{ partido.teams.home.name }}</span>
-</div>
+        <div class="equipo equipo-local">
+          <img [src]="partido.teams.home.logo" alt="{{ partido.teams.home.name }}" />
+          <span>{{ partido.teams.home.name }}</span>
+        </div>
 
-        <!-- Contenedor para resultado o marcador -->
         <div class="marcador">
           <span>{{ partido.goals.home }} - {{ partido.goals.away }}</span>
         </div>
 
-      
-<!-- Contenedor para equipo visitante -->
-<div class="equipo equipo-visitante">
-  <span>{{ partido.teams.away.name }}</span>
-  <img [src]="partido.teams.away.logo" alt="{{ partido.teams.away.name }}" />
-</div>
+        <div class="equipo equipo-visitante">
+          <span>{{ partido.teams.away.name }}</span>
+          <img [src]="partido.teams.away.logo" alt="{{ partido.teams.away.name }}" />
+        </div>
 
-        <!-- Estado del partido -->
         <span class="estado">
           {{ getEstadoPartido(partido.fixture.date, partido.goals.home, partido.goals.away, partido.fixture.status) }}
         </span>
 
         <button [routerLink]="['/ficha-partido', partido.fixture.id]">+</button>
-
       </li>
     </ul>
   </div>
 </div>
-

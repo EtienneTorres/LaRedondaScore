@@ -1,13 +1,13 @@
 import { Injectable} from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = '9b1333dd89690d1c45730253dccc5f45'; 
+  private apiKey = 'e8cebe19bba4b4f798f56248aa4a6a66'; 
   private apiUrl = 'https://v3.football.api-sports.io';
 
   constructor(private http: HttpClient) {}
@@ -113,4 +113,20 @@ getSeasonStats(id: string): Observable<any> {
     })
   );
 }
+
+
+getPartidosPorLiga(leagueId: number, season: string): Observable<any> {
+  const headers = new HttpHeaders({
+    'x-rapidapi-key': this.apiKey, // Cambia esto por tu clave API
+  });
+
+  return this.http.get<any>(`${this.apiUrl}/fixtures?league=${leagueId}&season=${season}`, { headers });
 }
+
+getAvailableSeasons(): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/leagues/seasons`);
+}
+
+}
+
+

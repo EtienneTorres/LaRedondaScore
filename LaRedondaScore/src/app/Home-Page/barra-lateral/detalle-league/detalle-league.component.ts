@@ -16,6 +16,12 @@ export class DetallesLeagueComponent implements OnInit {
   league: any = {}; // Guarda los detalles de la liga
   seasonStats: any = {}; // Guarda las estadísticas de la temporada, inicialmente null
   leagueId: string | null = null;
+  matches: any[] = []; // Declara la propiedad matches como un array
+  partidos: any[] = [];
+  currentSeason: number = 2022; // Temporada inicial, puedes ajustarlo si es necesario
+  minSeason: number = 2015; // Temporada mínima
+  maxSeason: number = 2022; // Temporada máxima
+
 
   constructor(
     private partidoService: PartidoService, // Servicio para interactuar con la API
@@ -23,14 +29,13 @@ export class DetallesLeagueComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Obtener el id de la liga desde la URL
-    this.route.paramMap.subscribe(params => {
-      this.leagueId = params.get('id');
-      if (this.leagueId) {
-        this.loadLeagueDetails(this.leagueId); // Cargar los detalles de la liga
-        this.loadSeasonStats(this.leagueId); // Cargar las estadísticas de la temporada
-      }
-    });
+    this.leagueId = this.route.snapshot.paramMap.get('id');
+    if (this.leagueId) {
+      console.log(this.leagueId);
+      this.loadMatches();
+      this.loadLeagueDetails(this.leagueId);
+      this.loadSeasonStats(this.leagueId);
+    }
   }
 
   // Método para cargar los detalles de la liga
@@ -57,6 +62,42 @@ export class DetallesLeagueComponent implements OnInit {
     });
   }
   
+  loadMatches(): void {
+    // Asegúrate de que `leagueId` no sea null y sea un número
+    const validLeagueId = this.leagueId ? Number(this.leagueId) : null;
+    const season = this.currentSeason.toString();  // Utiliza currentSeason para la temporada actual  
+    if (validLeagueId && season) {
+      this.partidoService.getPartidosPorLiga(validLeagueId, season).subscribe(
+        data => {
+          console.log('Respuesta de la API:', data);
+          if (data.response && data.response.length > 0) {
+            this.partidos = data.response;
+            console.log('Partidos de la liga:', this.partidos);
+          } else {
+            console.warn('No hay partidos disponibles para esta liga.');
+            this.partidos = [];
+          }
+        },
+        error => {
+          console.error('Error al cargar los partidos:', error);
+        }
+      );
+    } else {
+      console.error('El id de la liga o la temporada no es válido.');
+    }
+  }
+  
+  
+  changeSeason(direction: number) {
+    const newSeason = this.currentSeason + direction;
+
+    // Asegúrate de que la nueva temporada esté dentro del rango permitido
+    if (newSeason >= this.minSeason && newSeason <= this.maxSeason) {
+      this.currentSeason = newSeason;
+      this.loadMatches(); // Llamar a la API con la nueva temporada
+    }
+  }
+
   
 
 }

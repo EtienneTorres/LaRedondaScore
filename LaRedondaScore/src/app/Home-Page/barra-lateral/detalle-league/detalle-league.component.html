@@ -1,26 +1,35 @@
 <body>
-<div class="DetalleLeague">
-    <h1>{{ league.league.name }}</h1> <!-- Nombre de la liga -->
-    
-    <div class="league-header">
-      <img [src]="league.league.logo" alt="Logo de la liga" class="league-logo" />
-      <div class="league-info">
-        <h2>{{ league.league.name }}</h2>
-      </div>
+  <div class="season-navigation">
+  <button (click)="changeSeason(-1)" class="arrow-button">&#8593; Anterior Temporada</button>
+  <span>{{ currentSeason }}</span> <!-- Muestra la temporada actual -->
+  <button (click)="changeSeason(1)" class="arrow-button">&#8595; Siguiente Temporada</button>
+</div>
+
+<!-- Mostrar partidos -->
+<div *ngIf="partidos.length > 0">
+  <h3>Partidos de la Liga</h3>
+  <div *ngFor="let partido of partidos" class="match">
+    <div class="team">
+      <img [src]="partido.teams.home.logo" alt="{{ partido.teams.home.name }} logo">
+      <span>{{ partido.teams.home.name }}</span>
     </div>
-    
-      <h2>{{ seasonStats.league.name }}</h2>
-      <img [src]="seasonStats?.league?.logo" alt="Logo de la liga" width="50">
-      <p>País: {{ seasonStats?.country?.name }}</p>
-      <img [src]="seasonStats?.country?.flag" alt="Bandera del país" width="30">
-    
-      <h3>Temporadas</h3>
-      <div *ngFor="let season of seasonStats?.seasons">
-        <h4>Año: {{ season?.year }} ({{ season?.start }} - {{ season?.end }})</h4>
-        <p>Temporada actual: {{ season?.current ? 'Sí' : 'No' }}</p>
-    
-      </div>
-    
+    <div class="score">
+      <span>{{ partido.goals.home }}</span> - <span>{{ partido.goals.away }}</span>
     </div>
-  
+    <div class="team">
+      <img [src]="partido.teams.away.logo" alt="{{ partido.teams.away.name }} logo">
+      <span>{{ partido.teams.away.name }}</span>
+    </div>
+    <div class="details">
+      <p><strong>Estadio:</strong> {{ partido.fixture.venue.name }}</p>
+      <p><strong>Árbitro:</strong> {{ partido.fixture.referee || 'No disponible' }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Mensaje cuando no hay partidos -->
+<div *ngIf="partidos.length === 0" class="no-partidos">
+  <p>No hay partidos disponibles.</p>
+</div>
 </body>
+
