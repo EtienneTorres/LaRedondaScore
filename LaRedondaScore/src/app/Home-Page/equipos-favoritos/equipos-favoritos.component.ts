@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EquiposService } from '../../lista-favoritos/equipos.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-equipos-favoritos',
@@ -16,7 +17,8 @@ export class EquiposFavoritosComponent implements OnInit {
   equiposFavoritos: { [key: string]: { nombre: string; imagen: string } } = {};
   mensaje: string = ''; // Para mostrar mensajes de feedback
 
-  constructor(private equiposService: EquiposService) {}
+  constructor(private equiposService: EquiposService,private router: Router) {}
+
 
   ngOnInit(): void {
     const userId = Number(localStorage.getItem('userId'));
@@ -59,4 +61,36 @@ export class EquiposFavoritosComponent implements OnInit {
     }
   }
   
+
+
+eliminarEquipo(teamName: string) {
+  const userId = Number(localStorage.getItem('userId'));
+  if (userId) {
+    this.equiposService.removeFavoriteTeam(userId, teamName).subscribe(
+      (response) => {
+        this.mensaje = response.message || 'Equipo eliminado de favoritos';
+        this.cargarEquiposFavoritos(userId); // Recargar los favoritos después de la eliminación
+      },
+      (error) => {
+        this.mensaje = 'Error al eliminar el equipo de favoritos';
+        console.error(error);
+      }
+    );
+  } else {
+    this.mensaje = 'Usuario no encontrado';
+  }
+}
+
+
+// Método para redirigir a otro componente
+irAEquipo(nombre: string) {
+  // Redirigir a la ruta del equipo usando su nombre o cualquier otro identificador
+  this.router.navigate([`/ficha-equipo/${nombre}`]);
+}
+
+
+
+
+
+
 }

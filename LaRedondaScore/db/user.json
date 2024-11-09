@@ -24,10 +24,6 @@
         "1": {
           "nombre": "Real Madrid",
           "imagen": "https://media.api-sports.io/football/teams/541.png"
-        },
-        "2": {
-          "nombre": "Albacete",
-          "imagen": "https://media.api-sports.io/football/teams/722.png"
         }
       }
     },

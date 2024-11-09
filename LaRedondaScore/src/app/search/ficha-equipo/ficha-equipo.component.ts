@@ -6,11 +6,12 @@ import { UserService } from '../../users-services/user.service';
 import { Observable } from 'rxjs';
 import { EquiposService } from '../../lista-favoritos/equipos.service';
 import { NavComponent } from '../../navbar/nav/nav.component';
+import { Nav2Component } from '../../navbar/nav2/nav2.component';
 
 @Component({
   selector: 'app-ficha-equipo',
   standalone: true,
-  imports: [RouterModule,CommonModule,NavComponent],
+  imports: [RouterModule,CommonModule,Nav2Component],
   templateUrl: './ficha-equipo.component.html',
   styleUrl: './ficha-equipo.component.css'
 })
