@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PartidoService } from '../../Api/partidos.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../users-services/user.service';
 import { Observable } from 'rxjs';
 import { EquiposService } from '../../lista-favoritos/equipos.service';
+import { NavComponent } from '../../navbar/nav/nav.component';
 
 @Component({
   selector: 'app-ficha-equipo',
   standalone: true,
-  imports: [CommonModule],
+  imports: [RouterModule,CommonModule,NavComponent],
   templateUrl: './ficha-equipo.component.html',
   styleUrl: './ficha-equipo.component.css'
 })
@@ -56,14 +57,14 @@ export class FichaEquipoComponent implements OnInit {
     });
   }
 
-  agregarAFavoritos(teamName: string): void {
+  agregarAFavoritos(teamName: string, teamLogo: string): void {
     // Leer el ID del usuario desde localStorage
     const userId = Number(localStorage.getItem('userId')) ;
     console.log(userId);
     console.log(teamName);
     if (userId) {
       // Llamamos al servicio para agregar el equipo a favoritos
-      this.equipo.addFavoriteTeam(userId, teamName)
+      this.equipo.addFavoriteTeam(userId, teamName,teamLogo)
         .subscribe(response => {
           console.log('Equipo agregado a favoritos', response);
         }, error => {
@@ -82,8 +83,8 @@ export class FichaEquipoComponent implements OnInit {
     if (userId) {
       this.equipo.getFavoriteTeams(userId).subscribe(
         (favoritos) => {
-          if (favoritos.length > 0) {
-            console.log('Equipos favoritos:', favoritos[0].teams);
+          if (Object.keys(favoritos).length > 0) { // Verifica si hay equipos favoritos
+            console.log('Equipos favoritos:', favoritos);
           } else {
             console.log('No tiene equipos favoritos');
           }
@@ -96,8 +97,6 @@ export class FichaEquipoComponent implements OnInit {
       console.warn('Usuario no autenticado');
     }
   }
-  
-  
   
   
 }

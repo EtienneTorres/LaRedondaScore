@@ -18,36 +18,52 @@ export class EquiposService {
     return this.currentUserId;  // Obtén el `userId` de la sesión activa
   }
 
-  addFavoriteTeam(userId: number, teamName: string): Observable<any> {
+  addFavoriteTeam(userId: number, teamName: string, teamImage: string): Observable<any> {
     return this.http.get<any[]>(`${this.urlbase}/favoritos/?userId=${userId}`).pipe(
       switchMap(favoritos => {
         if (favoritos.length > 0) {
           const favorito = favoritos[0];
           
           // Verificar si el equipo ya existe
-          if (!Object.values(favorito.equipos).includes(teamName)) {
-            const newId = Object.keys(favorito.equipos).length + 1; // Generar nuevo ID para el equipo
-            favorito.equipos[newId] = teamName; // Agregar el nuevo equipo
+          const equipoYaExiste = Object.values(favorito.equipos).some(
+            (equipo: any) => equipo.nombre === teamName
+          );
   
-            // Actualizar los favoritos del usuario
+          if (!equipoYaExiste) {
+            const newId = Object.keys(favorito.equipos).length + 1;
+            favorito.equipos[newId] = {
+              nombre: teamName,
+              imagen: teamImage
+            };
+  
             return this.http.put(`${this.urlbase}/favoritos/${favorito.id}`, favorito);
-            
           } else {
             return of({ message: 'El equipo ya está en tus favoritos' });
           }
         } else {
-          return of({ message: 'Usuario no encontrado' });
+          const nuevoFavorito = {
+            userId: userId,
+            equipos: {
+              1: {
+                nombre: teamName,
+                imagen: teamImage
+              }
+            }
+          };
+  
+          return this.http.post(`${this.urlbase}/favoritos`, nuevoFavorito);
         }
       })
     );
   }
   
   
-  getFavoriteTeams(userId: number): Observable<any> {
+  
+  getFavoriteTeams(userId: number): Observable<{ [key: string]: { nombre: string; imagen: string } }> {
     return this.http.get<any[]>(`${this.urlbase}/favoritos/?userId=${userId}`).pipe(
       map(favoritos => {
         if (favoritos.length > 0) {
-          return favoritos[0].equipos; // Devuelve solo el objeto "equipos"
+          return favoritos[0].equipos; // Devuelve el objeto "equipos" con nombre e imagen
         }
         return {}; // Si no existe el usuario, devuelve un objeto vacío
       })

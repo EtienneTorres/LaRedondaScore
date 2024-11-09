@@ -7,7 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = 'e8cebe19bba4b4f798f56248aa4a6a66'; 
+  private apiKey = 'c6541bac3bff097e397a4cc3292fb3fb'; 
   private apiUrl = 'https://v3.football.api-sports.io';
 
   constructor(private http: HttpClient) {}

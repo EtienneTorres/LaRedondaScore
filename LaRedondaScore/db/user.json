@@ -21,10 +21,32 @@
       "id": "1",
       "userId": 1,
       "equipos": {
-        "1": "Huracan",
-        "2": "Lanus",
-        "3": "Real Madrid",
-        "4": "River Plate"
+        "1": {
+          "nombre": "Real Madrid",
+          "imagen": "https://media.api-sports.io/football/teams/541.png"
+        },
+        "2": {
+          "nombre": "Albacete",
+          "imagen": "https://media.api-sports.io/football/teams/722.png"
+        }
+      }
+    },
+    {
+      "id": "63ab",
+      "userId": 6254,
+      "equipos": {
+        "1": {
+          "nombre": "Huracan",
+          "imagen": "https://media.api-sports.io/football/teams/445.png"
+        },
+        "2": {
+          "nombre": "Boca Juniors",
+          "imagen": "https://media.api-sports.io/football/teams/451.png"
+        },
+        "3": {
+          "nombre": "Alvarado",
+          "imagen": "https://media.api-sports.io/football/teams/1962.png"
+        }
       }
     }
   ]

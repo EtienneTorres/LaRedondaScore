@@ -1,20 +1,19 @@
 <div class="sidebar">
-    <h2>Equipos Favoritos</h2>
-  
-    <!-- Mensaje de retroalimentación -->
-    <p *ngIf="mensaje" class="feedback">{{ mensaje }}</p>
-  
-    <!-- Lista de equipos favoritos -->
-    <ul>
-      <li *ngFor="let equipo of equiposFavoritos | keyvalue" 
-           
-          [class.expanded]="true">
-  
-        <div class="equipo-info">
-          <img src="/World.png" alt="Flag" class="country-flag" />
-          <span class="equipo-name">{{ equipo.value }}</span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  
+  <h2>Equipos Favoritos</h2>
+
+  <!-- Mensaje de retroalimentación -->
+  <p *ngIf="mensaje" class="feedback">{{ mensaje }}</p>
+
+  <!-- Lista de equipos favoritos -->
+  <ul>
+    <li *ngFor="let equipo of equiposFavoritos | keyvalue" [class.expanded]="true">
+      <div class="equipo-info">
+        <!-- Muestra la imagen del equipo -->
+        <img [src]="equipo.value.imagen" alt="{{ equipo.value.nombre }}" class="country-flag" />
+        
+        <!-- Nombre del equipo -->
+        <span class="equipo-name">{{ equipo.value.nombre }}</span>
+      </div>
+    </li>
+  </ul>
+</div>

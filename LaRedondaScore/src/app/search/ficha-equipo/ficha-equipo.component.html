@@ -1,4 +1,6 @@
 <body>
+
+  <app-nav></app-nav>
   <div class="ficha-equipo-container" *ngIf="equipoDetails">
     <h2>{{ equipoDetails.team.name }}</h2>
 
@@ -19,7 +21,7 @@
     </div>
 
  <!-- Botón para agregar a favoritos -->
- <button (click)="agregarAFavoritos(equipoDetails.team.name)" class="btn-favorito">Agregar a favoritos</button>
+ <button (click)="agregarAFavoritos(equipoDetails.team.name,equipoDetails.team.logo)" class="btn-favorito">Agregar a favoritos</button>
  <p *ngIf="message">{{ message }}</p> <!-- Mensaje de éxito o error -->
 
 

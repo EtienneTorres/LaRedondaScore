@@ -13,7 +13,7 @@ export class EquiposFavoritosComponent implements OnInit {
 
 
   currentUserId: number | null = 1; // Asignar un ID predeterminado para pruebas
-  equiposFavoritos: string[] = []; 
+  equiposFavoritos: { [key: string]: { nombre: string; imagen: string } } = {};
   mensaje: string = ''; // Para mostrar mensajes de feedback
 
   constructor(private equiposService: EquiposService) {}
@@ -44,13 +44,13 @@ export class EquiposFavoritosComponent implements OnInit {
   
 
 
-  agregarEquipoAFavoritos(teamName: string) {
+  agregarEquipoAFavoritos(teamName: string, teamImage: string) {
     const userId = this.equiposService.getUserId();
     if (userId) {
-      this.equiposService.addFavoriteTeam(userId, teamName).subscribe(
+      this.equiposService.addFavoriteTeam(userId, teamName, teamImage).subscribe(
         (response) => {
           this.mensaje = response.message || 'Equipo añadido a favoritos';
-          this.cargarEquiposFavoritos(userId); // Recargar la lista de favoritos
+          this.cargarEquiposFavoritos(userId);
         },
         (error) => this.mensaje = 'Error al añadir el equipo a favoritos'
       );
@@ -58,6 +58,5 @@ export class EquiposFavoritosComponent implements OnInit {
       this.mensaje = 'Usuario no encontrado';
     }
   }
-
-
+  
 }
