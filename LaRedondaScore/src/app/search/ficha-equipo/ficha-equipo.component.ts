@@ -75,6 +75,25 @@ export class FichaEquipoComponent implements OnInit {
       // Si el usuario no está autenticado, puedes redirigir a la página de login
     }
   }
+
+  EliminarDeFavoritos(teamName: string): void {
+    // Leer el ID del usuario desde localStorage
+    const userId = Number(localStorage.getItem('userId')) ;
+    console.log(userId);
+    console.log(teamName);
+    if (userId) {
+      // Llamamos al servicio para agregar el equipo a favoritos
+      this.equipo.removeFavoriteTeam(userId, teamName)
+        .subscribe(response => {
+          console.log('Equipo eliminado de favoritos', response);
+        }, error => {
+          console.error('Error al eliminar equipo de favoritos', error);
+        });
+    } else {
+      console.warn('Usuario no autenticado');
+      // Si el usuario no está autenticado, puedes redirigir a la página de login
+    }
+  }
   
 
   mostrarFavoritos(): void {

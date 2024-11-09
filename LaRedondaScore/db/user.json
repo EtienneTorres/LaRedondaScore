@@ -35,17 +35,9 @@
       "id": "63ab",
       "userId": 6254,
       "equipos": {
-        "1": {
-          "nombre": "Huracan",
-          "imagen": "https://media.api-sports.io/football/teams/445.png"
-        },
         "2": {
           "nombre": "Boca Juniors",
           "imagen": "https://media.api-sports.io/football/teams/451.png"
-        },
-        "3": {
-          "nombre": "Alvarado",
-          "imagen": "https://media.api-sports.io/football/teams/1962.png"
         }
       }
     }

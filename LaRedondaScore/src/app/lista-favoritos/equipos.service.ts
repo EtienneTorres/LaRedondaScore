@@ -57,8 +57,32 @@ export class EquiposService {
     );
   }
   
-  
-  
+  removeFavoriteTeam(userId: number, teamName: string): Observable<any> {
+    return this.http.get<any[]>(`${this.urlbase}/favoritos/?userId=${userId}`).pipe(
+      switchMap(favoritos => {
+        if (favoritos.length > 0) {
+          const favorito = favoritos[0];
+          
+          // Buscar el equipo en los favoritos
+          const equipoId = Object.keys(favorito.equipos).find(key => favorito.equipos[key].nombre === teamName);
+
+          if (equipoId) {
+            // Eliminar el equipo
+            delete favorito.equipos[equipoId];
+
+            // Actualizar los favoritos del usuario en la base de datos
+            return this.http.put(`${this.urlbase}/favoritos/${favorito.id}`, favorito);
+          } else {
+            return of({ message: 'El equipo no está en tus favoritos' });
+          }
+        } else {
+          return of({ message: 'No se encontraron favoritos para el usuario' });
+        }
+      })
+    );
+  }
+
+
   getFavoriteTeams(userId: number): Observable<{ [key: string]: { nombre: string; imagen: string } }> {
     return this.http.get<any[]>(`${this.urlbase}/favoritos/?userId=${userId}`).pipe(
       map(favoritos => {
@@ -69,10 +93,6 @@ export class EquiposService {
       })
     );
   }
-  
-  
-  
-
 
 
 }

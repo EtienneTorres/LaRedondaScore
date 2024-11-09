@@ -124,4 +124,28 @@ body {
   }
   
 
-  
+.btn-container {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
+    position: absolute;
+    top: 10px; /* Ajusta según el espacio que quieras desde la parte superior */
+    right: 10px; /* Ajusta según el espacio que quieras desde la derecha */
+}
+
+.btn-favorito {
+    width: auto;
+    height: auto;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 20px;
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    color: #fff;
+    padding: 8px 20px; /* Tamaño de padding más pequeño */
+    transition: border-color 0.3s ease;
+}
+
+.btn-favorito:hover {
+    border-color: rgba(255, 255, 255, 1); /* Cambia el borde a blanco */
+}
