@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { PartidoService } from '../../../Api/partidos.service'; // Ajusta la ruta a tu servicio
+import { PartidoService } from '../../../Api/partidos.service';
+import { TablaComponent } from "./tabla/tabla.component"; // Ajusta la ruta a tu servicio
+import { Nav2Component } from '../../../navbar/nav2/nav2.component';
 
 @Component({
   selector: 'app-detalle-league',
   standalone: true,
   templateUrl: './detalle-league.component.html',
-  imports: [RouterModule,CommonModule],
+  imports: [RouterModule, CommonModule, TablaComponent,Nav2Component],
   styleUrls: ['./detalle-league.component.css']
 })
 export class DetallesLeagueComponent implements OnInit {

@@ -7,8 +7,9 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = 'e8cebe19bba4b4f798f56248aa4a6a66'; 
+  private apiKey = 'bcd3f1c68863f461eff75ccc9ba04535'; 
   private apiUrl = 'https://v3.football.api-sports.io';
+  private apiUrlstanding = 'https://v3.football.api-sports.io/standings';
 
   constructor(private http: HttpClient) {}
 
@@ -126,6 +127,20 @@ getPartidosPorLiga(leagueId: number, season: string): Observable<any> {
 getAvailableSeasons(): Observable<any> {
   return this.http.get<any>(`${this.apiUrl}/leagues/seasons`);
 }
+
+
+
+getStandings(leagueId: number, season: string): Observable<any> {
+  const headers = new HttpHeaders({
+    'x-rapidapi-key': this.apiKey, // Asegúrate de reemplazar esto por tu clave API
+  });
+
+  return this.http.get<any>(`${this.apiUrl}/standings?league=${leagueId}&season=${season}`, { headers });
+}
+
+
+
+
 
 }
 

@@ -54,6 +54,14 @@
         "1": {
           "nombre": "Ajax",
           "imagen": "https://media.api-sports.io/football/teams/194.png"
+        },
+        "2": {
+          "nombre": "Lanus",
+          "imagen": "https://media.api-sports.io/football/teams/446.png"
+        },
+        "3": {
+          "nombre": "Alvarado",
+          "imagen": "https://media.api-sports.io/football/teams/1962.png"
         }
       }
     }

@@ -3,239 +3,146 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url(../../../Imagenes/Fondo.jpg) no-repeat center fixed;
+  background: url(../../../Imagenes/Fondo.jpg)no-repeat center fixed;
   background-size: cover;
-  flex-direction: column;
+  flex-direction: column; 
   overflow-y: auto;
-  font-family: 'Arial', sans-serif;
 }
 
-.DetalleLeague {
-  margin-top: 120px;
-  width: 80%;
-  max-width: 1200px;
+.season-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.arrow-button {
+  background-color: #FF9800;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.arrow-button:hover {
+  background-color: #F57C00;
+  transform: scale(1.1);
+}
+
+.arrow-button:active {
+  background-color: #E65100;
+  transform: scale(1.05);
+}
+
+.season-navigation span {
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFD700;
+}
+
+/* Estilos para la lista de partidos */
+.match {
+  width: 70%;
   background: transparent;
-  border: 2px solid rgba(255, 255, 255, .2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(80px);
-  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   color: #e0e0e0;
   border-radius: 20px;
-  padding: 30px 25px;
+  padding: 25px 20px;
+  margin: 20px auto;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.DetalleLeague h1 {
-  color: #FFD700;
-  font-size: 2.2em;
+.match h3 {
+  color: #ffffff;
+  font-size: 2.5em;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   text-transform: uppercase;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  letter-spacing: 1.5px;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
 }
 
-.DetalleLeague h2, .DetalleLeague h3 {
-  color: #FFD700;
-  font-size: 1.5em;
-  margin: 20px 0 10px;
-  font-weight: 600;
-  text-align: center;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-.league-header {
+.team {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 30px;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
-.league-logo {
-  width: 80px;
-  height: 80px;
+.team img {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  margin-right: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-.league-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.league-info h2 {
-  font-size: 1.8em;
+.score {
+  font-size: 1.5em;
   font-weight: bold;
-  color: #fff;
-}
-
-.league-info p {
-  color: #fff;
-  font-size: 1.1em;
-}
-
-.season-stats {
-  margin-top: 40px;
+  color: #f0f0f0;
   text-align: center;
+  flex-shrink: 0;
 }
 
-.stat {
-  font-size: 1.2em;
-  margin: 10px 0;
-}
-
-.stat span:first-child {
-  font-weight: bold;
-}
-
-.informacion-adicional {
-  margin-top: 30px;
-  text-align: center;
-}
-
-nav {
-  display: flex;
-  background: transparent;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(200px);
-  color: #fff;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1;
-}
-
-.nav-links {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-.nav-links li {
-  margin-left: 20px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  padding: 5px 10px;
-  transition: background-color 0.3s;
-}
-
-.nav-links a:hover {
-  background-color: #ffffff;
-  border-radius: 5px;
-  color: black;
-}
-
-/* Estilos para los partidos */
-.match {
-  margin-bottom: 30px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  transition: box-shadow 0.3s ease;
-}
-
-.match:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-}
-
-.match p {
-  color: #fff;
-  font-size: 1.1em;
-  margin: 5px 0;
-  text-align: center;
-}
-
-.match .team {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px 0;
-}
-
-.match .team img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.match .team span {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #FFD700;
-}
-
-.match .score {
-  font-size: 1.4em;
-  font-weight: bold;
-  margin: 10px 0;
-  color: #FFD700;
-}
-
-.match .score span {
-  margin: 0 20px;
-}
-
-.match .details {
+.details p {
   font-size: 1em;
-  color: #fff;
-  margin-top: 15px;
+  color: #f0f0f0;
+  margin-top: 5px;
 }
 
-.match .details p {
-  margin-bottom: 5px;
+.details strong {
+  font-weight: bold;
+  color: #FFD700;
 }
 
-.match .details img {
-  margin-top: 10px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-}
-
-/* Para la sección de 'sin partidos' */
+/* Estilos cuando no hay partidos */
 .no-partidos {
-  font-size: 1.2em;
-  color: #fff;
+  width: 70%;
+  background: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 25px 20px;
   text-align: center;
-  margin-top: 50px;
+  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
-/* Ajustes para pantallas pequeñas */
-@media (max-width: 768px) {
-  .match .team img {
-    width: 40px;
-    height: 40px;
-  }
+.no-partidos p {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #FF9800;
+}
 
-  .match .score {
-    font-size: 1.2em;
-  }
+/* Fuentes generales */
+.match h3, .team span, .score, .details p {
+  font-family: 'Arial', sans-serif;
+}
 
-  .match .team span {
-    font-size: 1em;
-  }
+.league-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  width: 90%;
+  margin: 0 auto;
+}
 
-  .match p {
-    font-size: 1em;
-  }
+.detallegue-container {
+  flex: 1;
+}
 
-  .match .details p {
-    font-size: 0.9em;
-  }
+.tabla-container {
+  flex: 1;
 }
