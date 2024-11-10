@@ -116,3 +116,41 @@ li img {
 .partidosDia h1, .partidosDia h2, li span {
     font-family: 'Arial', sans-serif;
 }
+
+.navegacion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.navegacion button {
+    background-color: #FF9800;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.navegacion button:hover {
+    background-color: #F57C00; 
+    transform: scale(1.1); 
+}
+
+.navegacion button:active {
+    background-color: #E65100;
+    transform: scale(1.05);
+}
+
+.navegacion span {
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFD700;
+    padding: 0 10px;
+}

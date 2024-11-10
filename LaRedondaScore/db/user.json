@@ -14,6 +14,16 @@
       "id": "6254",
       "username": "Mariano",
       "password": "Mariano"
+    },
+    {
+      "id": "734b",
+      "username": "Etienne",
+      "password": "Etienne"
+    },
+    {
+      "id": "7a0b",
+      "username": "Etienne",
+      "password": "Etienne"
     }
   ],
   "favoritos": [
@@ -34,6 +44,16 @@
         "2": {
           "nombre": "Boca Juniors",
           "imagen": "https://media.api-sports.io/football/teams/451.png"
+        }
+      }
+    },
+    {
+      "id": "3fd6",
+      "userId": "734b",
+      "equipos": {
+        "1": {
+          "nombre": "Ajax",
+          "imagen": "https://media.api-sports.io/football/teams/194.png"
         }
       }
     }

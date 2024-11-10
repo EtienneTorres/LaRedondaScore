@@ -18,7 +18,7 @@ export class EquiposService {
     return this.currentUserId;  // Obtén el `userId` de la sesión activa
   }
 
-  addFavoriteTeam(userId: number, teamName: string, teamImage: string): Observable<any> {
+  addFavoriteTeam(userId: string, teamName: string, teamImage: string): Observable<any> {
     return this.http.get<any[]>(`${this.urlbase}/favoritos/?userId=${userId}`).pipe(
       switchMap(favoritos => {
         if (favoritos.length > 0) {
@@ -57,7 +57,7 @@ export class EquiposService {
     );
   }
   
-  removeFavoriteTeam(userId: number, teamName: string): Observable<any> {
+  removeFavoriteTeam(userId: string, teamName: string): Observable<any> {
     return this.http.get<any[]>(`${this.urlbase}/favoritos/?userId=${userId}`).pipe(
       switchMap(favoritos => {
         if (favoritos.length > 0) {
@@ -83,7 +83,7 @@ export class EquiposService {
   }
 
 
-  getFavoriteTeams(userId: number): Observable<{ [key: string]: { nombre: string; imagen: string } }> {
+  getFavoriteTeams(userId: string): Observable<{ [key: string]: { nombre: string; imagen: string } }> {
     return this.http.get<any[]>(`${this.urlbase}/favoritos/?userId=${userId}`).pipe(
       map(favoritos => {
         if (favoritos.length > 0) {

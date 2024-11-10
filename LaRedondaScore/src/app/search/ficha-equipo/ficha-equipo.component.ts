@@ -22,6 +22,9 @@ export class FichaEquipoComponent implements OnInit {
   equipoDetails: any = {}; // Detalles del equipo que obtendremos de la API
   userId: number | null = null; // ID del usuario logueado
   message:string='';
+  equiposFavoritos: { [key: string]: { nombre: string; imagen: string, } } = {};
+  mensaje: string = ''; // Para mostrar mensajes de feedback
+
 
   constructor(
     private route: ActivatedRoute, // Para acceder a los parámetros de la ruta
@@ -58,28 +61,40 @@ export class FichaEquipoComponent implements OnInit {
     });
   }
 
-  agregarAFavoritos(teamName: string, teamLogo: string): void {
-    // Leer el ID del usuario desde localStorage
-    const userId = Number(localStorage.getItem('userId')) ;
+
+
+  cargarEquiposFavoritos(userId: string) {
+    this.equipo.getFavoriteTeams(userId).subscribe(
+      (favoritos) => {
+        this.equiposFavoritos = favoritos; // Almacena el JSON completo de favoritos
+        console.log(this.equiposFavoritos); // Muestra el JSON completo en la consola
+      },
+      (error) => {
+        this.mensaje = 'Error al cargar los equipos favoritos';
+        console.error(error);
+      }
+    );
+  }
+
+  agregarEquipoAFavoritos(teamName: string, teamImage: string) {
+    const userId = (localStorage.getItem('userId'));
     console.log(userId);
-    console.log(teamName);
     if (userId) {
-      // Llamamos al servicio para agregar el equipo a favoritos
-      this.equipo.addFavoriteTeam(userId, teamName,teamLogo)
-        .subscribe(response => {
-          console.log('Equipo agregado a favoritos', response);
-        }, error => {
-          console.error('Error al agregar equipo a favoritos', error);
-        });
+      this.equipo.addFavoriteTeam(userId, teamName, teamImage).subscribe(
+        (response) => {
+          this.mensaje = response.message || 'Equipo añadido a favoritos';
+          this.cargarEquiposFavoritos(userId);
+        },
+        (error) => this.mensaje = 'Error al añadir el equipo a favoritos'
+      );
     } else {
-      console.warn('Usuario no autenticado');
-      // Si el usuario no está autenticado, puedes redirigir a la página de login
+      this.mensaje = 'Usuario no encontrado';
     }
   }
 
   EliminarDeFavoritos(teamName: string): void {
     // Leer el ID del usuario desde localStorage
-    const userId = Number(localStorage.getItem('userId')) ;
+    const userId = (localStorage.getItem('userId')) ;
     console.log(userId);
     console.log(teamName);
     if (userId) {
@@ -98,7 +113,7 @@ export class FichaEquipoComponent implements OnInit {
   
 
   mostrarFavoritos(): void {
-    const userId = Number(localStorage.getItem('userId'));
+    const userId = (localStorage.getItem('userId'));
     
     if (userId) {
       this.equipo.getFavoriteTeams(userId).subscribe(

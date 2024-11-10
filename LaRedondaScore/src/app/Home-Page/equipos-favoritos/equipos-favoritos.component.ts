@@ -21,7 +21,7 @@ export class EquiposFavoritosComponent implements OnInit {
 
 
   ngOnInit(): void {
-    const userId = Number(localStorage.getItem('userId'));
+    const userId = (localStorage.getItem('userId'));
     if (userId !== null) {
       this.cargarEquiposFavoritos(userId);
     } else {
@@ -31,7 +31,7 @@ export class EquiposFavoritosComponent implements OnInit {
   }
   
 
-  cargarEquiposFavoritos(userId: number) {
+  cargarEquiposFavoritos(userId: string) {
     this.equiposService.getFavoriteTeams(userId).subscribe(
       (favoritos) => {
         this.equiposFavoritos = favoritos; // Almacena el JSON completo de favoritos
@@ -46,25 +46,10 @@ export class EquiposFavoritosComponent implements OnInit {
   
 
 
-  agregarEquipoAFavoritos(teamName: string, teamImage: string) {
-    const userId = this.equiposService.getUserId();
-    if (userId) {
-      this.equiposService.addFavoriteTeam(userId, teamName, teamImage).subscribe(
-        (response) => {
-          this.mensaje = response.message || 'Equipo añadido a favoritos';
-          this.cargarEquiposFavoritos(userId);
-        },
-        (error) => this.mensaje = 'Error al añadir el equipo a favoritos'
-      );
-    } else {
-      this.mensaje = 'Usuario no encontrado';
-    }
-  }
-  
 
 
 eliminarEquipo(teamName: string) {
-  const userId = Number(localStorage.getItem('userId'));
+  const userId = (localStorage.getItem('userId'));
   if (userId) {
     this.equiposService.removeFavoriteTeam(userId, teamName).subscribe(
       (response) => {
