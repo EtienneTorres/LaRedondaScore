@@ -17,7 +17,7 @@
             <div class="team-item">
 
               <!-- Usamos routerLink para redirigir al componente FichaEquipo -->
-              <a [routerLink]="['/ficha-equipo', equipo.name]" >
+              <a [routerLink]="['/ficha-equipo', equipo.id]" >
 
 
                 <!-- Mostrar el escudo -->
@@ -28,9 +28,21 @@
             </div>
         </li>
     </ul>
-
-    <!-- Si no se encuentran resultados, mostrar mensaje -->
-    <div *ngIf="filteredEquipos.length === 0 && searchTerm.length > 2 && !loading" class="no-results">
-        No se encontraron equipos.
+  
+    <!-- Resultados de Jugadores -->
+    <ul *ngIf="filteredJugadores.length > 0" class="dropdown-menu">
+        <li *ngFor="let jugador of filteredJugadores">
+            <div class="player-item">
+              <a [routerLink]="['/ficha-player', jugador.id]">
+                <img [src]="jugador.photo" alt="{{ jugador.name }} Foto" class="player-photo">
+                <span class="player-name">{{ jugador.name }}</span>
+              </a>
+            </div>
+        </li>
+    </ul>
+  
+    <div *ngIf="filteredEquipos.length === 0 && filteredJugadores.length === 0 && searchTerm.length > 2 && !loading" class="no-results">
+      No se encontraron resultados.
     </div>
-</div>
+  </div>
+  

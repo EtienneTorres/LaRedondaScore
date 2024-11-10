@@ -19,10 +19,15 @@ export class BuscarComponent {
   searchTerm: string = ''; // Término de búsqueda
   loading: boolean = false; // Indicador de carga
 
-  constructor(private equipoService:PartidoService ) {}
+  jugadores: any[] = []; 
+  filteredJugadores: any[] = [];
+
+  constructor(private equipoService: PartidoService ) {}
 
   onInputChange() {
+    
     if (this.searchTerm.length > 2) { // Solo realiza la búsqueda si el término tiene más de 2 caracteres
+      console.log("Buscando jugadores con término:", this.searchTerm);
         this.loading = true;  // Inicia el indicador de carga
         this.equipoService.getEquiposPorNombre(this.searchTerm).subscribe(data => {
           // Asegúrate de que la respuesta tenga la propiedad 'response' y contiene los equipos
@@ -34,14 +39,30 @@ export class BuscarComponent {
             this.filteredEquipos = []; // Si no se encuentran equipos, limpia la lista
           }
           this.loading = false; // Detiene el indicador de carga
-        }, error => {
+        },
+        error => {
           console.error('Error al buscar equipos', error);
-          this.loading = false; // Detiene el indicador de carga en caso de error
-        });
-      } else {
-        this.filteredEquipos = []; // Limpia la lista si el término es demasiado corto
-        this.loading = false; // Asegúrate de desactivar el indicador de carga
-      }
-    }
+          this.loading = false;
+        }
+      );
 
+      // Buscar jugadores (desde aca cambie)
+
+      this.equipoService.getJugadoresPorNombre(this.searchTerm).subscribe(data => {
+        if (data && data.response && data.response.length > 0) {
+            // Muestra los jugadores encontrados
+            this.filteredJugadores = data.response.map((item: any) => item.player);
+        } else {
+            this.filteredJugadores = [];
+        }
+        this.loading = false;
+    }, error => {
+        console.error('Error al buscar jugadores', error);
+        this.loading = false;
+    });
+} else {
+    this.filteredJugadores = [];
+    this.loading = false;
+}
+}
 }

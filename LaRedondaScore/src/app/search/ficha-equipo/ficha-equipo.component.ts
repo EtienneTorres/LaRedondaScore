@@ -17,6 +17,7 @@ export class FichaEquipoComponent implements OnInit {
 
 
   teamName: string = ''; // Nombre del equipo a mostrar
+  idTeam: string = '';
   equipoDetails: any = {}; // Detalles del equipo que obtendremos de la API
   userId: string | null = null; // ID del usuario logueado
   message:string='';
@@ -40,13 +41,13 @@ export class FichaEquipoComponent implements OnInit {
     console.log( this.userId);
     // Obtener el nombre del equipo desde la URL
     this.route.paramMap.subscribe(params => {
-      this.teamName = params.get('teamName') || ''; // Obtiene el parámetro 'teamName' de la URL
-      console.log(this.teamName);
+      this.idTeam = params.get('id') || ''; // Obtiene el parámetro 'teamName' de la URL
+      console.log(this.idTeam);
 
-      if (this.teamName) {
+      if (this.idTeam) {
         // Llama a la API para obtener los detalles del equipo
-        this.getEquipoDetails(this.teamName);
-        console.log(this.teamName);
+        this.getEquipoDetails(this.idTeam);
+        console.log(this.idTeam);
       }
     });
 
@@ -57,8 +58,8 @@ export class FichaEquipoComponent implements OnInit {
 
   }
 
-  getEquipoDetails(teamName: string): void {
-    this.partidoService.getEquiposPorNombre(teamName).subscribe(
+  getEquipoDetails(id: string): void {
+    this.partidoService.getEquiposPorID(id).subscribe(
       data => {
         if (data && data.response && data.response.length > 0) {
           this.equipoDetails = data.response[0];
