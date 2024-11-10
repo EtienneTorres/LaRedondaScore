@@ -12,7 +12,7 @@ json-server (para simular una API REST)
 Instalación
 
 Clona el repositorio:
-git clone https://github.com/usuario/LaRedondaScore.git
+git clone https://github.com/Etienne2021/LaRedondaScore
 cd LaRedondaScore
 
 Instala las dependencias:
