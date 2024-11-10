@@ -1,8 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { PartidoService } from '../../Api/partidos.service';
+import { PartidoService } from '../../Services/Api/partidos.service';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
 
 
@@ -14,22 +13,35 @@ import { RouterLink, RouterModule } from '@angular/router';
   styleUrl: './barra-lateral.component.css'
 })
 
-
-
 export class BarraLateralComponent implements OnInit {
 
-  countries: any[] = [];
-  leagues: any[] = [];
-  matches: any[] = [];
-  selectedCountryId: string | null = null;
+ // Array de ligas que deseas mostrar, incluyendo el país
+ PaisesDeseados: {country: string }[] = [
+  {country: "England" },
+  {country: "Italy" },
+  {country: "Argentina" },
+  {country: "Spain" },
+  {country: "Germany" },
+  {country: "France" },
+  {country: "South America" },
+  {country: "Netherlands" },
+  {country: "Portugal" },
+  {country: "International" },
+  {country: "World" }
+];
+
+  countries: any[] = []; // Variable para almacenar los paises
+  leagues: any[] = []; // Variable para almacenar las ligas
   visibleCountry: string | null = null; // Controla qué país tiene ligas visibles
 
-
+  // Constructor
   constructor(private partido: PartidoService) {}
+
   ngOnInit() {
-    this.loadCountries();
+    this.loadCountries(); // Se cargan los paises
   }
 
+  // Metodo para obtener y cargar los paises
   loadCountries() { 
     this.partido.getCountries().subscribe(data => {
       console.log(data);
@@ -42,6 +54,7 @@ export class BarraLateralComponent implements OnInit {
     });
 }
 
+// Metodos para ovtener y cargar las ligas filtradas por los equipos
 loadleagues(country: string) {
   console.log(`Cargando ligas para el país: ${country}`);
   
@@ -69,21 +82,4 @@ loadleagues(country: string) {
     console.error('Error al cargar las ligas:', error);
   });
 }
-
-  // Array de ligas que deseas mostrar
- // Array de ligas que deseas mostrar, incluyendo el país
-PaisesDeseados: {country: string }[] = [
-  {country: "England" },
-  {country: "Italy" },
-  {country: "Argentina" },
-  {country: "Spain" },
-  {country: "Germany" },
-  {country: "France" },
-  {country: "South America" },
-  {country: "Netherlands" },
-  {country: "Portugal" },
-  {country: "International" }, // Mundial no tiene un país específico // Champions League es un torneo internacional
-  {country: "World" }
-];
-
 }

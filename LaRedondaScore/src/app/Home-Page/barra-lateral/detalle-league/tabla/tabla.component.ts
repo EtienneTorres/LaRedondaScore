@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { PartidoService } from '../../../../Api/partidos.service';
+import { PartidoService } from '../../../../Services/Api/partidos.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,11 +16,12 @@ export class TablaComponent implements OnInit{
   @Input() currentSeason: number = 2022;  // Recibe la temporada actual
   tabla: any[] = [];  // Guardará la tabla de posiciones
 
+  // Constructor
   constructor(private partidoService: PartidoService) {}
 
   ngOnInit() {
     if (this.leagueId) {
-      this.loadTablaPosiciones();
+      this.loadTablaPosiciones(); // Carga la tabla de posiciones
     }
   }
 
@@ -31,8 +32,7 @@ export class TablaComponent implements OnInit{
   }
  }
 
-
-
+  // Metodo para cargar la tabla de posiciones
   loadTablaPosiciones() {
     const season = this.currentSeason.toString();
     const validLeagueId = this.leagueId ? Number(this.leagueId) : null;
@@ -42,7 +42,7 @@ export class TablaComponent implements OnInit{
         (data: any) => {
           console.log('Tabla de posiciones:', data);
           // Accede correctamente a la tabla de posiciones
-          this.tabla = data.response[0]?.league?.standings[0] || [];  // Asegúrate de que `standings[0]` tiene los equipos
+          this.tabla = data.response[0]?.league?.standings[0] || []; 
         },
         error => {
           console.error('Error al cargar la tabla de posiciones:', error);
@@ -50,7 +50,6 @@ export class TablaComponent implements OnInit{
       );
     }
   }
-
 
 
 }

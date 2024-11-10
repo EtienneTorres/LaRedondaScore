@@ -8,12 +8,12 @@
     color: #e0e0e0;
     border-radius: 10px;
     position: fixed;
-    top: 700px; /* Ajustar la distancia desde la parte superior */
+    top: 700px; 
     left: 50px; 
-    height: auto; /* Deja que la barra lateral se ajuste según el contenido */
+    height: auto; 
     max-height: 62vh; 
     overflow-y: auto;
-    scrollbar-width: none; /* Elimina el scroll */
+    scrollbar-width: none;
   }
   
   /* Oculta la barra de desplazamiento en Chrome, Safari y Edge */
@@ -77,36 +77,32 @@
   }
   
  
-  
-  /* Efecto de iluminación al pasar el mouse */
   .delete-button:hover .trash-icon {
-    filter: brightness(1.5); /* Aumenta el brillo para simular la iluminación */
-    transform: scale(1.1);   /* Aumenta ligeramente el tamaño */
+    filter: brightness(1.5); 
+    transform: scale(1.1);  
   }
   .delete-button {
     margin-left: 10px;
-    background-color: #f1f1f1; /* Color de fondo del botón */
+    background-color: #f1f1f1;
     border: none;
-    border-radius: 80%; /* Forma redondeada */
-    padding: 5px; /* Espaciado alrededor del icono */
+    border-radius: 80%;
+    padding: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+    transition: background-color 0.3s ease, transform 0.3s ease; 
   }
   
-  /* Efecto de iluminación y cambio de color de fondo al pasar el mouse */
   .delete-button:hover {
-    background-color: #FFD700; /* Fondo dorado cuando pasa el mouse */
+    background-color: #FFD700;
   }
   
   .trash-icon {
     width: 15px;
     height: 15px;
-    transition: filter 0.3s ease, transform 0.3s ease; /* Transiciones para suavizar el efecto */
+    transition: filter 0.3s ease, transform 0.3s ease;
   }
   
-  /* Efecto de iluminación al pasar el mouse sobre el icono */
   .delete-button:hover .trash-icon {
-    filter: brightness(1.5); /* Aumenta el brillo para simular la iluminación */
-    transform: scale(1.1);   /* Aumenta ligeramente el tamaño */
+    filter: brightness(1.5); 
+    transform: scale(1.1);  
   }
   

@@ -1,9 +1,8 @@
-import { UserService } from './../../users-services/user.service';
+import { UserService } from '../../Services/users-services/user.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink, RouterModule } from '@angular/router';
-import { RegisterPageComponent } from '../register-page/register-page.component';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
@@ -20,11 +19,11 @@ export class LoginPageComponent {
  password: string = '';
  errorMessage: string = '';  // Mensaje de error en caso de login fallido
 
+ // Constructor
  constructor(private userService: UserService, private router: Router) { }
 
  // Método que se ejecuta al enviar el formulario
 login() {
-  // Llamamos al servicio de login
   this.userService.login(this.username, this.password).subscribe(
     (response) => {
       // Verificamos que la respuesta no esté vacía
@@ -49,7 +48,7 @@ login() {
   );
 }
 
-
+  // Metodo que abre nueva ventana para que se registre el nuevo usuario
  openRegisterWindow() {
   window.open(
     '/register',  // La ruta donde tienes el componente de registro

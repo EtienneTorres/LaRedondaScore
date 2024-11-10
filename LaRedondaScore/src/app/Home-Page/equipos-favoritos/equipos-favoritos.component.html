@@ -8,10 +8,8 @@
   <ul>
     <li *ngFor="let equipo of equiposFavoritos | keyvalue" [class.expanded]="true">
       <div class="equipo-info" (click)="irAEquipo(equipo.value.id)">
-        <!-- Muestra la imagen del equipo -->
-        <img [src]="equipo.value.imagen" alt="{{ equipo.value.nombre }}" class="country-flag" />
         
-        <!-- Nombre del equipo -->
+        <img [src]="equipo.value.imagen" alt="{{ equipo.value.nombre }}" class="country-flag" />
         <span class="equipo-name">{{ equipo.value.nombre }}</span>
 
         <!-- Botón de eliminar con ícono de tacho de basura -->

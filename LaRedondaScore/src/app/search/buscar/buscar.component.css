@@ -5,7 +5,7 @@
 
 input[type="text"]::placeholder {
     color: #ffffff;
-    opacity: 1; /* Asegura que el color del placeholder se vea claramente */
+    opacity: 1; 
 }
 
 
@@ -71,8 +71,8 @@ input[type="text"] {
 }
 
 .team-item a, .player-item a {
-    text-decoration: none; /* Elimina el subrayado */
-    color: #FFD700; /* Cambia el color del texto a dorado */
+    text-decoration: none; 
+    color: #FFD700; 
     display: flex; /* Asegura que el enlace tome el estilo del contenedor */
     align-items: center;
 }

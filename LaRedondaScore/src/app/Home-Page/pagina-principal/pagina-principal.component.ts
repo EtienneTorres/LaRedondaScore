@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { PartidoService } from '../../Api/partidos.service';
 import { CommonModule } from '@angular/common';
 import { PartidosComponent } from '../partidos/partidos.component';
 import { BarraLateralComponent } from '../barra-lateral/barra-lateral.component';

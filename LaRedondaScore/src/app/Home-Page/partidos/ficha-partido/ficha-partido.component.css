@@ -23,7 +23,7 @@ body {
 }
 
 .FichaPartido h1 {
-  color: #FFD700; /* Color dorado para el título */
+  color: #FFD700; 
   font-size: 2.2em;
   font-weight: bold;
   text-align: center;
@@ -43,7 +43,7 @@ body {
 
 .formaciones {
   display: flex; /* Usar flexbox para alinear las formaciones */
-  justify-content: space-between; /* Espacio entre las formaciones */
+  justify-content: space-between; 
   margin-top: 80px;
   padding: 10px;
   border-top: 2px solid #FFD700;}
@@ -73,7 +73,7 @@ body {
 .formacion li {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Espacio entre el nombre y el dorsal */
+  justify-content: space-between;
   padding: 8px;
   margin-bottom: 5px;
   background: rgba(255, 255, 255, 0.1);
@@ -82,10 +82,10 @@ body {
 }
 
 .formacion li:hover {
-  background: rgba(255, 255, 255, 0.2); /* Efecto hover */
+  background: rgba(255, 255, 255, 0.2);
 }
 
-/* Ajuste de estilo para los números y posiciones */
+
 .formacion li span {
   color: #f0f0f0;
   font-weight: 500;
@@ -95,14 +95,14 @@ body {
   display: flex;
   align-items: center;
   flex: 1;
-  justify-content: center; /* Centra el equipo local y visitante */
+  justify-content: center; 
 }
 
 .marcador {
-  display: flex; /* Usar flexbox para alinear */
-  flex-direction: column; /* Alinear en columnas */
-  align-items: center; /* Centra el contenido del marcador */
-  margin: -40px 0px; /* Espacio entre equipos y marcador */
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  margin: -40px 0px; 
 }
 
 .equipo-local, .equipo-visitante {
@@ -110,11 +110,11 @@ body {
 }
 
 .equipo-local {
-  justify-content: flex-start; /* Logo del equipo local a la izquierda */
+  justify-content: flex-start;
 }
 
 .equipo-visitante {
-  justify-content: flex-end; /* Logo del equipo visitante a la derecha */
+  justify-content: flex-end;
 }
 
 .equipo_visitante{
@@ -126,14 +126,14 @@ body {
 }
 
 .equipo img {
-  width: 60px; /* Tamaño del escudo ajustado */
-  height: 60px; /* Mantiene la proporción */
-  margin-right: 10px; /* Espacio entre el logo y el nombre del equipo */
+  width: 60px;
+  height: 60px; 
+  margin-right: 10px; 
   margin-left: 10px;
   align-items: center;
-  border-radius: 60%; /* Hace que la imagen sea redonda */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde para el escudo */
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5); /* Sombra para el escudo */
+  border-radius: 60%; 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5); 
 }
 
  .marcador {
@@ -142,8 +142,8 @@ body {
    height: 30px;
   color: #f0f0f0;
   text-align: center;
-  flex-shrink: 0; /* Evita que el estado se reduzca */
-  flex-direction: column; /* Para alinear el texto en columnas */
+  flex-shrink: 0; 
+  flex-direction: column; 
 }
 
 .informacion-adicional{
@@ -214,7 +214,7 @@ nav {
 }
 
 .search-container input:hover {
-  border-color: rgba(255, 255, 255, 1); /* Cambia el borde a blanco */
+  border-color: rgba(255, 255, 255, 1); 
 }
 .search-container input::placeholder
 {
@@ -237,5 +237,5 @@ nav {
 }
 
 .logo:hover {
-  transform: scale(1.3); /* Aumenta el tamaño al 110% */
+  transform: scale(1.3); 
 }

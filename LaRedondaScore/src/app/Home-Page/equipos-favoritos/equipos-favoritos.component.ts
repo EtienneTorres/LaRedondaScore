@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EquiposService } from '../../lista-favoritos/equipos.service';
+import { EquiposService } from '../../Services/lista-favoritos/equipos.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -17,20 +17,21 @@ export class EquiposFavoritosComponent implements OnInit {
   equiposFavoritos: { [key: string]: { nombre: string; imagen: string; id:string} } = {};
   mensaje: string = ''; // Para mostrar mensajes de feedback
 
+  // Constructor
   constructor(private equiposService: EquiposService,private router: Router) {}
 
 
   ngOnInit(): void {
-    const userId = (localStorage.getItem('userId'));
+    const userId = (localStorage.getItem('userId')); // Obtenemos el ID de la sesion activa
     if (userId !== null) {
-      this.cargarEquiposFavoritos(userId);
+      this.cargarEquiposFavoritos(userId);  // Cargamos los equipos favoritos de la sesion activa
     } else {
       this.mensaje = 'Usuario no encontrado';
       console.error('El ID de usuario no está disponible.');
     }
   }
   
-
+  // Metodo para cargar los equipos favoritos de la sesion activa
   cargarEquiposFavoritos(userId: string) {
     this.equiposService.getFavoriteTeams(userId).subscribe(
       (favoritos) => {
@@ -44,7 +45,7 @@ export class EquiposFavoritosComponent implements OnInit {
     );
   }
   
-
+  // Metodo para eliminar los equipos favoritos de la sesion activa
 eliminarEquipo(teamName: string, event: Event) {
   event.stopPropagation();
   const userId = (localStorage.getItem('userId'));
@@ -70,10 +71,4 @@ irAEquipo(id: string) {
   // Redirigir a la ruta del equipo usando su nombre o cualquier otro identificador
   this.router.navigate([`/ficha-equipo/${id}`]);
 }
-
-
-
-
-
-
 }

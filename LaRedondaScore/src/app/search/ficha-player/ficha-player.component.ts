@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { PartidoService } from '../../Api/partidos.service';
-import { UserService } from '../../users-services/user.service';
-import { EquiposService } from '../../lista-favoritos/equipos.service';
+import { PartidoService } from '../../Services/Api/partidos.service';
 import { CommonModule } from '@angular/common';
 import { Nav2Component } from '../../navbar/nav2/nav2.component';
 
@@ -18,8 +16,10 @@ export class FichaPlayerComponent implements OnInit {
   jugadorName: string = ''; // Nombre del jugador
   jugadorDetails: any = {}; // Detalles del jugador
   loading: boolean = true; // Indicador de carga
-  jugadorId: string = '';
+  jugadorId: string = ''; // ID del jugador
 
+
+  // Constructor
   constructor(
     private route: ActivatedRoute, // Para acceder a los parámetros de la ruta
     private partidoService: PartidoService // Servicio para obtener los detalles del jugador
@@ -35,7 +35,7 @@ export class FichaPlayerComponent implements OnInit {
     });
   }
 
-  // Llama a la API para obtener los detalles del jugador
+  // Metodo que obtiene los detalles del jugador a traves de su ID
   getJugadorDetails(id: string): void {
     this.loading = true;
     this.partidoService.getJugadoresPorID(id).subscribe(data => {

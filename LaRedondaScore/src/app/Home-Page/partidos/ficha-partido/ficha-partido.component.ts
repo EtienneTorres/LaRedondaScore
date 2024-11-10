@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { PartidoService } from '../../../Api/partidos.service';
+import { PartidoService } from '../../../Services/Api/partidos.service';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from '../../../navbar/nav/nav.component';
 
@@ -14,18 +14,20 @@ import { NavComponent } from '../../../navbar/nav/nav.component';
 })
 export class FichaPartidoComponent implements OnInit {
 
-  partidoId: string = '';
+  partidoId: string = ''; // Id del partido
   cargando: boolean = true; // Indicador de carga
   detallesPartido: any = {}; // Inicializa como objeto vacío
 
+  // Constructor
   constructor(private route: ActivatedRoute, private partidoService: PartidoService) {}
 
   ngOnInit(): void {
-    this.partidoId = this.route.snapshot.paramMap.get('id')!;
+    this.partidoId = this.route.snapshot.paramMap.get('id')!; // Obtenemos el ID desde la ruta
     console.log(this.partidoId);
-    this.cargarDetallesPartido(this.partidoId);
-  }
+    this.cargarDetallesPartido(this.partidoId);  // Cargamos los detalles del partido con la ID
+  } 
 
+  // Metodo que carga los detalles del partido
   cargarDetallesPartido(id: string): void {
     this.partidoService.getPartidoPorId(id).subscribe(
       (data) => {
@@ -43,6 +45,7 @@ export class FichaPartidoComponent implements OnInit {
     );
   }
 
+  // Metodo para obtener el estado de la ficha del partido
   getEstadoFicha(status: { long: string, short: string, elapsed: number, extra?: number }): string {
   switch (status.short) {
     case 'HT': // Medio tiempo
@@ -61,6 +64,8 @@ export class FichaPartidoComponent implements OnInit {
       return "No ha comenzado.";
   }
  }
+
+ // Metodo para obtener la posicion del jugador
   getPosicion(posicion: string): string {
     switch (posicion) {
       case 'G':

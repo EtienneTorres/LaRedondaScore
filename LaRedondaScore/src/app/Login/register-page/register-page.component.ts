@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../../users-services/user.service';
+import { UserService } from '../../Services/users-services/user.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -13,12 +13,14 @@ import { CommonModule } from '@angular/common';
 })
 export class RegisterPageComponent {
 
-  username: string = '';
-  password: string = '';
+  username: string = ''; // Nombre de usuario
+  password: string = ''; // Contrasena
   message: string = '';
 
+  // Constructor 
   constructor(private user : UserService, private router: Router) {}
 
+  // Metodo para registrar a un nuevo usuario
   onRegister(): void {
     this.user.register(this.username, this.password).subscribe(
       response => {

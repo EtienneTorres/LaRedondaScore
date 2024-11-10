@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { PartidoService } from '../../../Api/partidos.service';
-import { TablaComponent } from "./tabla/tabla.component"; // Ajusta la ruta a tu servicio
+import { PartidoService } from '../../../Services/Api/partidos.service';
+import { TablaComponent } from "./tabla/tabla.component"; 
 import { Nav2Component } from '../../../navbar/nav2/nav2.component';
 
 @Component({
@@ -24,19 +24,19 @@ export class DetallesLeagueComponent implements OnInit {
   minSeason: number = 2015; // Temporada mínima
   maxSeason: number = 2022; // Temporada máxima
 
-
+  // Constructor
   constructor(
-    private partidoService: PartidoService, // Servicio para interactuar con la API
-    private route: ActivatedRoute // Para obtener el id de la liga desde la ruta
+    private partidoService: PartidoService, 
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.leagueId = this.route.snapshot.paramMap.get('id');
+    this.leagueId = this.route.snapshot.paramMap.get('id'); // Obtenemos el ID de la liga desde la ruta
     if (this.leagueId) {
       console.log(this.leagueId);
-      this.loadMatches();
-      this.loadLeagueDetails(this.leagueId);
-      this.loadSeasonStats(this.leagueId);
+      this.loadMatches(); // Cargamos los partidos
+      this.loadLeagueDetails(this.leagueId); // Cargamos los detalles de la liga 
+      this.loadSeasonStats(this.leagueId); // Cargamos las estadisticas por temporada de la liga
     }
   }
 
@@ -50,11 +50,11 @@ export class DetallesLeagueComponent implements OnInit {
     });
   }
 
-  
+    // Metodo para cargar las estadisticas por temporada de una liga
   loadSeasonStats(id: string) {
     this.partidoService.getSeasonStats(id).subscribe((data: any) => {
       if (data.response && data.response.length > 0) {
-        this.seasonStats = data.response[0];  // Asignar la respuesta
+        this.seasonStats = data.response[0]; 
         console.log('Datos de la liga:', this.seasonStats);
       } else {
         console.log('No se encontraron datos para esta liga');
@@ -64,10 +64,11 @@ export class DetallesLeagueComponent implements OnInit {
     });
   }
   
+  // Metodo para cargar los partidos
   loadMatches(): void {
     // Asegúrate de que `leagueId` no sea null y sea un número
     const validLeagueId = this.leagueId ? Number(this.leagueId) : null;
-    const season = this.currentSeason.toString();  // Utiliza currentSeason para la temporada actual  
+    const season = this.currentSeason.toString(); 
     if (validLeagueId && season) {
       this.partidoService.getPartidosPorLiga(validLeagueId, season).subscribe(
         data => {
@@ -89,14 +90,14 @@ export class DetallesLeagueComponent implements OnInit {
     }
   }
   
-  
+  // Metodo para cambiar de temporada
   changeSeason(direction: number) {
     const newSeason = this.currentSeason + direction;
 
     // Asegúrate de que la nueva temporada esté dentro del rango permitido
     if (newSeason >= this.minSeason && newSeason <= this.maxSeason) {
       this.currentSeason = newSeason;
-      this.loadMatches(); // Llamar a la API con la nueva temporada
+      this.loadMatches(); // Cargamos los partidos de la nueva temporada
     }
   }
 

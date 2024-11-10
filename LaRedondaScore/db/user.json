@@ -36,6 +36,17 @@
       "id": "8f72",
       "userId": "c58c",
       "equipos": {}
+    },
+    {
+      "id": "cc82",
+      "userId": "6254",
+      "equipos": {
+        "1": {
+          "nombre": "Lazio",
+          "imagen": "https://media.api-sports.io/football/teams/487.png",
+          "id": 487
+        }
+      }
     }
   ]
 }

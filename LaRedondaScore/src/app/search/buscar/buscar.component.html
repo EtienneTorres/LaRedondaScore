@@ -5,11 +5,8 @@
       [(ngModel)]="searchTerm" 
       (keyup.enter)="onInputChange()" 
       aria-label="Buscar">
-  
    <!-- Indicador de carga -->
-   <div *ngIf="loading" class="loading-indicator">
-      Cargando...
-  </div>
+   <div *ngIf="loading" class="loading-indicator">      Cargando...   </div>
 </div>
 
 <!-- Resultados de búsqueda, fuera del contenedor principal -->

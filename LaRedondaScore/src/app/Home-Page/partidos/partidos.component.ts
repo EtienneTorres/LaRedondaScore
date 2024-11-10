@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {OnInit } from '@angular/core';
-import { PartidoService } from '../../Api/partidos.service';
+import { PartidoService } from '../../Services/Api/partidos.service';
 import { RouterModule } from '@angular/router';
 
 
@@ -14,12 +14,6 @@ import { RouterModule } from '@angular/router';
 })
  export class PartidosComponent  implements OnInit {
 
-    
-     // Propiedad para almacenar los partidos organizados por liga
-  partidosPorLiga: { [liga: string]: any[] } = {};
-
-
- // Array de ligas que deseas mostrar
  // Array de ligas que deseas mostrar, incluyendo el país
 ligasDeseadas: { name: string; country: string }[] = [
   { name: "Premier League", country: "England" },
@@ -31,9 +25,9 @@ ligasDeseadas: { name: string; country: string }[] = [
   { name: "Conmebol Sudamericana", country: "South America" },
   { name: "Eredivisie", country: "Netherlands" },
   { name: "Primeira Liga", country: "Portugal" },
-  { name: "World Cup", country: "International" }, // Mundial no tiene un país específico
+  { name: "World Cup", country: "International" },
   { name: "Ligue 2", country: "France" },
-  { name: "UEFA Champions League", country: "World" }, // Champions League es un torneo internacional
+  { name: "UEFA Champions League", country: "World" },
   { name: "Primera B Metropolitana", country: "Argentina" },
   { name: "Copa De La Liga Profesional", country: "Argentina" },
   { name: "Copa Argentina", country: "Argentina" },
@@ -47,15 +41,17 @@ ligasDeseadas: { name: string; country: string }[] = [
 ];
 
 
+ partidosPorLiga: { [liga: string]: any[] } = {};  // Propiedad para almacenar los partidos organizados por liga
 fechaSeleccionada: string = new Date().toISOString().split('T')[0]; // Fecha actual en formato YYYY-MM-DD
-  
+
+// Constructor
 constructor(private partidoService: PartidoService) {}
 
 ngOnInit(): void {
   this.cargarPartidosDelDia(this.fechaSeleccionada); // Cargar los partidos del día actual
 }
 
-// Cargar partidos de un día específico
+// Metodo para cargar partidos de un día específico
 cargarPartidosDelDia(fecha: string): void {
   this.partidoService.getPartidosDelDia(fecha).subscribe((data) => {
     const partidosFiltrados = this.filtrarPartidosPorUtc3(data.response, fecha);
@@ -79,7 +75,7 @@ cargarPartidosDelDia(fecha: string): void {
   });
 }
 
-// Navegar hacia el día siguiente
+// Metodo para ir hacia el día siguiente
 siguienteDia(): void {
   const nuevaFecha = new Date(this.fechaSeleccionada);
   nuevaFecha.setDate(nuevaFecha.getDate() + 1);
@@ -87,7 +83,7 @@ siguienteDia(): void {
   this.cargarPartidosDelDia(this.fechaSeleccionada); // Recargar los partidos del día siguiente
 }
 
-// Navegar hacia el día anterior
+// Metodo para ir hacia el día anterior
 anteriorDia(): void {
   const nuevaFecha = new Date(this.fechaSeleccionada);
   nuevaFecha.setDate(nuevaFecha.getDate() - 1);
@@ -95,7 +91,7 @@ anteriorDia(): void {
   this.cargarPartidosDelDia(this.fechaSeleccionada); // Recargar los partidos del día anterior
 }
 
-// Filtrar partidos por UTC-3 (ajuste de zona horaria)
+// Metodo para filtrar partidos por UTC-3, horario argentina
 private filtrarPartidosPorUtc3(partidos: any[], date: string): any[] {
   const startTime = new Date(`${date}T03:00:00Z`).getTime(); // 03:00 UTC hoy
   const endTime = new Date(`${date}T02:59:59Z`).getTime() + 24 * 60 * 60 * 1000; // 02:59 UTC mañana
@@ -106,6 +102,7 @@ private filtrarPartidosPorUtc3(partidos: any[], date: string): any[] {
   });
 }
 
+// Metodo para obtener el estado del partido
 getEstadoPartido(fechaPartido: string, golesHome: number, golesAway: number, status: { long: string, short: string, elapsed: number, extra?: number }): string {
   const fechaPartidoDate = new Date(fechaPartido);
   const fechaActual = new Date();

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { PartidoService } from '../../Api/partidos.service';
+import { PartidoService } from '../../Services/Api/partidos.service';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../../users-services/user.service';
-import { EquiposService } from '../../lista-favoritos/equipos.service';
+import { UserService } from '../../Services/users-services/user.service';
+import { EquiposService } from '../../Services/lista-favoritos/equipos.service';
 import { Nav2Component } from '../../navbar/nav2/nav2.component';
 
 @Component({
@@ -17,26 +17,26 @@ export class FichaEquipoComponent implements OnInit {
 
 
   teamName: string = ''; // Nombre del equipo a mostrar
-  idTeam: string = '';
+  idTeam: string = ''; // ID del equipo a mostrar
   equipoDetails: any = {}; // Detalles del equipo que obtendremos de la API
   userId: string | null = null; // ID del usuario logueado
-  message:string='';
+  message:string=''; 
   equiposFavoritos: { [key: string]: { nombre: string; imagen: string, } } = {};
   mensaje: string = ''; // Para mostrar mensajes de feedback
   isFavorite: boolean = false; // Indica si el equipo ya es favorito
 
 
-
+  // Constructor
   constructor(
-    private route: ActivatedRoute, // Para acceder a los parámetros de la ruta
-    private partidoService: PartidoService ,// Servicio para obtener los detalles del equipo
+    private route: ActivatedRoute,
+    private partidoService: PartidoService ,
     private user:UserService,
     private equipo:EquiposService
   ) {}
   
 
   ngOnInit(): void {
-    
+
     this.userId = localStorage.getItem('userId');
     console.log( this.userId);
     // Obtener el nombre del equipo desde la URL
@@ -51,13 +51,14 @@ export class FichaEquipoComponent implements OnInit {
       }
     });
 
-
     if (this.userId) {
       this.cargarEquiposFavoritos(this.userId);
     }
 
   }
 
+
+  // Metodo para obtener los detalles del equipo
   getEquipoDetails(id: string): void {
     this.partidoService.getEquiposPorID(id).subscribe(
       data => {
@@ -73,7 +74,7 @@ export class FichaEquipoComponent implements OnInit {
   }
 
 
-
+  // Metodo para cargar los equipos favoritos de la sesion activa
   cargarEquiposFavoritos(userId: string) {
     this.equipo.getFavoriteTeams(userId).subscribe(
       (favoritos) => {
@@ -87,6 +88,7 @@ export class FichaEquipoComponent implements OnInit {
     );
   }
 
+  // Metodo para agregar equipo a la lista de favoritos de la sesion activa.
   agregarEquipoAFavoritos(teamName: string, teamImage: string, teamId:string) {
     const userId = (localStorage.getItem('userId'));
     console.log(userId);
@@ -104,7 +106,7 @@ export class FichaEquipoComponent implements OnInit {
     }
   }
 
-
+  // Meodo para mostrar la lista de favoritos de la sesion activa
   mostrarFavoritos(): void {
     const userId = (localStorage.getItem('userId'));
     
@@ -126,7 +128,7 @@ export class FichaEquipoComponent implements OnInit {
     }
   }
 
-
+  // Metodo que verifica si el equipo es favorito
   checkIfFavorite() {
     if (this.equipoDetails?.team?.name && this.equiposFavoritos) {
       const equipoName = this.equipoDetails.team.name;
