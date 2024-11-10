@@ -23,7 +23,7 @@
  <!-- Botón para agregar a favoritos -->
  <div class="btn-container" >
 
- <button *ngIf="!isFavorite" (click)="agregarEquipoAFavoritos(equipoDetails.team.name,equipoDetails.team.logo)" class="btn-favorito">Agregar a favoritos</button>
+ <button *ngIf="!isFavorite" (click)="agregarEquipoAFavoritos(equipoDetails.team.name,equipoDetails.team.logo,equipoDetails.team.id)" class="btn-favorito">Agregar a favoritos</button>
  </div>
  <p *ngIf="message">{{ message }}</p> <!-- Mensaje de éxito o error -->
 

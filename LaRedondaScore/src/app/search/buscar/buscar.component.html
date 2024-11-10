@@ -1,48 +1,45 @@
 <div class="search-container">
-    <input 
-        type="text" 
-        placeholder="Buscar equipo..." 
-        [(ngModel)]="searchTerm" 
-        (keyup.enter)="onInputChange()" 
-        aria-label="Buscar">
-    
-     <!-- Si se está buscando, muestra un indicador de carga -->
-     <div *ngIf="loading" class="loading-indicator">
-        Cargando...
-    </div>
-
-    <!-- Mostrar los resultados de búsqueda -->
-    <ul *ngIf="filteredEquipos.length > 0" class="dropdown-menu">
-        <li *ngFor="let equipo of filteredEquipos">
-            <div class="team-item">
-
-              <!-- Usamos routerLink para redirigir al componente FichaEquipo -->
-              <a [routerLink]="['/ficha-equipo', equipo.id]" >
-
-
-                <!-- Mostrar el escudo -->
-                <img [src]="equipo.logo" alt="{{ equipo.name }} Logo" class="team-logo">
-                <!-- Mostrar el nombre del equipo -->
-                <span class="team-name">{{ equipo.name }}</span>
-              </a>
-            </div>
-        </li>
-    </ul>
+  <input 
+      type="text" 
+      placeholder="Buscar..." 
+      [(ngModel)]="searchTerm" 
+      (keyup.enter)="onInputChange()" 
+      aria-label="Buscar">
   
-    <!-- Resultados de Jugadores -->
-    <ul *ngIf="filteredJugadores.length > 0" class="dropdown-menu">
-        <li *ngFor="let jugador of filteredJugadores">
-            <div class="player-item">
-              <a [routerLink]="['/ficha-player', jugador.id]">
-                <img [src]="jugador.photo" alt="{{ jugador.name }} Foto" class="player-photo">
-                <span class="player-name">{{ jugador.name }}</span>
-              </a>
-            </div>
-        </li>
-    </ul>
-  
-    <div *ngIf="filteredEquipos.length === 0 && filteredJugadores.length === 0 && searchTerm.length > 2 && !loading" class="no-results">
-      No se encontraron resultados.
-    </div>
+   <!-- Indicador de carga -->
+   <div *ngIf="loading" class="loading-indicator">
+      Cargando...
   </div>
-  
+</div>
+
+<!-- Resultados de búsqueda, fuera del contenedor principal -->
+<div class="search-results" *ngIf="filteredEquipos.length > 0 || filteredJugadores.length > 0">
+  <!-- Lista de equipos encontrados -->
+  <ul *ngIf="filteredEquipos.length > 0" class="dropdown-menu">
+      <li *ngFor="let equipo of filteredEquipos">
+          <div class="team-item">
+              <a [routerLink]="['/ficha-equipo', equipo.id]">
+                  <img [src]="equipo.logo" alt="{{ equipo.name }} Logo" class="team-logo">
+                  <span class="team-name">{{ equipo.name }}</span>
+              </a>
+          </div>
+      </li>
+  </ul>
+
+  <!-- Lista de jugadores encontrados -->
+  <ul *ngIf="filteredJugadores.length > 0" class="dropdown-menu">
+      <li *ngFor="let jugador of filteredJugadores">
+          <div class="player-item">
+              <a [routerLink]="['/ficha-player', jugador.id]">
+                  <img [src]="jugador.photo" alt="{{ jugador.name }} Foto" class="player-photo">
+                  <span class="player-name">{{ jugador.name }}</span>
+              </a>
+          </div>
+      </li>
+  </ul>
+</div>
+
+<!-- Mensaje cuando no hay resultados -->
+<div *ngIf="filteredEquipos.length === 0 && filteredJugadores.length === 0 && searchTerm.length > 2 && !loading" class="no-results">
+No se encontraron resultados.
+</div>

@@ -87,11 +87,11 @@ export class FichaEquipoComponent implements OnInit {
     );
   }
 
-  agregarEquipoAFavoritos(teamName: string, teamImage: string) {
+  agregarEquipoAFavoritos(teamName: string, teamImage: string, teamId:string) {
     const userId = (localStorage.getItem('userId'));
     console.log(userId);
     if (userId) {
-      this.equipo.addFavoriteTeam(userId, teamName, teamImage).subscribe(
+      this.equipo.addFavoriteTeam(userId, teamName, teamImage, teamId).subscribe(
         (response) => {
           this.mensaje = response.message || 'Equipo añadido a favoritos';
           this.isFavorite = true;

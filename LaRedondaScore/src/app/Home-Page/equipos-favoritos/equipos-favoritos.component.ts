@@ -14,7 +14,7 @@ export class EquiposFavoritosComponent implements OnInit {
 
 
   currentUserId: number | null = 1; // Asignar un ID predeterminado para pruebas
-  equiposFavoritos: { [key: string]: { nombre: string; imagen: string } } = {};
+  equiposFavoritos: { [key: string]: { nombre: string; imagen: string; id:string} } = {};
   mensaje: string = ''; // Para mostrar mensajes de feedback
 
   constructor(private equiposService: EquiposService,private router: Router) {}
@@ -45,10 +45,8 @@ export class EquiposFavoritosComponent implements OnInit {
   }
   
 
-
-
-
-eliminarEquipo(teamName: string) {
+eliminarEquipo(teamName: string, event: Event) {
+  event.stopPropagation();
   const userId = (localStorage.getItem('userId'));
   if (userId) {
     this.equiposService.removeFavoriteTeam(userId, teamName).subscribe(
@@ -68,9 +66,9 @@ eliminarEquipo(teamName: string) {
 
 
 // Método para redirigir a otro componente
-irAEquipo(nombre: string) {
+irAEquipo(id: string) {
   // Redirigir a la ruta del equipo usando su nombre o cualquier otro identificador
-  this.router.navigate([`/ficha-equipo/${nombre}`]);
+  this.router.navigate([`/ficha-equipo/${id}`]);
 }
 
 

@@ -7,7 +7,7 @@
   <!-- Lista de equipos favoritos -->
   <ul>
     <li *ngFor="let equipo of equiposFavoritos | keyvalue" [class.expanded]="true">
-      <div class="equipo-info" (click)="irAEquipo(equipo.value.nombre)">
+      <div class="equipo-info" (click)="irAEquipo(equipo.value.id)">
         <!-- Muestra la imagen del equipo -->
         <img [src]="equipo.value.imagen" alt="{{ equipo.value.nombre }}" class="country-flag" />
         
@@ -15,7 +15,7 @@
         <span class="equipo-name">{{ equipo.value.nombre }}</span>
 
         <!-- Botón de eliminar con ícono de tacho de basura -->
-        <button (click)="eliminarEquipo(equipo.value.nombre)" class="delete-button">
+        <button (click)="eliminarEquipo(equipo.value.nombre, $event)" class="delete-button">
           <img src="icons8-basura-24.png" alt="Eliminar" class="trash-icon" />
         </button>
       </div>

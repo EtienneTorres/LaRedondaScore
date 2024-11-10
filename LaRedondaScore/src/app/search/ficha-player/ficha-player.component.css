@@ -32,14 +32,14 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-.jugador-info {
+.player-info {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
 }
 
-.jugador-photo {
+.player-photo {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -48,65 +48,45 @@ body {
     margin-bottom: 20px;
 }
 
-.jugador-details {
+.player-details {
     width: 100%;
     color: #fff;
-    text-align: left;
+    text-align: center;
+    justify-content: left;
 }
 
-.jugador-details p {
+.player-details p {
     font-size: 1.1em;
     margin: 8px 0;
     font-weight: 500;
 }
 
-.jugador-details strong {
+.player-details strong {
     color: #FFD700; /* Dorado para los títulos de las propiedades */
 }
 
-.jugador-stats {
+.player-stats {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
     color: #fff;
 }
 
-.jugador-stat-item {
+.player-stat-item {
     text-align: center;
     margin: 0 15px;
 }
 
-.jugador-stat-item h4 {
+.player-stat-item h4 {
     font-size: 1.2em;
     color: #FFD700; /* Dorado para los títulos de las estadísticas */
     margin-bottom: 8px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-.jugador-stat-item p {
+.player-stat-item p {
     font-size: 1em;
     font-weight: 500;
-}
-
-.btn-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.btn-favorito {
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
-    border-radius: 20px;
-    font-size: 14px;
-    color: #fff;
-    padding: 8px 20px;
-    transition: border-color 0.3s ease;
-    cursor: pointer;
-}
-
-.btn-favorito:hover {
-    border-color: rgba(255, 255, 255, 1);
 }
 
 .mensaje-feedback {
