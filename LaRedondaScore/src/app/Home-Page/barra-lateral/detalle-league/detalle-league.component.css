@@ -1,20 +1,40 @@
+/* Estilos generales del cuerpo */
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Alineación desde la parte superior */
   min-height: 100vh;
-  background: url(../../../Imagenes/Fondo.jpg)no-repeat center fixed;
+  background: url(../../../Imagenes/Fondo.jpg) no-repeat center fixed;
   background-size: cover;
-  flex-direction: column; 
+  flex-direction: column;
   overflow-y: auto;
 }
 
-.season-navigation {
+/* Contenedor principal donde se alinearán los dos componentes */
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 90%;
+  max-width: 2500px; /* Limita el ancho máximo para evitar que los componentes se estiren demasiado */
+}
+
+/* Estilos para la sección de detalles de la liga */
+.detallegue-container {
+  margin-top: 50px;
+  flex: 1; /* Ocupa la mitad del espacio disponible */
+  min-width: 500px; /* Ajuste para evitar que se haga demasiado pequeño */
+}
+
+
+
+/* Estilos para la navegación de temporadas y rondas */
+.season-navigation, .round-navigation {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 15px;
-  margin-top: 100px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -33,26 +53,27 @@ body {
 
 .arrow-button:hover {
   background-color: #F57C00;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .arrow-button:active {
   background-color: #E65100;
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
-.season-navigation span {
-  font-size: 20px;
+.season-navigation span, .round-navigation span {
+  font-size: 18px;
   font-weight: bold;
   color: #FFD700;
 }
 
+/* Tarjetas de partidos */
 .match {
-  width: 70%;
-  background: transparent;
+  width: 100%; /* Ajustado al 100% para usar el espacio disponible dentro del contenedor */
+  background: rgba(0, 0, 0, 0.5);
   border: 2px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(80px);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   color: #e0e0e0;
   border-radius: 20px;
   padding: 25px 20px;
@@ -62,41 +83,43 @@ body {
 
 .match h3 {
   color: #ffffff;
-  font-size: 2.5em;
+  font-size: 1.8em;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
 }
 
+/* Equipo y marcador */
 .team {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  margin-bottom: 15px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .team img {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .score {
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: bold;
   color: #f0f0f0;
   text-align: center;
   flex-shrink: 0;
 }
 
+/* Detalles de cada partido */
 .details p {
-  font-size: 1em;
+  font-size: 0.9em;
   color: #f0f0f0;
   margin-top: 5px;
 }
@@ -106,40 +129,31 @@ body {
   color: #FFD700;
 }
 
+/* Mensaje de no-partidos */
 .no-partidos {
-  width: 70%;
+  width: 100%;
   background: rgba(0, 0, 0, 0.3);
   color: #ffffff;
   border-radius: 20px;
-  padding: 25px 20px;
+  padding: 15px;
   text-align: center;
-  margin: 20px auto;
+  margin: 10px 0;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .no-partidos p {
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: bold;
   color: #FF9800;
 }
 
+/* Fuentes generales */
 .match h3, .team span, .score, .details p {
   font-family: 'Arial', sans-serif;
 }
 
-.league-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
-  width: 90%;
-  margin: 0 auto;
-}
-
-.detallegue-container {
-  flex: 1;
-}
-
 .tabla-container {
-  flex: 1;
+  margin-top: 50px;
+  margin-left: auto;  /* Empuja el contenedor de la tabla hacia la derecha */
+  flex-grow: 0;  /* Evita que el contenedor de la tabla ocupe espacio extra */
 }

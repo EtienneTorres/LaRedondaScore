@@ -1,20 +1,20 @@
 import { Injectable} from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = '2c997789c1f759531f7328171d176dc3'; 
+  private apiKey = '8f70c06d7084c4b9dd6c9075878554ab'; 
   private apiUrl = 'https://v3.football.api-sports.io';
+  private apiUrlstanding = 'https://v3.football.api-sports.io/standings';
+  private apiUrlfixture= 'https://v3.football.api-sports.io/fixtures'; // Asegúrate de que esta URL sea la correcta
+  private apiRoundsUrl = 'https://v3.football.api-sports.io/fixtures/rounds'; // Para obtener las rondas
 
-  // Constructor
   constructor(private http: HttpClient) {}
 
-
-     // Método para obtener todos los partidos del dia
   getPartidosDelDia(date: string): Observable<any> {
     const headers = {
       'x-rapidapi-host': 'v3.football.api-sports.io',
@@ -29,7 +29,6 @@ export class PartidoService {
     );
   }
 
-   // Método para obtener partido por id
   getPartidoPorId(id: string): Observable<any> {
     const headers = {
       'x-rapidapi-host': 'v3.football.api-sports.io',
@@ -58,7 +57,6 @@ export class PartidoService {
     );
   }
 
-     // Método para obtener las ligas
   getleagues():Observable<any>
   {
 
@@ -75,12 +73,13 @@ export class PartidoService {
 
   }
 
-   // Método para obtener equipos por nombre
+
   getEquiposPorNombre(teamName: string): Observable<any> {
     const headers = {
         'x-rapidapi-host': 'v3.football.api-sports.io',
         'x-rapidapi-key': this.apiKey
     };
+    //const params = new HttpParams().set('name', teamName); // Parámtero de búsqueda
 
     return this.http.get<any>(`${this.apiUrl}/teams?name=${teamName}`, { headers }).pipe(
         catchError(error => {
@@ -90,13 +89,13 @@ export class PartidoService {
     );
 }
 
-   // Método para obtener equipo por id
 getEquiposPorID(id: string): Observable<any> {
   const headers = {
       'x-rapidapi-host': 'v3.football.api-sports.io',
       'x-rapidapi-key': this.apiKey
   };
- 
+  //const params = new HttpParams().set('name', teamName); // Parámtero de búsqueda
+
   return this.http.get<any>(`${this.apiUrl}/teams?id=${id}`, { headers }).pipe(
       catchError(error => {
           console.error('Error al obtener el equipo', error);
@@ -105,7 +104,6 @@ getEquiposPorID(id: string): Observable<any> {
   );
 }
 
-   // Método para obtener los detalles de una liga determinada
 getLeagueDetails(id: string): Observable<any> {
   const headers = {
     'x-rapidapi-host': 'v3.football.api-sports.io',
@@ -120,7 +118,6 @@ getLeagueDetails(id: string): Observable<any> {
   );
 }
 
-   // Método para obtener las estadisticas de una liga determinada
 getSeasonStats(id: string): Observable<any> {
   const headers = {
     'x-rapidapi-host': 'v3.football.api-sports.io',
@@ -135,32 +132,47 @@ getSeasonStats(id: string): Observable<any> {
   );
 }
 
-   // Método para obtener todos los partidas de una liga por temporada
+
 getPartidosPorLiga(leagueId: number, season: string): Observable<any> {
   const headers = new HttpHeaders({
-    'x-rapidapi-key': this.apiKey, 
+    'x-rapidapi-key': this.apiKey, // Cambia esto por tu clave API
   });
 
   return this.http.get<any>(`${this.apiUrl}/fixtures?league=${leagueId}&season=${season}`, { headers });
 }
 
-   // Método para obtener las temporadas disponibles
 getAvailableSeasons(): Observable<any> {
   return this.http.get<any>(`${this.apiUrl}/leagues/seasons`);
 }
 
 
-   // Método para obtener la tabla de posicion de una liga por temporada
+
 getStandings(leagueId: number, season: string): Observable<any> {
   const headers = new HttpHeaders({
-    'x-rapidapi-key': this.apiKey, 
+    'x-rapidapi-key': this.apiKey, // Asegúrate de reemplazar esto por tu clave API
   });
 
   return this.http.get<any>(`${this.apiUrl}/standings?league=${leagueId}&season=${season}`, { headers });
 }
 
-   // Método para obtener jugadores por nombre
+
+
+// Nuevo metodo para buscar jugadores por nombre :)
+
+
 getJugadoresPorNombre(name: string): Observable<any> {
+  // Eliminar caracteres no alfanuméricos y convertir la primera letra en mayúscula
+  // const cleanedName = playerName
+  //   .replace(/[^\w\s]/gi, '') // Elimina caracteres especiales
+  //   .replace(/\s+/g, ' ') // Reemplaza múltiples espacios por uno solo
+  //   .trim(); // Elimina los espacios al principio y al final
+
+  // // Capitalizar las primeras letras del nombre y apellido
+  // const formattedName = cleanedName
+  //   .split(' ')
+  //   .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+  //   .join(' ');
+
   const headers = {
     'x-rapidapi-host': 'v3.football.api-sports.io',
     'x-rapidapi-key': this.apiKey
@@ -175,7 +187,7 @@ getJugadoresPorNombre(name: string): Observable<any> {
   );
 }
 
-   // Método para obtener jugadores por id
+
 getJugadoresPorID(id: string): Observable<any> {
   const headers = {
     'x-rapidapi-host': 'v3.football.api-sports.io',
@@ -190,6 +202,32 @@ getJugadoresPorID(id: string): Observable<any> {
     })
   );
 }
+
+
+  // Obtener las rondas disponibles para una liga y temporada
+  getRounds(leagueId: number, season: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'x-rapidapi-host': 'v3.football.api-sports.io',
+      'x-rapidapi-key': this.apiKey
+    });
+    const url = `${this.apiRoundsUrl}?season=${season}&league=${leagueId}`;
+    return this.http.get<any>(url, { headers });
+  }
+
+  // Obtener los partidos de una liga, temporada y ronda específicos
+  getPartidosPorRonda(leagueId: number, season: string, round: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'x-rapidapi-host': 'v3.football.api-sports.io',
+      'x-rapidapi-key': this.apiKey
+    });
+    const url = `${this.apiUrlfixture}?season=${season}&league=${leagueId}&round=${round}`;
+    return this.http.get<any>(url, { headers });
+  }
+
+
+
+
+
 }
 
 

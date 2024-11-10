@@ -1,9 +1,9 @@
+import { PartidoService } from './../../../Services/Api/partidos.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { PartidoService } from '../../../Services/Api/partidos.service';
-import { TablaComponent } from "./tabla/tabla.component"; 
+import { TablaComponent } from "./tabla/tabla.component"; // Ajusta la ruta a tu servicio
 import { Nav2Component } from '../../../navbar/nav2/nav2.component';
 
 @Component({
@@ -23,20 +23,24 @@ export class DetallesLeagueComponent implements OnInit {
   currentSeason: number = 2022; // Temporada inicial, puedes ajustarlo si es necesario
   minSeason: number = 2015; // Temporada mínima
   maxSeason: number = 2022; // Temporada máxima
+  currentRound: string = 'Regular Season - 1';  // Inicia en la primera ronda
+  rounds: string[] = []; // Almacena las rondas disponibles
 
-  // Constructor
+
+
   constructor(
-    private partidoService: PartidoService, 
-    private route: ActivatedRoute
+    private partidoService: PartidoService, // Servicio para interactuar con la API
+    private route: ActivatedRoute // Para obtener el id de la liga desde la ruta
   ) {}
 
   ngOnInit() {
-    this.leagueId = this.route.snapshot.paramMap.get('id'); // Obtenemos el ID de la liga desde la ruta
+    this.leagueId = this.route.snapshot.paramMap.get('id');
     if (this.leagueId) {
       console.log(this.leagueId);
-      this.loadMatches(); // Cargamos los partidos
-      this.loadLeagueDetails(this.leagueId); // Cargamos los detalles de la liga 
-      this.loadSeasonStats(this.leagueId); // Cargamos las estadisticas por temporada de la liga
+      this.loadMatches();
+      this.loadLeagueDetails(this.leagueId);
+      this.loadSeasonStats(this.leagueId);
+      this.loadRounds(); // Cargar las rondas al iniciar el componente
     }
   }
 
@@ -50,11 +54,11 @@ export class DetallesLeagueComponent implements OnInit {
     });
   }
 
-    // Metodo para cargar las estadisticas por temporada de una liga
+  
   loadSeasonStats(id: string) {
     this.partidoService.getSeasonStats(id).subscribe((data: any) => {
       if (data.response && data.response.length > 0) {
-        this.seasonStats = data.response[0]; 
+        this.seasonStats = data.response[0];  // Asignar la respuesta
         console.log('Datos de la liga:', this.seasonStats);
       } else {
         console.log('No se encontraron datos para esta liga');
@@ -63,44 +67,85 @@ export class DetallesLeagueComponent implements OnInit {
       console.error('Error al cargar las estadísticas de la temporada:', error);
     });
   }
-  
-  // Metodo para cargar los partidos
   loadMatches(): void {
-    // Asegúrate de que `leagueId` no sea null y sea un número
-    const validLeagueId = this.leagueId ? Number(this.leagueId) : null;
-    const season = this.currentSeason.toString(); 
-    if (validLeagueId && season) {
-      this.partidoService.getPartidosPorLiga(validLeagueId, season).subscribe(
-        data => {
-          console.log('Respuesta de la API:', data);
-          if (data.response && data.response.length > 0) {
-            this.partidos = data.response;
-            console.log('Partidos de la liga:', this.partidos);
-          } else {
-            console.warn('No hay partidos disponibles para esta liga.');
-            this.partidos = [];
-          }
-        },
-        error => {
-          console.error('Error al cargar los partidos:', error);
+  const validLeagueId = this.leagueId ? Number(this.leagueId) : null;
+  const season = this.currentSeason.toString();
+  if (validLeagueId && season) {
+    this.partidoService.getPartidosPorRonda(validLeagueId, season, this.currentRound).subscribe(
+      data => {
+        console.log('Respuesta de la API de partidos:', data);
+        if (data && data.response && data.response.length > 0) {
+          this.partidos = data.response;
+        } else {
+          console.warn('No hay partidos disponibles para esta liga.');
+          this.partidos = [];
         }
-      );
-    } else {
-      console.error('El id de la liga o la temporada no es válido.');
-    }
+      },
+      error => {
+        console.error('Error al cargar los partidos:', error);
+      }
+    );
+  } else {
+    console.error('El id de la liga o la temporada no es válido.');
   }
+}
+
   
-  // Metodo para cambiar de temporada
   changeSeason(direction: number) {
     const newSeason = this.currentSeason + direction;
 
     // Asegúrate de que la nueva temporada esté dentro del rango permitido
     if (newSeason >= this.minSeason && newSeason <= this.maxSeason) {
       this.currentSeason = newSeason;
-      this.loadMatches(); // Cargamos los partidos de la nueva temporada
+      this.currentRound = 'Regular Season - 1';
+      this.loadMatches(); // Llamar a la API con la nueva temporada
     }
   }
 
-  
+
+
+  loadRounds(): void {
+    const validLeagueId = this.leagueId ? Number(this.leagueId) : null;
+    const season = this.currentSeason.toString();
+    if (validLeagueId && season) {
+      this.partidoService.getRounds(validLeagueId, season).subscribe(
+        data => {
+          if (data.response && data.response.length > 0) {
+            this.rounds = data.response; // Rondas disponibles
+            console.log('Rondas disponibles:', this.rounds);
+            this.currentRound = this.rounds[0]; // Establece la primera ronda como predeterminada al cargar nuevas rondas
+            this.loadMatches(); // Cargar los partidos de la primera ronda
+          }
+        },
+        error => {
+          console.error('Error al cargar las rondas:', error);
+        }
+      );
+    }
+  }
+
+  selectRound(round: string): void {
+    this.currentRound = round; // Actualiza la ronda seleccionada
+    this.loadMatches(); // Recargar los partidos para la nueva ronda
+  }
+
+
+   // Funciones para cambiar de round
+   goToPreviousRound(): void {
+    const currentIndex = this.rounds.indexOf(this.currentRound);
+    if (currentIndex > 0) {
+      this.currentRound = this.rounds[currentIndex - 1];
+      this.loadMatches(); // Recargar los partidos para la nueva ronda
+    }
+  }
+
+  goToNextRound(): void {
+    const currentIndex = this.rounds.indexOf(this.currentRound);
+    if (currentIndex < this.rounds.length - 1) {
+      this.currentRound = this.rounds[currentIndex + 1];
+      this.loadMatches(); // Recargar los partidos para la nueva ronda
+    }
+  }
+
 
 }

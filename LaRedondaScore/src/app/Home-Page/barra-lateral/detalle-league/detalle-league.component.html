@@ -1,46 +1,53 @@
 <body>
-
   <app-nav2></app-nav2>
-  
-<div class="league-container">
-  <!-- Detalle de la liga -->
-  <div class="detallegue-container">
 
-    <div class="season-navigation">
-      <button (click)="changeSeason(-1)" class="arrow-button">&#8593; Anterior Temporada</button>
-      <span>{{ currentSeason }}</span>
-      <button (click)="changeSeason(1)" class="arrow-button">&#8595; Siguiente Temporada</button>
-    </div>
+  <div class="main-container"> <!-- Cambié el nombre del contenedor principal -->
+    <!-- Detalle de la liga -->
+    <div class="detallegue-container">
+      <div class="season-navigation">
+        <button (click)="changeSeason(-1)" class="arrow-button"> Anterior Temporada</button>
+        <span>{{ currentSeason }}</span>
+        <button (click)="changeSeason(1)" class="arrow-button"> Siguiente Temporada</button>
+      </div>
 
-    <div *ngIf="partidos.length > 0">
-      <h3>Partidos de la Liga</h3>
-      <div *ngFor="let partido of partidos" class="match">
-        <div class="team">
-          <img [src]="partido.teams.home.logo" alt="{{ partido.teams.home.name }} logo">
-          <span>{{ partido.teams.home.name }}</span>
+      <!-- Solo un round se muestra -->
+      <div class="round-navigation">
+        <button (click)="goToPreviousRound()" class="arrow-button"> Anterior Fecha</button>
+        <span>{{ currentRound }}</span>
+        <button (click)="goToNextRound()" class="arrow-button"> Siguiente Fecha</button>
+      </div>
+
+      <!-- Visualización de partidos -->
+      <div *ngIf="partidos.length > 0">
+        <h3>Partidos de la Liga</h3>
+        <div *ngFor="let partido of partidos" class="match">
+          <div class="team">
+            <img [src]="partido.teams.home.logo" alt="{{ partido.teams.home.name }} logo">
+            <span>{{ partido.teams.home.name }}</span>
+          </div>
+          <div class="score">
+            <span>{{ partido.goals.home }}</span> - <span>{{ partido.goals.away }}</span>
+          </div>
+          <div class="team">
+            <img [src]="partido.teams.away.logo" alt="{{ partido.teams.away.name }} logo">
+            <span>{{ partido.teams.away.name }}</span>
+          </div>
+          <div class="details">
+            <p><strong>Estadio:</strong> {{ partido.fixture.venue.name }}</p>
+            <p><strong>Árbitro:</strong> {{ partido.fixture.referee || 'No disponible' }}</p>
+          </div>
         </div>
-        <div class="score">
-          <span>{{ partido.goals.home }}</span> - <span>{{ partido.goals.away }}</span>
-        </div>
-        <div class="team">
-          <img [src]="partido.teams.away.logo" alt="{{ partido.teams.away.name }} logo">
-          <span>{{ partido.teams.away.name }}</span>
-        </div>
-        <div class="details">
-          <p><strong>Estadio:</strong> {{ partido.fixture.venue.name }}</p>
-          <p><strong>Árbitro:</strong> {{ partido.fixture.referee || 'No disponible' }}</p>
-        </div>
+      </div>
+
+      <div *ngIf="partidos.length === 0" class="no-partidos">
+        <p>No hay partidos disponibles.</p>
       </div>
     </div>
 
-    <div *ngIf="partidos.length === 0" class="no-partidos">
-      <p>No hay partidos disponibles.</p>
+    <!-- Tabla de posiciones -->
+    <div class="tabla-container">
+      <app-tabla [leagueId]="leagueId" [currentSeason]="currentSeason"></app-tabla>
     </div>
   </div>
 
-  <!-- Tabla de posiciones -->
-  <div class="tabla-container">
-    <app-tabla [leagueId]="leagueId" [currentSeason]="currentSeason"></app-tabla>
-  </div>
-</div>
 </body>
