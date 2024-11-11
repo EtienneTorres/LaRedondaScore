@@ -154,3 +154,14 @@ li img {
     color: #FFD700;
     padding: 0 10px;
 }
+
+.equipo {
+    transition: background-color 0.3s, box-shadow 0.3s, border 0.3s;
+    cursor: pointer;
+  }
+  
+  .equipo:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo transparente */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5); /* Iluminación suave */
+  }
+  

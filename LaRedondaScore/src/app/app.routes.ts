@@ -17,7 +17,7 @@ export const routes: Routes = [
     { path: 'ficha-player/:id', component: FichaPlayerComponent }, // Ruta para ficha del player
 
 
-    { path: '**', redirectTo: 'PaginaPrincipal' }// Redirige cualquier otra ruta a la página de inicio
+    { path: '**', redirectTo: 'login-page' }// Redirige cualquier otra ruta a la página de inicio
 ];
 
 

@@ -13,7 +13,7 @@
     <h2>{{ liga.key }}</h2>
     <ul>
       <li *ngFor="let partido of liga.value">
-        <div class="equipo equipo-local">
+        <div class="equipo equipo-local"    (click)="irAEquipo(partido.teams.home.id)">
           <img [src]="partido.teams.home.logo" alt="{{ partido.teams.home.name }}" />
           <span>{{ partido.teams.home.name }}</span>
         </div>
@@ -22,7 +22,7 @@
           <span>{{ partido.goals.home }} - {{ partido.goals.away }}</span>
         </div>
 
-        <div class="equipo equipo-visitante">
+        <div class="equipo equipo-visitante"  (click)="irAEquipo(partido.teams.away.id)">
           <span>{{ partido.teams.away.name }}</span>
           <img [src]="partido.teams.away.logo" alt="{{ partido.teams.away.name }}" />
         </div>

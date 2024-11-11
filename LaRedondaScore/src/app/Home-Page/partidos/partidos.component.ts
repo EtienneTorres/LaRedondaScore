@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {OnInit } from '@angular/core';
 import { PartidoService } from '../../Services/Api/partidos.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
@@ -43,10 +43,17 @@ ligasDeseadas: { name: string; country: string }[] = [
 
 
  partidosPorLiga: { [liga: string]: any[] } = {};  // Propiedad para almacenar los partidos organizados por liga
-fechaSeleccionada: string = new Date().toISOString().split('T')[0]; // Fecha actual en formato YYYY-MM-DD
+
+fechaSeleccionada: string;
 
 // Constructor
-constructor(private partidoService: PartidoService) {}
+constructor(private partidoService: PartidoService, private router: Router) {
+  let fechaActual = new Date();
+  fechaActual.setHours(fechaActual.getHours() - 3); // Ajuste de 3 horas para horario de Argentina
+  this.fechaSeleccionada = fechaActual.toISOString().split('T')[0]; // Fecha actual en formato YYYY-MM-DD
+}
+
+
 
 ngOnInit(): void {
   this.cargarPartidosDelDia(this.fechaSeleccionada); // Cargar los partidos del día actual
@@ -141,5 +148,15 @@ getEstadoPartido(fechaPartido: string, golesHome: number, golesAway: number, sta
       return "Estado desconocido";
   }
 }
+
+
+// Método para redirigir a otro componente
+irAEquipo(id: string) {
+  // Redirigir a la ruta del equipo usando su nombre o cualquier otro identificador
+  this.router.navigate([`/ficha-equipo/${id}`]);
+}
+
+
+
 }
  
