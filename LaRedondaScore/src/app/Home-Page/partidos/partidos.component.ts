@@ -53,26 +53,36 @@ ngOnInit(): void {
 }
 
 // Metodo para cargar partidos de un día específico
+// Metodo para cargar partidos de un día específico, incluyendo la noche anterior y la mañana siguiente
 cargarPartidosDelDia(fecha: string): void {
-  this.partidoService.getPartidosDelDia(fecha).subscribe((data) => {
-    const partidosFiltrados = this.filtrarPartidosPorUtc3(data.response, fecha);
+  // Fecha del día siguiente
+  const fechaSiguiente = new Date(new Date(fecha).setDate(new Date(fecha).getDate() + 1)).toISOString().split('T')[0];
+  
+  // Cargar partidos del día actual y el siguiente
+  this.partidoService.getPartidosDelDia(fecha).subscribe((dataHoy) => {
+    this.partidoService.getPartidosDelDia(fechaSiguiente).subscribe((dataMañana) => {
+      
+      // Combinar datos del día actual y del día siguiente
+      const partidosDelDia = [...dataHoy.response, ...dataMañana.response];
+      const partidosFiltrados = this.filtrarPartidosPorUtc3(partidosDelDia, fecha);
+      
+      // Agrupar los partidos por liga
+      this.partidosPorLiga = partidosFiltrados.reduce((acc: any, partido: any) => {
+        const ligaNombre = partido.league.name;
+        const paisNombre = partido.league.country;
+        const ligaClave = `${ligaNombre} (${paisNombre})`;
 
-    // Agrupar los partidos por liga
-    this.partidosPorLiga = partidosFiltrados.reduce((acc: any, partido: any) => {
-      const ligaNombre = partido.league.name;
-      const paisNombre = partido.league.country;
-      const ligaClave = `${ligaNombre} (${paisNombre})`;
+        const ligaDeseada = this.ligasDeseadas.find((liga) => 
+          liga.name === ligaNombre && liga.country === paisNombre
+        );
 
-      const ligaDeseada = this.ligasDeseadas.find((liga) => 
-        liga.name === ligaNombre && liga.country === paisNombre
-      );
-
-      if (ligaDeseada) {
-        if (!acc[ligaClave]) acc[ligaClave] = [];
-        acc[ligaClave].push(partido);
-      }
-      return acc;
-    }, {});
+        if (ligaDeseada) {
+          if (!acc[ligaClave]) acc[ligaClave] = [];
+          acc[ligaClave].push(partido);
+        }
+        return acc;
+      }, {});
+    });
   });
 }
 
@@ -92,7 +102,7 @@ anteriorDia(): void {
   this.cargarPartidosDelDia(this.fechaSeleccionada); // Recargar los partidos del día anterior
 }
 
-// Metodo para filtrar partidos por UTC-3, horario argentina
+// Metodo para filtrar partidos por UTC-3, horario argentina entre las 03:00 y las 02:59 del día siguiente
 private filtrarPartidosPorUtc3(partidos: any[], date: string): any[] {
   const startTime = new Date(`${date}T03:00:00Z`).getTime(); // 03:00 UTC hoy
   const endTime = new Date(`${date}T02:59:59Z`).getTime() + 24 * 60 * 60 * 1000; // 02:59 UTC mañana
