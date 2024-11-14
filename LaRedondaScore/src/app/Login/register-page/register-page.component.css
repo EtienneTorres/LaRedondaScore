@@ -84,9 +84,18 @@ body {
 }
 
 .error-message {
-    color: red;
-    font-size: 14px;
+    color: rgb(255, 131, 59);
+    font-size: 18px;
     margin-top: 5px;
+    margin-bottom: 12px;
+  }
+  
+.error-contraseña
+{
+    color: rgb(255, 131, 59);
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 12px;
 }
 
 .logo {
@@ -133,5 +142,38 @@ body {
     background-color: #ffffff;
     color: #f8982b;
     border: 1px solid #ffffff;
+  }
+  
+/* Estilos para los mensajes */
+.custom-alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .success {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .error {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .error-message {
+    color: #f44336;
+    font-size: 12px;
+  }
+  
+  .error-contraseña {
+    color: #f44336;
+    font-size: 12px;
+  }
+  
+  .invalid {
+    border-color: red;
   }
   

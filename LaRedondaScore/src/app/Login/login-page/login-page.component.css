@@ -148,8 +148,9 @@ body
   }
   
   .error-message {
-    color: red;
-    font-size: 14px;
+    color: rgb(255, 131, 59);    font-size: 18px;
     margin-top: 5px;
+    margin-bottom: 12px;
   }
+  
   

@@ -38,6 +38,7 @@ login() {
       } else {
         // Si el login no es exitoso
         this.errorMessage = 'Usuario o contraseña incorrectos';
+        console.log(this.errorMessage);
       }
     },
     (error) => {

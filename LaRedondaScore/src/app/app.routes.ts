@@ -6,18 +6,35 @@ import { FichaEquipoComponent } from './search/ficha-equipo/ficha-equipo.compone
 import { RegisterPageComponent } from './Login/register-page/register-page.component';
 import { DetallesLeagueComponent } from './Home-Page/barra-lateral/detalle-league/detalle-league.component';
 import { FichaPlayerComponent } from './search/ficha-player/ficha-player.component';
+import { AuthGuard } from './AuthGuard/auth.guard';
 
 export const routes: Routes = [
-    { path: 'login-page', component: LoginPageComponent }, // Página de inicio
-    { path: 'PaginaPrincipal', component: PaginaPrincipalComponent }, // Ruta al nuevo componente
-    { path: 'ficha-partido/:id', component: FichaPartidoComponent },
-    { path: 'ficha-equipo/:id', component: FichaEquipoComponent },// Ruta para ficha del equipo
-    { path: 'register', component: RegisterPageComponent }, // Ruta para el registro
-    { path: 'detalle-league/:id', component: DetallesLeagueComponent },// Ruta para ficha del equipo
-    { path: 'ficha-player/:id', component: FichaPlayerComponent }, // Ruta para ficha del player
-
-
-    { path: '**', redirectTo: 'login-page' }// Redirige cualquier otra ruta a la página de inicio
-];
-
-
+    { path: 'login-page', component: LoginPageComponent },
+    { path: 'register', component: RegisterPageComponent },
+    {
+      path: 'PaginaPrincipal',
+      component: PaginaPrincipalComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'ficha-partido/:id',
+      component: FichaPartidoComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'ficha-equipo/:id',
+      component: FichaEquipoComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'detalle-league/:id',
+      component: DetallesLeagueComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'ficha-player/:id',
+      component: FichaPlayerComponent,
+      canActivate: [AuthGuard]
+    },
+    { path: '**', redirectTo: 'login-page' } 
+  ];

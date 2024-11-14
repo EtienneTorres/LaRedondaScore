@@ -17,32 +17,32 @@ export class RegisterPageComponent {
   password: string = ''; // Contraseña
   message: string = ''; // Mensaje de error
   successMessage: string = ''; // Mensaje de éxito
+  errorMessage: string = '';
 
   // Constructor 
   constructor(private user: UserService, private router: Router) {}
 
-  // Método para registrar a un nuevo usuario
-  onRegister(): void {
-    this.user.register(this.username, this.password).subscribe(
-      response => {
-        console.log('Registro exitoso', response);
-        this.successMessage = 'Usuario registrado con éxito';
+ // Método para registrar un nuevo usuario
+ onRegister(): void {
+  this.user.register(this.username, this.password).subscribe(
+    response => {
+      console.log('Registro exitoso', response);
+      this.successMessage = 'Usuario registrado con éxito';
 
-        // Oculta el mensaje después de 4 segundos y redirige a login
-        setTimeout(() => {
-          this.successMessage = '';
-          window.close();
-        }, 1000);
-      },
-      error => {
-        console.error('Error en el registro', error);
-        this.message = 'Error en el registro. Intente de nuevo.';
-
-        // Oculta el mensaje de error después de unos segundos
-        setTimeout(() => {
-          this.message = '';
-        }, 4000);
+      // Oculta el mensaje después de 1 segundo y cierra la ventana
+      setTimeout(() => {
+        this.successMessage = '';
+        window.close();
+      }, 1000);
+    },
+    error => {
+      if (error.message === 'El usuario ya existe') {
+        this.errorMessage = 'El nombre de usuario ya está registrado. Intenta con otro.';
+      } else {
+        this.errorMessage = 'Error en el registro. Intenta de nuevo.';
       }
-    );
-  }
+
+    }
+  );
+}
 }

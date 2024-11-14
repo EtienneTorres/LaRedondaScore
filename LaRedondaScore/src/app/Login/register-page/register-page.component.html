@@ -38,6 +38,11 @@
         </div>
       </div>
 
+      <!-- Mostrar mensaje de error -->
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
       <button type="submit" [disabled]="registerForm.invalid" class="btn">REGISTRARSE</button>
     </form>
   </div>
