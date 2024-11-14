@@ -1,8 +1,14 @@
 <body>
   <img src="Logoinicio2.png" alt="" class="logo">
   
-  <div  class="wrapper">
+  <div class="wrapper">
     <h1>Formulario de Registro</h1>
+    
+    <!-- Cartel personalizado de éxito o error -->
+    <div *ngIf="successMessage || message" class="custom-alert" [ngClass]="{'success': successMessage, 'error': message}">
+      {{ successMessage || message }}
+    </div>
+
     <form #registerForm="ngForm" (ngSubmit)="onRegister()" novalidate>
       <!-- Nuevo Usuario -->
       <div class="input-box">

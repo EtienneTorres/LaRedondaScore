@@ -113,3 +113,25 @@ body {
         height: 80px;
     }
 }
+
+
+.custom-alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .success {
+    background-color: #ffffff;
+    color: #eb921f;
+    border: 1px solid #ffffff;
+  }
+  
+  .error {
+    background-color: #ffffff;
+    color: #f8982b;
+    border: 1px solid #ffffff;
+  }
+  
