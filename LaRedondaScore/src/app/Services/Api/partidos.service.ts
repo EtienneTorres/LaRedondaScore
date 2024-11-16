@@ -7,7 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = '57d4b4b5f43fb90818967fa5db044a86'; 
+  private apiKey = '47c20e0c70946fb28bccd7a9630aaccb '; 
   private apiUrl = 'https://v3.football.api-sports.io';
   private apiUrlstanding = 'https://v3.football.api-sports.io/standings';
   private apiUrlfixture= 'https://v3.football.api-sports.io/fixtures'; // Asegúrate de que esta URL sea la correcta
@@ -158,21 +158,7 @@ getStandings(leagueId: number, season: string): Observable<any> {
 
 
 // Nuevo metodo para buscar jugadores por nombre :)
-
-
 getJugadoresPorNombre(name: string): Observable<any> {
-  // Eliminar caracteres no alfanuméricos y convertir la primera letra en mayúscula
-  // const cleanedName = playerName
-  //   .replace(/[^\w\s]/gi, '') // Elimina caracteres especiales
-  //   .replace(/\s+/g, ' ') // Reemplaza múltiples espacios por uno solo
-  //   .trim(); // Elimina los espacios al principio y al final
-
-  // // Capitalizar las primeras letras del nombre y apellido
-  // const formattedName = cleanedName
-  //   .split(' ')
-  //   .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-  //   .join(' ');
-
   const headers = {
     'x-rapidapi-host': 'v3.football.api-sports.io',
     'x-rapidapi-key': this.apiKey
@@ -195,6 +181,36 @@ getJugadoresPorID(id: string): Observable<any> {
   };
 
   return this.http.get<any>(`${this.apiUrl}/players/profiles?player=${id}`, { headers }).pipe(
+    tap(data => console.log('Datos obtenidos:', data)),
+    catchError(error => {
+      console.error('Error al obtener el jugador', error);
+      return throwError(error);
+    })
+  );
+}
+
+getDtPorNombre(name: string): Observable<any> {
+  const headers = {
+    'x-rapidapi-host': 'v3.football.api-sports.io',
+    'x-rapidapi-key': this.apiKey
+  };
+
+  return this.http.get<any>(`${this.apiUrl}/coachs?search=${name}`, { headers }).pipe(
+    tap(data => console.log('Datos obtenidos:', data)),
+    catchError(error => {
+      console.error('Error al obtener el jugador', error);
+      return throwError(error);
+    })
+  );
+}
+
+getDtPorID(id: string): Observable<any> {
+  const headers = {
+    'x-rapidapi-host': 'v3.football.api-sports.io',
+    'x-rapidapi-key': this.apiKey
+  };
+
+  return this.http.get<any>(`${this.apiUrl}/coachs?id=${id}`, { headers }).pipe(
     tap(data => console.log('Datos obtenidos:', data)),
     catchError(error => {
       console.error('Error al obtener el jugador', error);

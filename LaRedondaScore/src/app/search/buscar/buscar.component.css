@@ -52,12 +52,12 @@ input[type="text"] {
     background: rgba(255, 255, 255, 0.1);
 }
 
-.team-item, .player-item {
+.team-item, .player-item, .dt-item{
     display: flex;
     align-items: center;
 }
 
-.team-logo, .player-photo {
+.team-logo, .dt-photo, .player-photo {
     width: 30px;
     height: auto;
     margin-right: 10px;
@@ -65,19 +65,19 @@ input[type="text"] {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.team-name, .player-name {
+.team-name, .player-name, .dt-name {
     color: #FFD700;
     font-size: 18px;
 }
 
-.team-item a, .player-item a {
+.team-item a, .player-item a, .dt-item a{
     text-decoration: none; 
     color: #FFD700; 
     display: flex; /* Asegura que el enlace tome el estilo del contenedor */
     align-items: center;
 }
 
-.team-item a:hover, .player-item a:hover {
+.team-item a:hover, .player-item a:hover, .dt-item a:hover {
     color: #ffffff; /* Cambia el color al pasar el mouse, si lo deseas */
 }
 

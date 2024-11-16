@@ -18,6 +18,8 @@ export class BuscarComponent {
   jugadores: any[] = []; // Array para almacenar los jugadores
   filteredJugadores: any[] = []; // Jugadores filtrados basados en la búsqueda
   searchTerm: string = ''; // Término de búsqueda
+  filteredDts: any[] = []; // Jugadores filtrados basados en la búsqueda
+  dts: any[] = []; // Array para almacenar los dts
   loading: boolean = false; // Indicador de carga
   
   // Constructor
@@ -44,6 +46,23 @@ export class BuscarComponent {
           this.loading = false;
         }
       );
+      
+
+      
+      this.equipoService.getDtPorNombre(this.searchTerm).subscribe(data => {
+        if (data && data.response && data.response.length > 0) {
+            // Muestra los tecnicos encontrados
+            this.filteredDts = data.response.map((item: any) => item);
+        } else {
+            this.filteredDts = [];  // Si no se encuentran tecnicos, limpia la lista
+        } 
+        // this.loading = false; // Detiene el indicador de carga
+    }, error => {
+        console.error('Error al buscar tecnicos', error);
+        this.filteredDts = []; // Si no se encuentran tecnicos, limpia la lista
+        this.loading = false; // Detiene el indicador de carga
+    });
+
 
       // Buscar jugadores
       this.equipoService.getJugadoresPorNombre(this.searchTerm).subscribe(data => {
@@ -56,12 +75,10 @@ export class BuscarComponent {
         this.loading = false; // Detiene el indicador de carga
     }, error => {
         console.error('Error al buscar jugadores', error);
+        this.filteredJugadores = []; // Si no se encuentran jugadores, limpia la lista
         this.loading = false; // Detiene el indicador de carga
     });
-} else {
-    this.filteredJugadores = []; // Si no se encuentran jugadores, limpia la lista
-    this.loading = false; // Detiene el indicador de carga
 }
+  }
 }
 
-}
