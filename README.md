@@ -19,6 +19,19 @@ Instala las dependencias:
 npm install
 Instala json-server globalmente si no lo tienes instalado:
 npm install -g json-server
+comando para correr bd:
+json-server --watch db/user.json
+
+En caso de que no funcione la api key:
+
+1-Ingresar a https://www.api-football.com/
+2-Registrarse
+3-en la barra lateral entrar a apis(</>)
+4-seleccionar footbal
+5-seleccionar live demo
+6-copiar api key
+7-copiarla en C:\Users\Etienne\LaRedondaScore\LaRedondaScore\src\app\Services\Api\partidos.service
+  en la constante private apiKey = 'Aqui adentro'; 
 
 INTEGRANTES:
 Mariano Ribas
