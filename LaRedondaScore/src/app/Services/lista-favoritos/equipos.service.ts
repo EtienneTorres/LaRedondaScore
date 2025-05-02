@@ -7,6 +7,10 @@ import { map, Observable, of, switchMap } from 'rxjs';
 })
 export class EquiposService {
 
+
+
+
+
   urlbase: string = 'http://localhost:3000';
 
   currentUserId: number | null = null; 

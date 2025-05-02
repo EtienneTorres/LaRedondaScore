@@ -12,12 +12,14 @@ export class UserService {
 
   urlbase:string='http://localhost:3000'
 
+
+
   // Constructor
   constructor(private http:HttpClient, private router:Router) { }
 
 
     // Método para registrar un nuevo usuario
-    register(username: string, password: string): Observable<any> {
+    register(username: string, password: string,userData?: any): Observable<any> {
       // Primero, buscamos si el usuario ya está registrado
       return this.http.get<any[]>(`${this.urlbase}/users?username=${username}`).pipe(
         map(users => {
@@ -25,8 +27,9 @@ export class UserService {
           if (users && users.length > 0) {
             throw new Error('El usuario ya existe');
           }
-          // Si no existe, procedemos con el registro
-          return this.http.post(`${this.urlbase}/users`, { username, password });
+        
+
+          return this.http.post(`${this.urlbase}/users`, userData).subscribe();
         }),
         catchError((error) => {
           // Si hubo un error, lo devolvemos para manejarlo en el componente
@@ -38,7 +41,9 @@ export class UserService {
    // Método para hacer login
   login(username: string, password: string): Observable<any> {
     // Aquí buscamos al usuario por su username y password
-    return this.http.get(`${this.urlbase}/users?username=${username}&password=${password}`);
+    
+    return this.http.get<any[]>(`http://localhost:3000/users?username=${username}&password=${password}&loginTipo=manual`);
+
   }
 
   // Método para hacer logout
@@ -46,6 +51,20 @@ export class UserService {
     localStorage.removeItem('userId');  // Elimina el ID del usuario de localStorage
     this.router.navigate(['/login-page']);  // Redirige al usuario al login
   }
+
+
+
+  
+  addGoogleUser(userData: any) {
+    return this.http.post(`${this.urlbase}`, userData); 
+  }
+  
+  getUsers(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.urlbase}/users`);  // Asegúrate de que esta URL sea correcta
+  }
+  
+  
+
 
 
 }

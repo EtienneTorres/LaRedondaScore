@@ -1,44 +1,24 @@
 {
   "users": [
     {
-      "id": "1",
-      "username": "usuario1",
-      "password": "contraseña1"
+      "id": "3362",
+      "username": "Etienne2024",
+      "password": "Etienne2024",
+      "loginTipo": "manual"
     },
     {
-      "id": "2",
-      "username": "usuario2",
-      "password": "contraseña2"
+      "id": "GY5mgdqpIzLIkEZZRj9bcUKo4rF2",
+      "username": "Eti Torres gambino",
+      "useremail": "etitorresgambino@gmail.com",
+      "password": "",
+      "loginTipo": "google"
     },
     {
-      "id": "6254",
-      "username": "Mariano",
-      "password": "Mariano"
-    },
-    {
-      "id": "734b",
-      "username": "Etienne",
-      "password": "Etienne"
-    },
-    {
-      "id": "7a0b",
-      "username": "Etienne",
-      "password": "Etienne"
-    },
-    {
-      "id": "c58c",
-      "username": "Uno",
-      "password": "Uno"
-    },
-    {
-      "id": "688d",
-      "username": "Eti",
-      "password": "Eti"
-    },
-    {
-      "id": "6689",
-      "username": "aa",
-      "password": "aa"
+      "id": "VPTNd127aoVfiY6zIGk4IpvZrHu2",
+      "username": "Etienne Torres",
+      "useremail": "etiennediablo11@gmail.com",
+      "password": "",
+      "loginTipo": "google"
     }
   ],
   "favoritos": [
@@ -49,7 +29,7 @@
     },
     {
       "id": "cc82",
-      "userId": "6254",
+      "userId": "GY5mgdqpIzLIkEZZRj9bcUKo4rF2",
       "equipos": {
         "1": {
           "nombre": "Lazio",
@@ -60,7 +40,7 @@
     },
     {
       "id": "6692",
-      "userId": "734b",
+      "userId": "3362",
       "equipos": {
         "1": {
           "nombre": "Independiente",

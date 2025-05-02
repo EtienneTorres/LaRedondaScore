@@ -24,7 +24,16 @@ export class RegisterPageComponent {
 
  // Método para registrar un nuevo usuario
  onRegister(): void {
-  this.user.register(this.username, this.password).subscribe(
+
+
+  const nuevoUsuario = {
+    username: this.username,
+    password: this.password,
+    loginTipo: 'manual'  // Esto es lo que se agrega para diferenciar el registro manual
+  };
+
+
+  this.user.register(this.username, this.password,nuevoUsuario).subscribe(
     response => {
       console.log('Registro exitoso', response);
       this.successMessage = 'Usuario registrado con éxito';

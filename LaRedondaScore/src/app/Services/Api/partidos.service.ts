@@ -7,7 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = '47c20e0c70946fb28bccd7a9630aaccb '; 
+  private apiKey = ''; 
   private apiUrl = 'https://v3.football.api-sports.io';
   private apiUrlstanding = 'https://v3.football.api-sports.io/standings';
   private apiUrlfixture= 'https://v3.football.api-sports.io/fixtures'; // Asegúrate de que esta URL sea la correcta
@@ -239,10 +239,6 @@ getDtPorID(id: string): Observable<any> {
     const url = `${this.apiUrlfixture}?season=${season}&league=${leagueId}&round=${round}`;
     return this.http.get<any>(url, { headers });
   }
-
-
-
-
 
 }
 

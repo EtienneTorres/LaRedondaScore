@@ -3,7 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url(../../Imagenes/Fondo.jpg)no-repeat center fixed;
+    background: url(../../Imagenes/Fondo\ LaRedondaScore.png)no-repeat center fixed;
     background-size: cover;
     flex-direction: column; 
     overflow-y: auto;
