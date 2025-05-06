@@ -8,6 +8,7 @@ import { DetallesLeagueComponent } from './Home-Page/barra-lateral/detalle-leagu
 import { FichaPlayerComponent } from './search/ficha-player/ficha-player.component';
 import { AuthGuard } from './AuthGuard/auth.guard';
 import { FichaDtComponent } from './search/ficha-dt/ficha-dt.component';
+import { PerfilComponent } from './Perfil/perfil/perfil.component';
 
 export const routes: Routes = [
     { path: 'login-page', component: LoginPageComponent },
@@ -42,6 +43,8 @@ export const routes: Routes = [
       component: FichaPlayerComponent,
       canActivate: [AuthGuard]
     },
+    { path: 'perfil', component: PerfilComponent },
     
     { path: '**', redirectTo: 'login-page' } 
+
   ];

@@ -6,7 +6,7 @@ body
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url(../../Imagenes/Fondo.jpg)no-repeat;
+    background: url(../../Imagenes/image2.png)no-repeat;
     background-size: cover;
     background-position: center;
 }

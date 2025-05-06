@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, switchMap } from 'rxjs';
 
 
 @Injectable({
@@ -11,6 +11,8 @@ export class UserService {
 
 
   urlbase:string='http://localhost:3000'
+
+  
 
 
 
@@ -50,11 +52,10 @@ export class UserService {
   logout(): void {
     localStorage.removeItem('userId');  // Elimina el ID del usuario de localStorage
     this.router.navigate(['/login-page']);  // Redirige al usuario al login
+    localStorage.removeItem('currentUserId');
   }
 
 
-
-  
   addGoogleUser(userData: any) {
     return this.http.post(`${this.urlbase}`, userData); 
   }
@@ -64,7 +65,22 @@ export class UserService {
   }
   
   
+ 
+// Actualizar contraseña del usuario
+updatePassword(userId: string, newPassword: string): Observable<any> {
+  return this.http.patch(`${this.urlbase}/users/${userId}`, { password: newPassword });
+}
 
+
+// Obtener el usuario logueado por ID
+getUserById(id: string): Observable<any> {
+  return this.http.get<any>(`${this.urlbase}/users/${id}`);
+}
+
+// Obtener sus favoritos por ID de usuario
+getFavoritosByUserId(userId: string): Observable<any[]> {
+  return this.http.get<any[]>(`${this.urlbase}/favoritos?userId=${userId}`);
+}
 
 
 }
