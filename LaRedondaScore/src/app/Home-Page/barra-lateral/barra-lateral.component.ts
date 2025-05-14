@@ -23,7 +23,7 @@ export class BarraLateralComponent implements OnInit {
   {country: "Spain" },
   {country: "Germany" },
   {country: "France" },
-  {country: "South America" },
+  {country: "South-America" },
   {country: "Netherlands" },
   {country: "Portugal" },
   {country: "International" },

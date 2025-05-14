@@ -22,7 +22,7 @@ ligasDeseadas: { name: string; country: string }[] = [
   { name: "La Liga", country: "Spain" },
   { name: "Bundesliga", country: "Germany" },
   { name: "Ligue 1", country: "France" },
-  { name: "Conmebol Sudamericana", country: "South America" },
+  { name: "Conmebol Sudamericana", country: "South-America" },
   { name: "Eredivisie", country: "Netherlands" },
   { name: "Primeira Liga", country: "Portugal" },
   { name: "World Cup", country: "International" },

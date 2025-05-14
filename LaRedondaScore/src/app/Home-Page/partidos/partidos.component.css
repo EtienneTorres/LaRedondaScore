@@ -1,20 +1,21 @@
+
 .partidosDia {
     width: 60%;
     height: auto;
+    position: relative; /* Para que el contenido pase por debajo */
+    z-index: 1; /* Asegura que el contenido no se quede encima del nav */
+    margin-top: 100px; /* Puedes ajustar esto si prefieres que el contenido quede más cerca del nav */
+    padding: 30px;
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(80px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: #e0e0e0;
     border-radius: 20px;
-    padding: 30px 30px;
     margin-left: 250px;
     margin-right: 250px;
-    margin-top: 110px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    transform: translateX(150px);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;    
 }
-
 
 .partidosDia h1 {
     color: #ffffff;

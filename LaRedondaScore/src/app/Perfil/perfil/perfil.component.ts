@@ -53,13 +53,6 @@ export class PerfilComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-
    // Cambiar la contraseña
    changePassword() {
     if (this.newPassword) {
