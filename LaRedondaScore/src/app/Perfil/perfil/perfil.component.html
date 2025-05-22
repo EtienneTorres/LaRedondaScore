@@ -28,10 +28,10 @@
     </div>
   </div>
 
-  <div class="perfil-container">
+  <div *ngIf="user.loginTipo != 'google'" class="perfil-container">
     <h2>Cambiar contraseña</h2>
     
-      
+  
     <!-- Sección para cambiar la contraseña -->
     <div>
       <label for="newPassword">Nueva Contraseña:</label>
