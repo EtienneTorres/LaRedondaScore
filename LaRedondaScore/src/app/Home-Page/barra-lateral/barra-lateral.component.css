@@ -63,18 +63,21 @@ li.expanded > .league-list {
 }
 
 .league-list {
-  display: flex; 
-  align-items: center; 
+  margin-left: 10px; /* ajustá esto para que coincida con la bandera del país */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 
-.league-item {
-  display: flex; 
-  align-items: center; 
-  padding: 5px 0; 
+.league-item a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
 }
 
-.country-flag {
+.country-flag  {
   width: 30px; 
   height: auto;
   margin-right: 10px; 
@@ -84,11 +87,17 @@ li.expanded > .league-list {
 
 .league-flag {
   width: 30px; 
-  height: auto;
+  height: 30px;
   margin-right: 10px; 
   border-radius: 20%;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
+.league-flag {
+  background-color: white; /* o cualquier color que contraste */
+  padding: 3px;
+}
+
 
 .country-name {
   margin-left: 10px; 
@@ -97,7 +106,7 @@ li.expanded > .league-list {
 }
 
 .league-name {
-  margin-left: 40px; 
+  margin-left: 0; 
   font-size: 12px;
   color: #e0e0e0; 
 

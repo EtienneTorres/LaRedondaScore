@@ -14,7 +14,7 @@ import { Router, RouterModule } from '@angular/router';
 })
  export class PartidosComponent  implements OnInit {
 
- // Array de ligas que deseas mostrar, incluyendo el país
+// Array de ligas que deseas mostrar, incluyendo el país
 ligasDeseadas: { name: string; country: string }[] = [
   { name: "Premier League", country: "England" },
   { name: "Serie A", country: "Italy" },
@@ -22,7 +22,8 @@ ligasDeseadas: { name: string; country: string }[] = [
   { name: "La Liga", country: "Spain" },
   { name: "Bundesliga", country: "Germany" },
   { name: "Ligue 1", country: "France" },
-  { name: "Conmebol Sudamericana", country: "South-America" },
+  { name: "CONMEBOL Sudamericana", country: "World" },
+  { name: "CONMEBOL Libertadores", country: "World" },
   { name: "Eredivisie", country: "Netherlands" },
   { name: "Primeira Liga", country: "Portugal" },
   { name: "World Cup", country: "International" },
@@ -46,11 +47,11 @@ ligasDeseadas: { name: string; country: string }[] = [
 
 fechaSeleccionada: string;
 
-// Constructor
 constructor(private partidoService: PartidoService, private router: Router) {
-  let fechaActual = new Date();
+let fechaActual = new Date();
   fechaActual.setHours(fechaActual.getHours() - 3); // Ajuste de 3 horas para horario de Argentina
   this.fechaSeleccionada = fechaActual.toISOString().split('T')[0]; // Fecha actual en formato YYYY-MM-DD
+
 }
 
 
@@ -59,8 +60,6 @@ ngOnInit(): void {
   this.cargarPartidosDelDia(this.fechaSeleccionada); // Cargar los partidos del día actual
 }
 
-// Metodo para cargar partidos de un día específico
-// Metodo para cargar partidos de un día específico, incluyendo la noche anterior y la mañana siguiente
 cargarPartidosDelDia(fecha: string): void {
   // Fecha del día siguiente
   const fechaSiguiente = new Date(new Date(fecha).setDate(new Date(fecha).getDate() + 1)).toISOString().split('T')[0];
@@ -91,6 +90,7 @@ cargarPartidosDelDia(fecha: string): void {
       }, {});
     });
   });
+
 }
 
 // Metodo para ir hacia el día siguiente
@@ -108,6 +108,7 @@ anteriorDia(): void {
   this.fechaSeleccionada = nuevaFecha.toISOString().split('T')[0];
   this.cargarPartidosDelDia(this.fechaSeleccionada); // Recargar los partidos del día anterior
 }
+
 
 // Metodo para filtrar partidos por UTC-3, horario argentina entre las 03:00 y las 02:59 del día siguiente
 private filtrarPartidosPorUtc3(partidos: any[], date: string): any[] {
@@ -149,14 +150,11 @@ getEstadoPartido(fechaPartido: string, golesHome: number, golesAway: number, sta
   }
 }
 
-
 // Método para redirigir a otro componente
 irAEquipo(id: string) {
   // Redirigir a la ruta del equipo usando su nombre o cualquier otro identificador
   this.router.navigate([`/ficha-equipo/${id}`]);
 }
-
-
 
 }
  

@@ -21,7 +21,7 @@
       <ul *ngIf="visibleCountry === country.name" class="league-list">
         <li *ngFor="let league of leagues" class="league-item">
 
-            <!-- Usamos routerLink para redirigir al componente FichaEquipo -->
+            <!-- Usamos routerLink para redirigir al componente Fichaliga -->
           <a [routerLink]="['/detalle-league', league.league.id]"> 
 
             <img [src]="league.league.logo" class="league-flag" />

@@ -7,11 +7,11 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = ''; 
+  private apiKey = 'cb23fc833ff5fa0ecd0680ccaa160aa9'; 
   private apiUrl = 'https://v3.football.api-sports.io';
   private apiUrlstanding = 'https://v3.football.api-sports.io/standings';
-  private apiUrlfixture= 'https://v3.football.api-sports.io/fixtures'; // Asegúrate de que esta URL sea la correcta
-  private apiRoundsUrl = 'https://v3.football.api-sports.io/fixtures/rounds'; // Para obtener las rondas
+  private apiUrlfixture= 'https://v3.football.api-sports.io/fixtures'; //Asegúrate de que esta URL sea la correcta
+  private apiRoundsUrl = 'https://v3.football.api-sports.io/fixtures/rounds'; //Para obtener las rondas
 
   constructor(private http: HttpClient) {}
 
@@ -28,6 +28,7 @@ export class PartidoService {
       })
     );
   }
+
 
   getPartidoPorId(id: string): Observable<any> {
     const headers = {

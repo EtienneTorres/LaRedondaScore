@@ -30,15 +30,20 @@ export class BarraLateralComponent implements OnInit {
   {country: "World" }
 ];
 
-  countries: any[] = []; // Variable para almacenar los paises
+ countries: any[] = []; // Variable para almacenar los paises
   leagues: any[] = []; // Variable para almacenar las ligas
+
   visibleCountry: string | null = null; // Controla qué país tiene ligas visibles
 
   // Constructor
   constructor(private partido: PartidoService) {}
 
+
+
+
+
   ngOnInit() {
-    this.loadCountries(); // Se cargan los paises
+    this.loadCountries();
   }
 
   // Metodo para obtener y cargar los paises
