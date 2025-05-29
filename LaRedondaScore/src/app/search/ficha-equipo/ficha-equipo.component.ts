@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../Services/users-services/user.service';
 import { EquiposService } from '../../Services/lista-favoritos/equipos.service';
 import { Nav2Component } from '../../navbar/nav2/nav2.component';
+import { BarraLateralComponent } from '../../Home-Page/barra-lateral/barra-lateral.component';
 
 @Component({
   selector: 'app-ficha-equipo',
   standalone: true,
-  imports: [RouterModule,CommonModule,Nav2Component],
+  imports: [RouterModule,CommonModule,Nav2Component,BarraLateralComponent],
   templateUrl: './ficha-equipo.component.html',
   styleUrl: './ficha-equipo.component.css'
 })

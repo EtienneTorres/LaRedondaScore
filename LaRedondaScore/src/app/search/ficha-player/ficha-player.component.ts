@@ -3,11 +3,12 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PartidoService } from '../../Services/Api/partidos.service';
 import { CommonModule } from '@angular/common';
 import { Nav2Component } from '../../navbar/nav2/nav2.component';
+import { BarraLateralComponent } from '../../Home-Page/barra-lateral/barra-lateral.component';
 
 @Component({
   selector: 'app-ficha-player',
   standalone: true,
-  imports: [RouterModule,CommonModule,Nav2Component],
+  imports: [RouterModule,CommonModule,Nav2Component,BarraLateralComponent],
   templateUrl: './ficha-player.component.html',
   styleUrl: './ficha-player.component.css'
 })

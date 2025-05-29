@@ -5,11 +5,12 @@ import { PartidoService } from '../../../Services/Api/partidos.service';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from '../../../navbar/nav/nav.component';
 import { Nav2Component } from '../../../navbar/nav2/nav2.component';
+import { BarraLateralComponent } from '../../barra-lateral/barra-lateral.component';
 
 @Component({
   selector: 'app-ficha-partido',
   standalone: true,
-  imports: [RouterModule,CommonModule,Nav2Component],
+  imports: [RouterModule,CommonModule,Nav2Component,BarraLateralComponent],
   templateUrl: './ficha-partido.component.html',
   styleUrl: './ficha-partido.component.css'
 })

@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Nav2Component } from '../../navbar/nav2/nav2.component';
 import { PartidoService } from '../../Services/Api/partidos.service';
+import { BarraLateralComponent } from '../../Home-Page/barra-lateral/barra-lateral.component';
 
 @Component({
   selector: 'app-ficha-dt',
   standalone: true,
-  imports: [RouterModule, CommonModule, Nav2Component],
+  imports: [RouterModule, CommonModule, Nav2Component,BarraLateralComponent],
   templateUrl: './ficha-dt.component.html',
   styleUrl: './ficha-dt.component.css'
 })
