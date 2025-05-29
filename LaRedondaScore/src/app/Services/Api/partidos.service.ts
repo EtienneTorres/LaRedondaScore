@@ -7,7 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = 'cb23fc833ff5fa0ecd0680ccaa160aa9'; 
+  private apiKey = '62c34faa436e20717d787b56ca86ea0b'; 
   private apiUrl = 'https://v3.football.api-sports.io';
   private apiUrlstanding = 'https://v3.football.api-sports.io/standings';
   private apiUrlfixture= 'https://v3.football.api-sports.io/fixtures'; //Asegúrate de que esta URL sea la correcta
@@ -241,6 +241,28 @@ getDtPorID(id: string): Observable<any> {
     return this.http.get<any>(url, { headers });
   }
 
+
+getFixtureStatistics(fixtureId: number, partidoTerminado: boolean): Observable<any> {
+   const headers = new HttpHeaders({
+      'x-rapidapi-host': 'v3.football.api-sports.io',
+      'x-rapidapi-key': this.apiKey
+    });
+  let params = new HttpParams().set('fixture', fixtureId.toString());
+
+  if (partidoTerminado) {
+    params = params.set('half', 'true'); // Pide estadísticas con Fulltime, primer y segundo tiempo
+  }
+
+  return this.http.get<any>(`${this.apiUrl}/fixtures/statistics`, { headers, params }).pipe(
+    catchError(error => {
+      console.error('Error al obtener estadísticas del fixture', error);
+      return throwError(error);
+    })
+  );
+}
+
+
+  
 }
 
 

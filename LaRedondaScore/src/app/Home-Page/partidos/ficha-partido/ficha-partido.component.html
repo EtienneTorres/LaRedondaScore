@@ -45,6 +45,34 @@
     </div>
   </div>
   
+
+<!-- Estadísticas del partido con gráfico comparativo -->
+<ng-container *ngFor="let stat of estadisticasPartido[0].statistics">
+  <div class="estadistica-item"
+       *ngIf="getStatValue(estadisticasPartido[0].statistics, stat.type) > 0 || getStatValue(estadisticasPartido[1].statistics, stat.type) > 0">
+    <div class="nombre-estadistica">{{ stat.type }}</div>
+    <div class="barras-comparativas">
+      <div 
+        class="barra equipo-local"
+        [style.width.%]="getStatValue(estadisticasPartido[0].statistics, stat.type) / maxStatValue(stat.type) * 100"
+        [title]="estadisticasPartido[0].team.name + ': ' + getStatValue(estadisticasPartido[0].statistics, stat.type)">
+        {{ getStatValue(estadisticasPartido[0].statistics, stat.type) }}
+      </div>
+      <div 
+        class="barra equipo-visitante"
+        [style.width.%]="getStatValue(estadisticasPartido[1].statistics, stat.type) / maxStatValue(stat.type) * 100"
+        [title]="estadisticasPartido[1].team.name + ': ' + getStatValue(estadisticasPartido[1].statistics, stat.type)">
+        {{ getStatValue(estadisticasPartido[1].statistics, stat.type) }}
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+
+
+
+
+
   <div class="informacion-adicional">
     <h3>Información Adicional</h3>
     <p>Fecha: {{ detallesPartido.fixture.date | date:'fullDate' }}</p>
@@ -56,4 +84,8 @@
 </div>
 
 
+
+
 </body>
+
+

@@ -7,16 +7,23 @@
       "loginTipo": "manual"
     },
     {
-      "id": "GY5mgdqpIzLIkEZZRj9bcUKo4rF2",
-      "username": "Eti Torres gambino",
-      "useremail": "etitorresgambino@gmail.com",
+      "id": "VPTNd127aoVfiY6zIGk4IpvZrHu2",
+      "username": "Etienne Torres",
+      "useremail": "etiennediablo11@gmail.com",
       "password": "",
       "loginTipo": "google"
     },
     {
-      "id": "VPTNd127aoVfiY6zIGk4IpvZrHu2",
-      "username": "Etienne Torres",
-      "useremail": "etiennediablo11@gmail.com",
+      "id": "NNNJGuqW8XSeLb7pf8GydAqeVo33",
+      "username": "Dago Torres",
+      "useremail": "dagotorres295@gmail.com",
+      "password": "",
+      "loginTipo": "google"
+    },
+    {
+      "id": "OrX7Y4tsc2NRyV8SV2VmYdmVR6l1",
+      "username": "Etienne Dago Torres",
+      "useremail": "etiennedagotorres@gmail.com",
       "password": "",
       "loginTipo": "google"
     }

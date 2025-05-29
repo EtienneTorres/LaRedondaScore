@@ -36,8 +36,11 @@ login() {
         const user = response[0]; // Suponiendo que la respuesta es un arreglo con un único usuario
 
         // Guardamos el ID del usuario en localStorage
-        localStorage.setItem('userId', user.id);  // Guarda el ID del usuario en localStorage
 
+        localStorage.setItem('userId', user.id);
+        localStorage.setItem('userName', user.username);
+        localStorage.setItem('userEmail', user.useremail || '');
+        localStorage.setItem('loginTipo', 'normal');
 
         this.router.navigate(['/PaginaPrincipal']);  // Redirige a la página principal o dashboard
       } else {
@@ -68,11 +71,7 @@ logInConGoogleYRedirigir() {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
 
-  // Iniciar sesión con Google
-  provider.setCustomParameters({
-    prompt: 'select_account'  // Asegura que el usuario elija su cuenta de Google
-  });
-
+ 
   // Se cierra cualquier sesión previa y se inicia la sesión con Google
   signOut(auth).then(() => {
     return signInWithPopup(auth, provider);  // Inicia el inicio de sesión

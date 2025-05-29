@@ -19,6 +19,8 @@ export class FichaPartidoComponent implements OnInit {
   partidoId: string = ''; // Id del partido
   cargando: boolean = true; // Indicador de carga
   detallesPartido: any = {}; // Inicializa como objeto vacío
+    estadisticasPartido: any = null; // <-- Para guardar las estadísticas
+
 
   // Constructor
   constructor(private route: ActivatedRoute, private partidoService: PartidoService) {}
@@ -28,7 +30,7 @@ export class FichaPartidoComponent implements OnInit {
     console.log(this.partidoId);
     this.cargarDetallesPartido(this.partidoId);  // Cargamos los detalles del partido con la ID
   } 
-
+/*
   // Metodo que carga los detalles del partido
   cargarDetallesPartido(id: string): void {
     this.partidoService.getPartidoPorId(id).subscribe(
@@ -45,7 +47,40 @@ export class FichaPartidoComponent implements OnInit {
         this.cargando = false; // Cambia el estado de carga incluso en caso de error
       }
     );
+  }*/
+
+ cargarDetallesPartido(id: string): void {
+    this.partidoService.getPartidoPorId(id).subscribe(
+      (data) => {
+        if (data.response.length > 0) {
+          this.detallesPartido = data.response[0];
+          this.cargarEstadisticasSegunEstado(this.detallesPartido.fixture.status);
+        } else {
+          console.error('No se encontraron detalles para el partido.');
+        }
+        this.cargando = false;
+      },
+      (error) => {
+        console.error('Error al cargar los detalles del partido', error);
+        this.cargando = false;
+      }
+    );
   }
+
+  cargarEstadisticasSegunEstado(status: { long: string, short: string, elapsed: number, extra?: number }): void {
+    const partidoTerminado = status.short === 'FT';
+
+    this.partidoService.getFixtureStatistics(+this.partidoId, partidoTerminado).subscribe(
+      (data) => {
+        this.estadisticasPartido = data.response;
+        console.log('Estadísticas cargadas:', this.estadisticasPartido);
+      },
+      (error) => {
+        console.error('Error al cargar estadísticas del partido', error);
+      }
+    );
+  }
+
 
   // Metodo para obtener el estado de la ficha del partido
   getEstadoFicha(status: { long: string, short: string, elapsed: number, extra?: number }): string {
@@ -82,4 +117,31 @@ export class FichaPartidoComponent implements OnInit {
         return '-';
     }
   }
+
+
+getStatValue(stats: any[], type: string): number {
+  const stat = stats.find(s => s.type === type);
+  return stat ? stat.value : 0;
+}
+
+maxStatValue(type: string): number {
+  const homeVal = this.getStatValue(this.estadisticasPartido[0].statistics, type);
+  const awayVal = this.getStatValue(this.estadisticasPartido[1].statistics, type);
+  return Math.max(homeVal, awayVal, 1); // mínimo 1 para evitar ancho cero
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 }

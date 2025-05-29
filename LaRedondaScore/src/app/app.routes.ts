@@ -43,7 +43,8 @@ export const routes: Routes = [
       component: FichaPlayerComponent,
       canActivate: [AuthGuard]
     },
-    { path: 'perfil', component: PerfilComponent },
+    { path: 'perfil', component: PerfilComponent,  canActivate: [AuthGuard]
+ },
     
     { path: '**', redirectTo: 'login-page' } 
 
