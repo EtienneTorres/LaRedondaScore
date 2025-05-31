@@ -46,29 +46,39 @@
   </div>
   
 
-<!-- Estadísticas del partido con gráfico comparativo -->
+ <div class="Estadistica">
+  
+  <h2>Estadistica</h2>
+
 <ng-container *ngFor="let stat of estadisticasPartido[0].statistics">
   <div class="estadistica-item"
        *ngIf="getStatValue(estadisticasPartido[0].statistics, stat.type) > 0 || getStatValue(estadisticasPartido[1].statistics, stat.type) > 0">
+    
     <div class="nombre-estadistica">{{ stat.type }}</div>
+
     <div class="barras-comparativas">
-      <div 
-        class="barra equipo-local"
-        [style.width.%]="getStatValue(estadisticasPartido[0].statistics, stat.type) / maxStatValue(stat.type) * 100"
-        [title]="estadisticasPartido[0].team.name + ': ' + getStatValue(estadisticasPartido[0].statistics, stat.type)">
+      <span class="valor-local">
         {{ getStatValue(estadisticasPartido[0].statistics, stat.type) }}
+      </span>
+
+      <div class="barra equipo-local2"
+           [style.width.%]="getStatValue(estadisticasPartido[0].statistics, stat.type) / maxStatValue(stat.type) * 100"
+           [title]="estadisticasPartido[0].team.name + ': ' + getStatValue(estadisticasPartido[0].statistics, stat.type)">
       </div>
-      <div 
-        class="barra equipo-visitante"
-        [style.width.%]="getStatValue(estadisticasPartido[1].statistics, stat.type) / maxStatValue(stat.type) * 100"
-        [title]="estadisticasPartido[1].team.name + ': ' + getStatValue(estadisticasPartido[1].statistics, stat.type)">
+
+      <div class="barra equipo-visitante2"
+           [style.width.%]="getStatValue(estadisticasPartido[1].statistics, stat.type) / maxStatValue(stat.type) * 100"
+           [title]="estadisticasPartido[1].team.name + ': ' + getStatValue(estadisticasPartido[1].statistics, stat.type)">
+      </div>
+
+      <span class="valor-visitante">
         {{ getStatValue(estadisticasPartido[1].statistics, stat.type) }}
-      </div>
+      </span>
     </div>
   </div>
 </ng-container>
 
-
+</div>
 
 
 

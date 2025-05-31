@@ -30,24 +30,7 @@ export class FichaPartidoComponent implements OnInit {
     console.log(this.partidoId);
     this.cargarDetallesPartido(this.partidoId);  // Cargamos los detalles del partido con la ID
   } 
-/*
-  // Metodo que carga los detalles del partido
-  cargarDetallesPartido(id: string): void {
-    this.partidoService.getPartidoPorId(id).subscribe(
-      (data) => {
-        if (data.response.length > 0) {
-          this.detallesPartido = data.response[0]; // Asigna el primer elemento
-        } else {
-          console.error('No se encontraron detalles para el partido.');
-        }
-        this.cargando = false; // Cambia el estado de carga
-      },
-      (error) => {
-        console.error('Error al cargar los detalles del partido', error);
-        this.cargando = false; // Cambia el estado de carga incluso en caso de error
-      }
-    );
-  }*/
+
 
  cargarDetallesPartido(id: string): void {
     this.partidoService.getPartidoPorId(id).subscribe(
@@ -66,9 +49,9 @@ export class FichaPartidoComponent implements OnInit {
       }
     );
   }
-
+/*
   cargarEstadisticasSegunEstado(status: { long: string, short: string, elapsed: number, extra?: number }): void {
-    const partidoTerminado = status.short === 'FT';
+    const partidoTerminado = status.short === 'FT' || status.short === '1H'|| status.short === '2H';
 
     this.partidoService.getFixtureStatistics(+this.partidoId, partidoTerminado).subscribe(
       (data) => {
@@ -80,6 +63,23 @@ export class FichaPartidoComponent implements OnInit {
       }
     );
   }
+*/
+cargarEstadisticasSegunEstado(status: { long: string, short: string, elapsed: number, extra?: number }): void {
+  const partidoTerminado = status.short === 'FT';
+  const enJuego = status.short === '1H' || status.short === '2H';
+
+  const usarHalf = partidoTerminado || enJuego;
+
+  this.partidoService.getFixtureStatistics(this.partidoId, usarHalf).subscribe(
+    (data) => {
+      this.estadisticasPartido = data.response;
+      console.log('Estadísticas cargadas:', this.estadisticasPartido);
+    },
+    (error) => {
+      console.error('Error al cargar estadísticas del partido', error);
+    }
+  );
+}
 
 
   // Metodo para obtener el estado de la ficha del partido
@@ -133,15 +133,45 @@ maxStatValue(type: string): number {
 
 
 
+getNombreEstadistica(type: string): string {
+  switch(type) {
+    case 'Shots on Goal':
+      return 'Disparos a Puerta';
+    case 'Shots off Goal':
+      return 'Disparos Fuera';
+    case 'Total Shots':
+      return 'Tiros Totales';
+    case 'Blocked Shots':
+      return 'Tiros Bloqueados';
+    case 'Shots insidebox':
+      return 'Tiros dentro del área';
+    case 'Shots outsidebox':
+      return 'Tiros fuera del área';
+    case 'Fouls':
+      return 'Faltas';
+    case 'Corner Kicks':
+      return 'Tiros de esquina';
+    case 'Offsides':
+      return 'Fuera de Juego';
+    case 'Ball Possession':
+      return 'Posesión de balón';
+    case 'Yellow Cards':
+      return 'Tarjetas Amarillas';
+    case 'Red Cards':
+      return 'Tarjetas Rojas';
+    case 'Goalkeeper Saves':
+      return 'Atajadas';
+    case  'expected_goals':
+      return 'Goles Esperados';
+    case 'Total passes':
+      return 'Pases Totales';
+    case 'Passes accurate':
+      return 'Pases Completados';
+    default:
+      return type; // Si no hay traducción, devuelve el texto original
+  }
+}
 
 
 
-
-
-
-
-
-
-
-  
 }
