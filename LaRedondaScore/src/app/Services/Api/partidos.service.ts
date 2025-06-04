@@ -7,7 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = ''; 
+  private apiKey = '62c34faa436e20717d787b56ca86ea0b'; 
   private apiUrl = 'https://v3.football.api-sports.io';
   private apiUrlstanding = 'https://v3.football.api-sports.io/standings';
   private apiUrlfixture= 'https://v3.football.api-sports.io/fixtures'; //Asegúrate de que esta URL sea la correcta
@@ -15,19 +15,23 @@ export class PartidoService {
 
   constructor(private http: HttpClient) {}
 
-  getPartidosDelDia(date: string): Observable<any> {
-    const headers = {
-      'x-rapidapi-host': 'v3.football.api-sports.io',
-      'x-rapidapi-key': this.apiKey
-    };
-    
-    return this.http.get<any>(`${this.apiUrl}/fixtures?date=${date}`, { headers }).pipe(
-      catchError(error => {
-        console.error('Error al obtener los partidos del día', error);
-        return throwError(error);
-      })
-    );
-  }
+ 
+
+getPartidosDelDia(date: string): Observable<any> {
+  const headers = {
+    'x-rapidapi-host': 'v3.football.api-sports.io',
+    'x-rapidapi-key': this.apiKey
+  };
+
+  const url = `${this.apiUrl}/fixtures?date=${date}&timezone=America/Argentina/Buenos_Aires`;
+
+  return this.http.get<any>(url, { headers }).pipe(
+    catchError(error => {
+      console.error('Error al obtener los partidos del día', error);
+      return throwError(() => error);
+    })
+  );
+}
 
 
   getPartidoPorId(id: string): Observable<any> {

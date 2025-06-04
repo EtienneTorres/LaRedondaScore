@@ -46,7 +46,7 @@
   </div>
   
 
- <div class="Estadistica">
+ <div class="Estadistica" *ngIf="estadisticasPartido?.length >= 2">
   
   <h2>Estadistica</h2>
 
@@ -54,7 +54,8 @@
   <div class="estadistica-item"
        *ngIf="getStatValue(estadisticasPartido[0].statistics, stat.type) > 0 || getStatValue(estadisticasPartido[1].statistics, stat.type) > 0">
     
-    <div class="nombre-estadistica">{{ stat.type }}</div>
+    <div class="nombre-estadistica">{{ getNombreEstadistica(stat.type) }}</div>
+
 
     <div class="barras-comparativas">
       <span class="valor-local">

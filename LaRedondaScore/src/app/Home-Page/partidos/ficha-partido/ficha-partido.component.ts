@@ -31,7 +31,7 @@ export class FichaPartidoComponent implements OnInit {
     this.cargarDetallesPartido(this.partidoId);  // Cargamos los detalles del partido con la ID
   } 
 
-
+/*
  cargarDetallesPartido(id: string): void {
     this.partidoService.getPartidoPorId(id).subscribe(
       (data) => {
@@ -49,11 +49,11 @@ export class FichaPartidoComponent implements OnInit {
       }
     );
   }
-/*
+
   cargarEstadisticasSegunEstado(status: { long: string, short: string, elapsed: number, extra?: number }): void {
     const partidoTerminado = status.short === 'FT' || status.short === '1H'|| status.short === '2H';
 
-    this.partidoService.getFixtureStatistics(+this.partidoId, partidoTerminado).subscribe(
+    this.partidoService.getFixtureStatistics(this.partidoId, partidoTerminado).subscribe(
       (data) => {
         this.estadisticasPartido = data.response;
         console.log('Estadísticas cargadas:', this.estadisticasPartido);
@@ -64,12 +64,44 @@ export class FichaPartidoComponent implements OnInit {
     );
   }
 */
+
+cargarDetallesPartido(id: string): void {
+  this.partidoService.getPartidoPorId(id).subscribe(
+    (data) => {
+      if (data.response.length > 0) {
+        this.detallesPartido = data.response[0];
+        this.cargando = false;
+        // La lógica de si cargar estadísticas o no se maneja aparte
+        this.verificarYcargarEstadisticas();
+      } else {
+        console.error('No se encontraron detalles para el partido.');
+        this.cargando = false;
+      }
+    },
+    (error) => {
+      console.error('Error al cargar los detalles del partido', error);
+      this.cargando = false;
+    }
+  );
+}
+
+verificarYcargarEstadisticas(): void {
+  const status = this.detallesPartido?.fixture.status;
+  if (!status) {
+    console.warn('No se puede verificar estado del fixture.');
+    return;
+  }
+
+  const partidoEnJuegoOTerminado = ['1H', '2H', 'FT'].includes(status.short);
+  if (partidoEnJuegoOTerminado) {
+    this.cargarEstadisticasSegunEstado(status);
+  } else {
+    console.log(`Partido en estado "${status.short}", no se cargan estadísticas todavía.`);
+  }
+}
+
 cargarEstadisticasSegunEstado(status: { long: string, short: string, elapsed: number, extra?: number }): void {
-  const partidoTerminado = status.short === 'FT';
-  const enJuego = status.short === '1H' || status.short === '2H';
-
-  const usarHalf = partidoTerminado || enJuego;
-
+  const usarHalf = status.short === 'FT'; // Solo en partidos finalizados
   this.partidoService.getFixtureStatistics(this.partidoId, usarHalf).subscribe(
     (data) => {
       this.estadisticasPartido = data.response;
@@ -80,6 +112,9 @@ cargarEstadisticasSegunEstado(status: { long: string, short: string, elapsed: nu
     }
   );
 }
+
+
+
 
 
   // Metodo para obtener el estado de la ficha del partido
