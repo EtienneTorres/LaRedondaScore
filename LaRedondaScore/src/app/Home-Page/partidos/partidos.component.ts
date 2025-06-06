@@ -63,6 +63,31 @@ ngOnInit(): void {
 }
 
 
+
+cargarPartidosDelDia(fecha: string): void {
+  this.partidoService.getPartidosDelDia(fecha).subscribe((data) => {
+    const partidos = data.response;
+
+    this.partidosPorLiga = partidos.reduce((acc: any, partido: any) => {
+      const ligaNombre = partido.league.name;
+      const paisNombre = partido.league.country;
+      const ligaClave = `${ligaNombre} (${paisNombre})`;
+
+
+       const ligaDeseada = this.ligasDeseadas.find((liga) => 
+          liga.name === ligaNombre && liga.country === paisNombre)|| paisNombre === "World";
+
+         if (ligaDeseada) {
+      if (!acc[ligaClave]) acc[ligaClave] = [];
+      acc[ligaClave].push(partido);
+         }
+      return acc;
+    }, {});
+  });
+}
+
+
+/*
 cargarPartidosDelDia(fecha: string): void {
   this.partidoService.getPartidosDelDia(fecha).subscribe((data) => {
     const partidos = data.response;
@@ -83,7 +108,7 @@ cargarPartidosDelDia(fecha: string): void {
       return acc;
     }, {});
   });
-} 
+} */
 
 // Metodo para ir hacia el día siguiente
 siguienteDia(): void {

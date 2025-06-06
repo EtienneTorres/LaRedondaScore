@@ -42,7 +42,7 @@ export class TablaComponent implements OnInit{
         (data: any) => {
           console.log('Tabla de posiciones:', data);
           // Accede correctamente a la tabla de posiciones
-          this.tabla = data.response[0]?.league?.standings[0] || [];  // Asegúrate de que `standings[0]` tiene los equipos
+          this.tabla = data.response[0]?.league?.standings || [];
         },
         error => {
           console.error('Error al cargar la tabla de posiciones:', error);
