@@ -4,6 +4,11 @@
   <!-- Mensaje de retroalimentación -->
   <p *ngIf="mensaje" class="feedback">{{ mensaje }}</p>
 
+    <!-- Mensaje cuando NO hay favoritos -->
+  <p *ngIf="!mensaje && (equiposFavoritos | keyvalue).length === 0" class="no-favorites">
+    No hay equipos favoritos aún.
+  </p>
+
   <!-- Lista de equipos favoritos -->
   <ul>
     <li *ngFor="let equipo of equiposFavoritos | keyvalue" [class.expanded]="true">

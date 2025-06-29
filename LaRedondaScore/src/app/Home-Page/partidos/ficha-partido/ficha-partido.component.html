@@ -12,9 +12,22 @@
     </div>
 
     <div class="marcador">
-      <h2>{{ detallesPartido.goals.home }} - {{ detallesPartido.goals.away }}</h2>
-      <p>{{ getEstadoFicha(detallesPartido.fixture.status) }}</p>
-    </div>
+  <span>{{ detallesPartido.goals.home }} - {{ detallesPartido.goals.away }}</span>
+
+  <!-- Mostrar goles en Tiempo Extra si existen -->
+  <ng-container *ngIf="detallesPartido.score.extratime.home !== null || detallesPartido.score.extratime.away !== null">
+    <br />
+    <small>ET: {{ detallesPartido.score.extratime.home ?? 0 }} - {{ detallesPartido.score.extratime.away ?? 0 }}</small>
+  </ng-container>
+
+  <!-- Mostrar goles por penales si existen -->
+  <ng-container *ngIf="detallesPartido.score.penalty.home !== null || detallesPartido.score.penalty.away !== null">
+    <br />
+    <small>Penales: {{ detallesPartido.score.penalty.home ?? 0 }} - {{ detallesPartido.score.penalty.away ?? 0 }}</small>
+  </ng-container>
+</div>
+
+    
 
     <div class="equipo equipo-visitante">
       <h3>{{ detallesPartido.teams.away.name }}</h3>

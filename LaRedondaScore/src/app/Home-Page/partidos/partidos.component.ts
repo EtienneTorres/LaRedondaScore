@@ -67,7 +67,7 @@ ngOnInit(): void {
 cargarPartidosDelDia(fecha: string): void {
   this.partidoService.getPartidosDelDia(fecha).subscribe((data) => {
     const partidos = data.response;
-
+   console.log('Partidos recibidos:', partidos);
     this.partidosPorLiga = partidos.reduce((acc: any, partido: any) => {
       const ligaNombre = partido.league.name;
       const paisNombre = partido.league.country;
@@ -87,28 +87,6 @@ cargarPartidosDelDia(fecha: string): void {
 }
 
 
-/*
-cargarPartidosDelDia(fecha: string): void {
-  this.partidoService.getPartidosDelDia(fecha).subscribe((data) => {
-    const partidos = data.response;
-
-    // Obtenemos lista única de países deseados
-    const paisesDeseados = [...new Set(this.ligasDeseadas.map(liga => liga.country))];
-
-    this.partidosPorLiga = partidos.reduce((acc: any, partido: any) => {
-      const ligaNombre = partido.league.name;
-      const paisNombre = partido.league.country;
-      const ligaClave = `${ligaNombre} (${paisNombre})`;
-
-      // Filtramos sólo por país
-      if (paisesDeseados.includes(paisNombre)) {
-        if (!acc[ligaClave]) acc[ligaClave] = [];
-        acc[ligaClave].push(partido);
-      }
-      return acc;
-    }, {});
-  });
-} */
 
 // Metodo para ir hacia el día siguiente
 siguienteDia(): void {
@@ -119,6 +97,8 @@ siguienteDia(): void {
 }
 
 // Metodo para ir hacia el día anterior
+
+
 anteriorDia(): void {
   const nuevaFecha = new Date(this.fechaSeleccionada);
   nuevaFecha.setDate(nuevaFecha.getDate() - 1);
@@ -127,20 +107,7 @@ anteriorDia(): void {
 }
 
 
-// Metodo para filtrar partidos por UTC-3, horario argentina entre las 03:00 y las 02:59 del día siguiente
-filtrarPartidosPorUtc3(partidos: any[], fecha: string): any[] {
-  return partidos.filter(partido => {
-    const fechaPartidoUTC = new Date(partido.fixture.date);
-    
-    // Ajustar a UTC-3 (hora argentina)
-    const fechaPartidoARG = new Date(fechaPartidoUTC.getTime() - 3 * 60 * 60 * 1000);
 
-    // Comparar solo la fecha (sin hora)
-    const fechaARG = fechaPartidoARG.toISOString().split('T')[0];
-
-    return fechaARG === fecha;
-  });
-}
 
 
 // Metodo para obtener el estado del partido
@@ -162,7 +129,7 @@ getEstadoPartido(fechaPartido: string, golesHome: number, golesAway: number, sta
     case '2H': // Segunda mitad
       return ` ${status.elapsed}'`;
     case 'ET': // Tiempo extra
-      return ` - ${status.elapsed}' + ${status.extra ? `(+${status.extra})` : ''}`;
+    return `${status.elapsed}' ${status.extra ? `(+${status.extra})` : ''} (Tiempo Extra)`;
     case 'PEN': // Penales
       return "Penales";
     case 'FT': // Finalizado

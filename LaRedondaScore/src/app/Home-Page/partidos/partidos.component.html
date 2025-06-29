@@ -18,9 +18,22 @@
           <span>{{ partido.teams.home.name }}</span>
         </div>
 
-        <div class="marcador">
-          <span>{{ partido.goals.home }} - {{ partido.goals.away }}</span>
-        </div>
+       <div class="marcador">
+  <span>{{ partido.goals.home }} - {{ partido.goals.away }}</span>
+
+  <!-- Mostrar goles en Tiempo Extra si existen -->
+  <ng-container *ngIf="partido.score.extratime.home !== null || partido.score.extratime.away !== null">
+    <br />
+    <small>ET: {{ partido.score.extratime.home ?? 0 }} - {{ partido.score.extratime.away ?? 0 }}</small>
+  </ng-container>
+
+  <!-- Mostrar goles por penales si existen -->
+  <ng-container *ngIf="partido.score.penalty.home !== null || partido.score.penalty.away !== null">
+    <br />
+    <small>Penales: {{ partido.score.penalty.home ?? 0 }} - {{ partido.score.penalty.away ?? 0 }}</small>
+  </ng-container>
+</div>
+
 
         <div class="equipo equipo-visitante"  (click)="irAEquipo(partido.teams.away.id)">
           <span>{{ partido.teams.away.name }}</span>

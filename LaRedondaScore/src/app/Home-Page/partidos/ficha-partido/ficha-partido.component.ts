@@ -31,39 +31,7 @@ export class FichaPartidoComponent implements OnInit {
     this.cargarDetallesPartido(this.partidoId);  // Cargamos los detalles del partido con la ID
   } 
 
-/*
- cargarDetallesPartido(id: string): void {
-    this.partidoService.getPartidoPorId(id).subscribe(
-      (data) => {
-        if (data.response.length > 0) {
-          this.detallesPartido = data.response[0];
-          this.cargarEstadisticasSegunEstado(this.detallesPartido.fixture.status);
-        } else {
-          console.error('No se encontraron detalles para el partido.');
-        }
-        this.cargando = false;
-      },
-      (error) => {
-        console.error('Error al cargar los detalles del partido', error);
-        this.cargando = false;
-      }
-    );
-  }
 
-  cargarEstadisticasSegunEstado(status: { long: string, short: string, elapsed: number, extra?: number }): void {
-    const partidoTerminado = status.short === 'FT' || status.short === '1H'|| status.short === '2H';
-
-    this.partidoService.getFixtureStatistics(this.partidoId, partidoTerminado).subscribe(
-      (data) => {
-        this.estadisticasPartido = data.response;
-        console.log('Estadísticas cargadas:', this.estadisticasPartido);
-      },
-      (error) => {
-        console.error('Error al cargar estadísticas del partido', error);
-      }
-    );
-  }
-*/
 
 cargarDetallesPartido(id: string): void {
   this.partidoService.getPartidoPorId(id).subscribe(

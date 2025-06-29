@@ -80,7 +80,8 @@ export class FichaEquipoComponent implements OnInit {
     this.equipo.getFavoriteTeams(userId).subscribe(
       (favoritos) => {
         this.equiposFavoritos = favoritos;
-        this.isFavorite = !!this.equiposFavoritos[this.teamName]; // Verifica si el equipo actual es favorito
+        // Después de cargar favoritos, chequear si el equipo actual ya está favorito
+      this.checkIfFavorite();
       },
       (error) => {
         this.mensaje = 'Error al cargar los equipos favoritos';
@@ -105,6 +106,7 @@ export class FichaEquipoComponent implements OnInit {
     } else {
       this.mensaje = 'Usuario no encontrado';
     }
+    
   }
 
   // Meodo para mostrar la lista de favoritos de la sesion activa
