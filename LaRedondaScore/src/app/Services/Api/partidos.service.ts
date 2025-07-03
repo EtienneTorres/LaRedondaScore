@@ -7,14 +7,24 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PartidoService {
-  private apiKey = '62c34faa436e20717d787b56ca86ea0b'; 
+  private apiKey = 'c7c13a8d5c6dc23c02fbc5e31268ede9'; 
   private apiUrl = 'https://v3.football.api-sports.io';
   private apiUrlstanding = 'https://v3.football.api-sports.io/standings';
-  private apiUrlfixture= 'https://v3.football.api-sports.io/fixtures'; //Asegúrate de que esta URL sea la correcta
-  private apiRoundsUrl = 'https://v3.football.api-sports.io/fixtures/rounds'; //Para obtener las rondas
+  private apiUrlfixture= 'https://v3.football.api-sports.io/fixtures'; 
+  private apiRoundsUrl = 'https://v3.football.api-sports.io/fixtures/rounds';
 
   constructor(private http: HttpClient) {}
 
+
+
+
+  getEventosDelPartido(id: string) {
+  return this.http.get<any>(`https://v3.football.api-sports.io/fixtures/events?fixture=${id}`, {
+    headers: {
+      'x-apisports-key': this.apiKey
+    }
+  });
+}
  
 
 getPartidosDelDia(date: string): Observable<any> {
@@ -84,7 +94,6 @@ getPartidosDelDia(date: string): Observable<any> {
         'x-rapidapi-host': 'v3.football.api-sports.io',
         'x-rapidapi-key': this.apiKey
     };
-    //const params = new HttpParams().set('name', teamName); // Parámtero de búsqueda
 
     return this.http.get<any>(`${this.apiUrl}/teams?name=${teamName}`, { headers }).pipe(
         catchError(error => {
@@ -99,7 +108,6 @@ getEquiposPorID(id: string): Observable<any> {
       'x-rapidapi-host': 'v3.football.api-sports.io',
       'x-rapidapi-key': this.apiKey
   };
-  //const params = new HttpParams().set('name', teamName); // Parámtero de búsqueda
 
   return this.http.get<any>(`${this.apiUrl}/teams?id=${id}`, { headers }).pipe(
       catchError(error => {
@@ -140,7 +148,7 @@ getSeasonStats(id: string): Observable<any> {
 
 getPartidosPorLiga(leagueId: number, season: string): Observable<any> {
   const headers = new HttpHeaders({
-    'x-rapidapi-key': this.apiKey, // Cambia esto por tu clave API
+    'x-rapidapi-key': this.apiKey, 
   });
 
   return this.http.get<any>(`${this.apiUrl}/fixtures?league=${leagueId}&season=${season}`, { headers });
@@ -154,7 +162,7 @@ getAvailableSeasons(): Observable<any> {
 
 getStandings(leagueId: number, season: string): Observable<any> {
   const headers = new HttpHeaders({
-    'x-rapidapi-key': this.apiKey, // Asegúrate de reemplazar esto por tu clave API
+    'x-rapidapi-key': this.apiKey, 
   });
 
   return this.http.get<any>(`${this.apiUrl}/standings?league=${leagueId}&season=${season}`, { headers });

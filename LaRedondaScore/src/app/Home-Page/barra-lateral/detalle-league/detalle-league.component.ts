@@ -20,9 +20,9 @@ export class DetallesLeagueComponent implements OnInit {
   leagueId: string | null = null;
   matches: any[] = []; // Declara la propiedad matches como un array
   partidos: any[] = [];
-  currentSeason: number = 2022; // Temporada inicial, puedes ajustarlo si es necesario
-  minSeason: number = 2015; // Temporada mínima
-  maxSeason: number = 2022; // Temporada máxima
+  currentSeason: number = 2025; // Temporada inicial, puedes ajustarlo si es necesario
+  minSeason: number = 2000; // Temporada mínima
+  maxSeason: number = 2025; // Temporada máxima
   currentRound: string = 'Regular Season - 1';  // Inicia en la primera ronda
   rounds: string[] = []; // Almacena las rondas disponibles
 
@@ -37,7 +37,6 @@ export class DetallesLeagueComponent implements OnInit {
     this.leagueId = this.route.snapshot.paramMap.get('id');
     if (this.leagueId) {
       console.log(this.leagueId);
-      this.loadMatches();
       this.loadLeagueDetails(this.leagueId);
       this.loadSeasonStats(this.leagueId);
       this.loadRounds(); // Cargar las rondas al iniciar el componente
@@ -91,16 +90,16 @@ export class DetallesLeagueComponent implements OnInit {
 }
 
   
-  changeSeason(direction: number) {
-    const newSeason = this.currentSeason + direction;
-
-    // Asegúrate de que la nueva temporada esté dentro del rango permitido
-    if (newSeason >= this.minSeason && newSeason <= this.maxSeason) {
-      this.currentSeason = newSeason;
-      this.currentRound = 'Regular Season - 1';
-      this.loadMatches(); // Llamar a la API con la nueva temporada
-    }
+ changeSeason(direction: number) {
+  const newSeason = this.currentSeason + direction;
+  if (newSeason >= this.minSeason && newSeason <= this.maxSeason) {
+    this.currentSeason = newSeason;
+    this.currentRound  = '';   // limpias la ronda actual
+    this.rounds        = [];   // limpias la lista de rondas
+    this.loadRounds();        // ← pedís las rondas del nuevo año
   }
+}
+
 
 
 

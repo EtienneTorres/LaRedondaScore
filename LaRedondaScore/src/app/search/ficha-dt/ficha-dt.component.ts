@@ -18,7 +18,7 @@ export class FichaDtComponent implements OnInit {
   dtDetails: any = {}; // Detalles del dt
   loading: boolean = true; // Indicador de carga
   dtId: string = ''; // ID del dt
-  dtCareer: any[] = []; // Para almacenar la carrera del DT
+  dtCareer: any[] = []; // almacenar la carrera del DT
 
 
   // Constructor
@@ -30,9 +30,9 @@ export class FichaDtComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const dtId = params.get('id'); // Obtenemos el ID del parámetro de la URL
-      console.log(dtId);  // Asegúrate de que se capture el ID
+      console.log(dtId);  // Asegúrar de que se capture el ID
       if (dtId) {
-        this.getDtDetails(dtId);  // Llama a la API usando el ID
+        this.getDtDetails(dtId);  // Llamar a la API usando el ID
       }
     });
   }

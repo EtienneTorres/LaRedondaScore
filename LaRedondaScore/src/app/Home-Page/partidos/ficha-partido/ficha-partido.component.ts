@@ -16,6 +16,7 @@ import { BarraLateralComponent } from '../../barra-lateral/barra-lateral.compone
 })
 export class FichaPartidoComponent implements OnInit {
 
+  eventosPartido: any[] = [];
   partidoId: string = ''; // Id del partido
   cargando: boolean = true; // Indicador de carga
   detallesPartido: any = {}; // Inicializa como objeto vacío
@@ -29,7 +30,22 @@ export class FichaPartidoComponent implements OnInit {
     this.partidoId = this.route.snapshot.paramMap.get('id')!; // Obtenemos el ID desde la ruta
     console.log(this.partidoId);
     this.cargarDetallesPartido(this.partidoId);  // Cargamos los detalles del partido con la ID
+    this.cargarEventosPartido(this.partidoId);
+    
   } 
+
+
+cargarEventosPartido(id: string): void {
+  this.partidoService.getEventosDelPartido(id).subscribe(
+    (data) => {
+      console.log('Respuesta eventos API:', data);
+      this.eventosPartido = data.response;
+    },
+    (error) => {
+      console.error('Error al cargar los eventos del partido', error);
+    }
+  );
+}
 
 
 
@@ -175,6 +191,45 @@ getNombreEstadistica(type: string): string {
   }
 }
 
+
+
+/** Íconos ***********************************/
+getIconoEvento(e: any): string {
+  switch (e.type?.toLowerCase()) {
+    case 'goal':
+      if (e.detail === 'Own Goal') return '😱';
+      if (e.detail === 'Penalty')  return '🥅';
+      return '⚽';
+    case 'card':
+      return e.detail === 'Yellow Card' ? '🟨'
+           : e.detail === 'Red Card'    ? '🟥'
+           : '🟦';
+    case 'subst':           // ⚠️ la API suele venir como "subst"
+    case 'substitution':
+      return '🔄';
+    case 'var':
+      return '🖥️';
+    default:
+      return '📌';
+  }
+}
+
+/** Clases de color **************************/
+getClaseEvento(e: any): string {
+  switch (e.type?.toLowerCase()) {
+    case 'goal':
+      return 'event-gol';
+    case 'card':
+      return e.detail === 'Yellow Card' ? 'event-amarilla'
+           : e.detail === 'Red Card'    ? 'event-roja'
+           : 'event-roja';
+    case 'subst':
+    case 'substitution':
+      return 'event-cambio';
+    default:
+      return '';
+  }
+}
 
 
 }

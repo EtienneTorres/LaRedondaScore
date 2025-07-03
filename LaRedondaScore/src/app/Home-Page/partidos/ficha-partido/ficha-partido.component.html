@@ -25,6 +25,7 @@
     <br />
     <small>Penales: {{ detallesPartido.score.penalty.home ?? 0 }} - {{ detallesPartido.score.penalty.away ?? 0 }}</small>
   </ng-container>
+
 </div>
 
     
@@ -34,6 +35,44 @@
       <img [src]="detallesPartido.teams.away.logo" alt="{{ detallesPartido.teams.away.name }}" />
     </div>
   </div>
+
+<div class="timeline">
+  <div *ngFor="let ev of eventosPartido" class="timeline-event">
+
+    <!-- Lado izquierdo (Local) -->
+    <div class="event-side left">
+      <ng-container *ngIf="ev.team.id === detallesPartido.teams.home.id">
+        <div class="event-content" [ngClass]="getClaseEvento(ev)">
+          <span class="icono">{{ getIconoEvento(ev) }}</span>
+          <div class="jugador">
+            <strong>{{ ev.player?.name }}</strong>
+            <small *ngIf="ev.assist?.name">Asist: {{ ev.assist.name }}</small>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Minuto siempre en el centro -->
+    <div class="event-time">
+      {{ ev.time.elapsed }}<span *ngIf="ev.time.extra">+{{ ev.time.extra }}</span>'
+    </div>
+
+    <!-- Lado derecho (Visitante) -->
+    <div class="event-side right">
+      <ng-container *ngIf="ev.team.id === detallesPartido.teams.away.id">
+        <div class="event-content" [ngClass]="getClaseEvento(ev)">
+          <span class="icono">{{ getIconoEvento(ev) }}</span>
+          <div class="jugador">
+            <strong>{{ ev.player?.name }}</strong>
+            <small *ngIf="ev.assist?.name">Asist: {{ ev.assist.name }}</small>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+  </div>
+</div>
+
 
   <div class="formaciones" *ngIf="detallesPartido.lineups?.length > 0">
   

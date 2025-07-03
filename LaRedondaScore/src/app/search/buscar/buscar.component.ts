@@ -32,7 +32,7 @@ export class BuscarComponent {
         this.loading = true;  // Inicia el indicador de carga
             // Buscar equipos
         this.equipoService.getEquiposPorNombre(this.searchTerm).subscribe(data => {
-          // Asegúrate de que la respuesta tenga la propiedad 'response' y contiene los equipos
+          // Asegúrar de que la respuesta tenga la propiedad 'response' y contiene los equipos
           if (data && data.response && data.response.length > 0) {
             // Accede al equipo desde 'data.response[0].team'
             this.filteredEquipos = data.response.map((item: any) => item.team); // Extrae solo los equipos
@@ -56,7 +56,7 @@ export class BuscarComponent {
         } else {
             this.filteredDts = [];  // Si no se encuentran tecnicos, limpia la lista
         } 
-        // this.loading = false; // Detiene el indicador de carga
+        
     }, error => {
         console.error('Error al buscar tecnicos', error);
         this.filteredDts = []; // Si no se encuentran tecnicos, limpia la lista
