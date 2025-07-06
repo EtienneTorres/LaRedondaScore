@@ -84,7 +84,7 @@ body {
 }
 
 .error-message {
-    color: rgb(255, 131, 59);
+    color: rgb(255, 255, 255);
     font-size: 18px;
     margin-top: 5px;
     margin-bottom: 12px;
@@ -92,7 +92,7 @@ body {
   
 .error-contraseña
 {
-    color: rgb(255, 131, 59);
+    color: rgb(255, 255, 255);
     font-size: 15px;
     margin-top: 5px;
     margin-bottom: 12px;
@@ -140,7 +140,7 @@ body {
   
   .error {
     background-color: #ffffff;
-    color: #f8982b;
+    color: #ffffff;
     border: 1px solid #ffffff;
   }
   
@@ -164,16 +164,16 @@ body {
   }
   
   .error-message {
-    color: #f44336;
+    color: #ffffff;
     font-size: 12px;
   }
   
   .error-contraseña {
-    color: #f44336;
+    color: #ffffff;
     font-size: 12px;
   }
   
   .invalid {
-    border-color: red;
+    border-color: rgb(255, 255, 255);
   }
   
